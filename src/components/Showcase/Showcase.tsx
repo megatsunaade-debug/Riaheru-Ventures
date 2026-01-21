@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield, Zap, Database, Lock, ExternalLink } from 'lucide-react';
+import { Shield, Zap, Database, Lock, ExternalLink, Brain, Users } from 'lucide-react';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Button } from '../ui/Button';
 
@@ -10,6 +10,9 @@ const techStack = [
     'AWS S3',
     'TypeScript',
     'Node.js',
+    'Vite',
+    'TanStack Query',
+    'Radix/Shadcn',
 ];
 
 const features = [
@@ -32,6 +35,16 @@ const features = [
         icon: Lock,
         title: 'Controle de Acesso',
         description: 'Permissões granulares e auditoria completa de ações.',
+    },
+    {
+        icon: Brain,
+        title: 'MarqletAI Integrada',
+        description: 'Inteligência artificial nativa para automação e insights jurídicos avançados.',
+    },
+    {
+        icon: Users,
+        title: 'Painel do Cliente',
+        description: 'Portal exclusivo para clientes do escritório acompanharem seus processos.',
     },
 ];
 
@@ -72,7 +85,7 @@ export function Showcase() {
                                 </div>
                                 <div className="flex-1 flex justify-center">
                                     <div className="px-3 py-1 bg-white/5 rounded-md text-xs text-white/40 font-mono">
-                                        marqlet.app
+                                        marqlet.com
                                     </div>
                                 </div>
                             </div>

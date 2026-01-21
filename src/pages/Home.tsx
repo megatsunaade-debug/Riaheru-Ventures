@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Hero, Services, Showcase, Stack, Team } from '@/components';
+import { Hero, Services, Showcase, Stack, Team, Newsletter } from '@/components';
 
 // Componente de navegação flutuante elegante
 function FloatingNav() {
@@ -12,15 +12,16 @@ function FloatingNav() {
         { id: 'showcase', label: '03' },
         { id: 'stack', label: '04' },
         { id: 'team', label: '05' },
+        { id: 'newsletter', label: '06' },
     ];
 
     useEffect(() => {
         const handleScroll = () => {
             setIsVisible(window.scrollY > 100);
-            
+
             const sectionElements = sections.map(s => document.getElementById(s.id));
             const scrollPos = window.scrollY + window.innerHeight / 2;
-            
+
             sectionElements.forEach((section, index) => {
                 if (section) {
                     const top = section.offsetTop;
@@ -42,9 +43,8 @@ function FloatingNav() {
 
     return (
         <nav
-            className={`fixed right-8 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}
+            className={`fixed right-8 top-1/2 -translate-y-1/2 z-50 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                }`}
         >
             <div className="flex flex-col items-end gap-4">
                 {sections.map((section, index) => (
@@ -54,20 +54,18 @@ function FloatingNav() {
                         className="group flex items-center gap-3 transition-all duration-300"
                     >
                         <span
-                            className={`font-mono text-xs tracking-widest transition-all duration-300 ${
-                                activeSection === index
-                                    ? 'text-amber-400 opacity-100'
-                                    : 'text-neutral-500 opacity-0 group-hover:opacity-100'
-                            }`}
+                            className={`font-mono text-xs tracking-widest transition-all duration-300 ${activeSection === index
+                                ? 'text-amber-400 opacity-100'
+                                : 'text-neutral-500 opacity-0 group-hover:opacity-100'
+                                }`}
                         >
                             {section.label}
                         </span>
                         <span
-                            className={`block transition-all duration-500 rounded-full ${
-                                activeSection === index
-                                    ? 'w-12 h-1 bg-gradient-to-r from-amber-400 to-orange-500'
-                                    : 'w-2 h-2 bg-neutral-600 group-hover:bg-neutral-400'
-                            }`}
+                            className={`block transition-all duration-500 rounded-full ${activeSection === index
+                                ? 'w-12 h-1 bg-gradient-to-r from-amber-400 to-orange-500'
+                                : 'w-2 h-2 bg-neutral-600 group-hover:bg-neutral-400'
+                                }`}
                         />
                     </button>
                 ))}
@@ -101,12 +99,12 @@ function SectionDivider({ number, title }: { number: string; title: string }) {
 }
 
 // Wrapper de seção com animação de entrada
-function AnimatedSection({ 
-    children, 
-    id, 
-    className = '' 
-}: { 
-    children: React.ReactNode; 
+function AnimatedSection({
+    children,
+    id,
+    className = ''
+}: {
+    children: React.ReactNode;
     id: string;
     className?: string;
 }) {
@@ -134,11 +132,10 @@ function AnimatedSection({
         <section
             ref={sectionRef}
             id={id}
-            className={`transition-all duration-1000 ${
-                isVisible 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-16'
-            } ${className}`}
+            className={`transition-all duration-1000 ${isVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-16'
+                } ${className}`}
         >
             {children}
         </section>
@@ -230,9 +227,9 @@ function AnimatedBackground() {
         <div className="fixed inset-0 -z-10 overflow-hidden">
             {/* Gradiente base */}
             <div className="absolute inset-0 bg-[#0a0a0a]" />
-            
+
             {/* Padrão de grid sutil */}
-            <div 
+            <div
                 className="absolute inset-0 opacity-[0.02]"
                 style={{
                     backgroundImage: `
@@ -242,14 +239,14 @@ function AnimatedBackground() {
                     backgroundSize: '100px 100px',
                 }}
             />
-            
+
             {/* Orbes de luz flutuantes */}
             <div className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] rounded-full bg-amber-500/5 blur-[150px] animate-pulse" />
             <div className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-orange-500/5 blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
             <div className="absolute top-3/4 left-1/3 w-[400px] h-[400px] rounded-full bg-red-500/3 blur-[100px] animate-pulse" style={{ animationDelay: '4s' }} />
-            
+
             {/* Noise texture overlay */}
-            <div 
+            <div
                 className="absolute inset-0 opacity-[0.15]"
                 style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
@@ -274,32 +271,27 @@ function Footer() {
                             Transformando ideias em experiências digitais memoráveis
                         </p>
                     </div>
-                    
+
                     <div className="flex items-center gap-8">
-                        <a 
-                            href="#" 
+                        <a
+                            href="#"
                             className="text-neutral-400 hover:text-amber-400 transition-colors duration-300 text-sm tracking-wider"
                         >
                             LinkedIn
                         </a>
-                        <a 
-                            href="#" 
-                            className="text-neutral-400 hover:text-amber-400 transition-colors duration-300 text-sm tracking-wider"
-                        >
-                            GitHub
-                        </a>
-                        <a 
-                            href="#" 
+
+                        <a
+                            href="#"
                             className="text-neutral-400 hover:text-amber-400 transition-colors duration-300 text-sm tracking-wider"
                         >
                             Twitter
                         </a>
                     </div>
                 </div>
-                
+
                 <div className="mt-16 pt-8 border-t border-neutral-800/30 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-neutral-600 text-xs tracking-wider">
-                        © {new Date().getFullYear()} — Todos os direitos reservados
+                        © {new Date().getFullYear()} Riaheru Ventures — Todos os direitos reservados
                     </p>
                     <p className="text-neutral-600 text-xs tracking-wider font-mono">
                         Feito com <span className="text-amber-400">♥</span> e muito café
@@ -357,6 +349,12 @@ export function Home() {
                 <SectionDivider number="04" title="Equipe" />
                 <AnimatedSection id="team" className="py-16">
                     <Team />
+                </AnimatedSection>
+
+                {/* Newsletter Section */}
+                <SectionDivider number="05" title="Newsletter" />
+                <AnimatedSection id="newsletter">
+                    <Newsletter />
                 </AnimatedSection>
 
                 {/* Footer */}

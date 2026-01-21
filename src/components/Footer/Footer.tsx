@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, Phone, Cookie } from 'lucide-react';
+import { useCookieConsent } from '../../hooks/useCookieConsent';
 
 const footerLinks = {
     servicos: [
@@ -13,9 +14,7 @@ const footerLinks = {
         { name: 'Carreiras', href: '/carreiras' },
     ],
     legal: [
-        { name: 'Privacidade', href: '/privacidade' },
-        { name: 'Termos', href: '/termos' },
-        { name: 'LGPD', href: '/lgpd' },
+        { name: 'Privacidade', href: '/Politica-de-Privacidade-Riaheru-Ventures TESTE.docx', download: true },
     ],
 };
 
@@ -30,6 +29,8 @@ const contactInfo = [
 ];
 
 export function Footer() {
+    const { openSettings } = useCookieConsent();
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
@@ -127,12 +128,22 @@ export function Footer() {
                                 <li key={link.name}>
                                     <a
                                         href={link.href}
+                                        download={link.download}
                                         className="text-sm text-white/50 hover:text-[var(--accent-light)] transition-colors duration-300"
                                     >
                                         {link.name}
                                     </a>
                                 </li>
                             ))}
+                            <li>
+                                <button
+                                    onClick={openSettings}
+                                    className="text-sm text-white/50 hover:text-[var(--accent-light)] transition-colors duration-300 flex items-center gap-2"
+                                >
+                                    <Cookie size={14} />
+                                    Preferências de Cookies
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>

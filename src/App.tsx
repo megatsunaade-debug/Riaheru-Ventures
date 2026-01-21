@@ -8,6 +8,8 @@ import { About } from '@/pages/About';
 import { InfoPage } from '@/pages/InfoPage';
 import { ModalProvider } from '@/context/ModalContext';
 import { ContactModal } from '@/components/ContactModal/ContactModal';
+import { CookieConsent } from '@/components/CookieConsent/CookieConsent';
+import { CookieConsentProvider } from '@/hooks/useCookieConsent';
 
 
 // Component to scroll to top on route change
@@ -29,22 +31,25 @@ function App() {
         <title>Riaheru | Engenharia de Software</title>
         <meta name="description" content="Software House híbrida especializada em desenvolvimento de alta performance, estratégia jurídica e infraestrutura escalável." />
       </Helmet>
-      <ModalProvider>
-        <div className="min-h-screen antialiased">
-          <Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/sobre" element={<About />} />
-              {INFO_PAGES.map((page) => (
-                <Route key={page.path} path={page.path} element={<InfoPage {...page} />} />
-              ))}
-            </Routes>
-          </main>
-          <Footer />
-          <ContactModal />
-        </div>
-      </ModalProvider>
+      <CookieConsentProvider>
+        <ModalProvider>
+          <div className="min-h-screen antialiased">
+            <Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/sobre" element={<About />} />
+                {INFO_PAGES.map((page) => (
+                  <Route key={page.path} path={page.path} element={<InfoPage {...page} />} />
+                ))}
+              </Routes>
+            </main>
+            <Footer />
+            <ContactModal />
+            <CookieConsent />
+          </div>
+        </ModalProvider>
+      </CookieConsentProvider>
     </Router>
   );
 }

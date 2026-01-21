@@ -5,19 +5,23 @@ import { SectionTitle } from '../ui/SectionTitle';
 const stackCategories = [
     {
         name: 'Frontend',
-        technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+        description: 'Experiência digital imersiva com performance otimizada para escala global.',
+        technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vite', 'TanStack Query', 'Radix/Shadcn'],
     },
     {
         name: 'Backend',
-        technologies: ['Node.js', 'tRPC', 'Express', 'Next.js'],
+        description: 'Arquitetura resiliente e segura para processamento de regras de negócio críticas.',
+        technologies: ['Node.js 20', 'tRPC', 'Express', 'Vitest', 'Zod', 'Wouter'],
     },
     {
         name: 'Dados',
-        technologies: ['MySQL', 'Drizzle ORM', 'Docker', 'PostgreSQL', 'Supabase'],
+        description: 'Governança e integridade para ativos de informação de alto valor estratégico.',
+        technologies: ['PostgreSQL', 'MySQL 8', 'Drizzle ORM', 'Docker', 'AWS S3', 'Supabase'],
     },
     {
         name: 'Integração',
-        technologies: ['Webhooks', 'APIs RESTful', 'AWS', 'CI/CD'],
+        description: 'Interoperabilidade sistêmica para automação e orquestração de fluxos complexos.',
+        technologies: ['Nginx', 'Linux VPS', 'PM2', 'Let\'s Encrypt', 'Webhooks', 'CI/CD'],
     },
 ];
 
@@ -26,13 +30,13 @@ export function Stack() {
         <section id="stack" className="relative py-20 md:py-28 bg-white">
             <div className="container max-w-7xl">
                 <SectionTitle
-                    tag="Expertise Técnica"
+                    tag="Engenharia de Software"
                     title={
                         <>
                             Nossa <span className="text-[var(--accent-primary)]">Powerhouse</span> Tecnológica
                         </>
                     }
-                    description="Nossa liderança técnica combina Engenharia de Produção com Full-Stack Development. Não somos apenas devs, somos construtores de ativos digitais."
+                    description="Superamos o desenvolvimento tradicional para construir ativos digitais estratégicos. Projetamos plataformas SaaS e sistemas críticos com foco em escalabilidade, governança e longevidade, atuando como parceiros técnicos de negócios que exigem robustez enterprise."
                 />
 
                 {/* Stack Grid */}
@@ -53,7 +57,7 @@ export function Stack() {
                             {/* Content */}
                             <div className="relative z-10">
                                 {/* Category Header */}
-                                <div className="flex items-center gap-4 mb-7">
+                                <div className="flex items-center gap-4 mb-4">
                                     <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] group-hover:bg-[var(--accent-primary)] group-hover:text-white transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-[var(--accent-primary)]/30">
                                         <div className="w-3.5 h-3.5 rounded-full bg-current" />
                                     </div>
@@ -61,6 +65,11 @@ export function Stack() {
                                         {category.name}
                                     </h3>
                                 </div>
+
+                                {/* Category Description */}
+                                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
+                                    {category.description}
+                                </p>
 
                                 {/* Technologies as Tags */}
                                 <div className="flex flex-wrap gap-2.5">

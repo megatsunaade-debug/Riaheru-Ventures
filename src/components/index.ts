@@ -4,6 +4,7 @@ export { Services } from './Services/Services';
 export { Showcase } from './Showcase/Showcase';
 export { Stack } from './Stack/Stack';
 export { Team } from './Team/Team';
+export { Newsletter } from './Newsletter/Newsletter';
 export { Footer } from './Footer/Footer';
 export { Button } from './ui/Button';
 export { Card } from './ui/Card';

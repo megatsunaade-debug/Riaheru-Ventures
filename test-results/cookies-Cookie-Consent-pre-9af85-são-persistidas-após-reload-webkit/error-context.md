@@ -1,0 +1,415 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - generic [ref=e6]:
+        - link "Riaheru" [ref=e7]:
+          - /url: /
+          - img "Riaheru" [ref=e8]
+        - generic [ref=e9]:
+          - link "Serviços" [ref=e10]:
+            - /url: /#servicos
+            - text: Serviços
+          - link "Ventures" [ref=e11]:
+            - /url: /#ventures
+            - text: Ventures
+          - link "Expertise" [ref=e12]:
+            - /url: /#stack
+            - text: Expertise
+          - link "Sobre" [ref=e13]:
+            - /url: /sobre
+            - text: Sobre
+        - button "Iniciar Projeto" [ref=e16]
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - navigation [ref=e20]:
+        - generic [ref=e21]:
+          - button "01" [ref=e22]:
+            - generic [ref=e23]: "01"
+          - button "02" [ref=e25]:
+            - generic [ref=e26]: "02"
+          - button "03" [ref=e28]:
+            - generic [ref=e29]: "03"
+          - button "04" [ref=e31]:
+            - generic [ref=e32]: "04"
+          - button "05" [ref=e34]:
+            - generic [ref=e35]: "05"
+      - main [ref=e44]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - img [ref=e50]
+            - text: Software House & Venture Builder
+          - heading "Soluções de Software Inovadoras" [level=1] [ref=e53]
+          - paragraph [ref=e54]:
+            - text: Unimos
+            - strong [ref=e55]: Engenharia de Software
+            - text: ","
+            - text: Consultoria Estratégica e Venture Building
+            - text: para transformar ideias em ativos digitais de alto valor.
+          - generic [ref=e56]:
+            - button "Iniciar Projeto" [ref=e57]:
+              - text: Iniciar Projeto
+              - img [ref=e58]
+            - button "Conhecer Portfólio" [ref=e60]
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - generic [ref=e64]: "1"
+              - generic [ref=e65]: Projeto Entregue
+            - generic [ref=e66]:
+              - generic [ref=e68]: "3"
+              - generic [ref=e69]: Projetos em Andamento
+            - generic [ref=e70]:
+              - generic [ref=e72]: R$ 800k+
+              - generic [ref=e73]: Retorno Gerado
+            - generic [ref=e74]:
+              - generic [ref=e76]: 100%
+              - generic [ref=e77]: Satisfação
+        - generic [ref=e78]:
+          - generic [ref=e80]: "01"
+          - generic [ref=e82]:
+            - generic [ref=e83]: "01"
+            - heading "Serviços" [level=2] [ref=e85]
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - generic [ref=e90]: Nossos Serviços
+            - heading "A Tríade da Excelência" [level=2] [ref=e91]
+            - paragraph [ref=e92]: Três pilares integrados que transformam ideias em produtos digitais de alta performance.
+          - generic [ref=e93]:
+            - generic [ref=e94]:
+              - img [ref=e96]
+              - generic [ref=e100]: Fábrica de Software
+              - heading "Desenvolvimento Customizado" [level=3] [ref=e101]
+              - paragraph [ref=e102]: Squads de elite para seu projeto. Entregamos soluções escaláveis com arquitetura robusta e código de alta qualidade.
+              - list [ref=e103]:
+                - listitem [ref=e104]:
+                  - generic [ref=e106]: Squads dedicados
+                - listitem [ref=e107]:
+                  - generic [ref=e109]: Metodologia ágil
+                - listitem [ref=e110]:
+                  - generic [ref=e112]: Código escalável
+                - listitem [ref=e113]:
+                  - generic [ref=e115]: Suporte contínuo
+              - link "Saiba mais" [ref=e116]:
+                - /url: "#fabrica"
+                - text: Saiba mais
+                - img [ref=e117]
+            - generic [ref=e119]:
+              - img [ref=e121]
+              - generic [ref=e129]: Consultoria Estratégica
+              - heading "Arquitetura de Software" [level=3] [ref=e130]
+              - paragraph [ref=e131]: IA, Automação e Otimização de Processos. Transformamos operações complexas em fluxos inteligentes.
+              - list [ref=e132]:
+                - listitem [ref=e133]:
+                  - generic [ref=e135]: Inteligência Artificial
+                - listitem [ref=e136]:
+                  - generic [ref=e138]: Automação de processos
+                - listitem [ref=e139]:
+                  - generic [ref=e141]: Análise de dados
+                - listitem [ref=e142]:
+                  - generic [ref=e144]: Otimização operacional
+              - link "Saiba mais" [ref=e145]:
+                - /url: "#consultoria"
+                - text: Saiba mais
+                - img [ref=e146]
+            - generic [ref=e148]:
+              - img [ref=e150]
+              - generic [ref=e155]: Riaheru Ventures
+              - heading "Soluções SaaS" [level=3] [ref=e156]
+              - paragraph [ref=e157]: Produtos proprietários e startups incubadas. Construímos ativos digitais que geram valor real.
+              - list [ref=e158]:
+                - listitem [ref=e159]:
+                  - generic [ref=e161]: Produtos SaaS
+                - listitem [ref=e162]:
+                  - generic [ref=e164]: Startups incubadas
+                - listitem [ref=e165]:
+                  - generic [ref=e167]: MVP acelerado
+                - listitem [ref=e168]:
+                  - generic [ref=e170]: Go-to-market
+              - link "Saiba mais" [ref=e171]:
+                - /url: "#ventures-service"
+                - text: Saiba mais
+                - img [ref=e172]
+        - generic [ref=e174]:
+          - generic [ref=e176]: "02"
+          - generic [ref=e178]:
+            - generic [ref=e179]: "02"
+            - heading "Portfólio" [level=2] [ref=e181]
+        - generic [ref=e184]:
+          - generic [ref=e185]:
+            - generic [ref=e186]: Produto Próprio
+            - 'heading "Marqlet Logo Marqlet: A Reinvenção da Gestão" [level=2] [ref=e187]':
+              - generic [ref=e188]:
+                - img "Marqlet Logo" [ref=e189]
+                - generic [ref=e190]: "Marqlet: A Reinvenção da Gestão"
+            - paragraph [ref=e191]: Plataforma SaaS desktop-first com segurança bancária. Nosso produto principal que valida a autoridade técnica da Riaheru.
+          - generic [ref=e192]:
+            - generic [ref=e194]:
+              - generic [ref=e201]: marqlet.com
+              - generic [ref=e202]:
+                - img "Marqlet Dashboard" [ref=e203]
+                - generic [ref=e204]:
+                  - img [ref=e206]
+                  - generic [ref=e208]:
+                    - generic [ref=e209]: Seguro
+                    - generic [ref=e210]: 100%
+            - generic [ref=e211]:
+              - generic [ref=e212]:
+                - generic [ref=e213]: React 19
+                - generic [ref=e214]: tRPC
+                - generic [ref=e215]: Drizzle ORM
+                - generic [ref=e216]: AWS S3
+                - generic [ref=e217]: TypeScript
+                - generic [ref=e218]: Node.js
+                - generic [ref=e219]: Vite
+                - generic [ref=e220]: TanStack Query
+                - generic [ref=e221]: Radix/Shadcn
+              - generic [ref=e222]:
+                - generic [ref=e223]:
+                  - img [ref=e225]
+                  - generic [ref=e227]:
+                    - heading "Segurança Bancária" [level=4] [ref=e228]
+                    - paragraph [ref=e229]: Criptografia de ponta e proteção de dados em conformidade com LGPD.
+                - generic [ref=e230]:
+                  - img [ref=e232]
+                  - generic [ref=e234]:
+                    - heading "Performance" [level=4] [ref=e235]
+                    - paragraph [ref=e236]: Arquitetura desktop-first para máxima velocidade e responsividade.
+                - generic [ref=e237]:
+                  - img [ref=e239]
+                  - generic [ref=e243]:
+                    - heading "Dados Estruturados" [level=4] [ref=e244]
+                    - paragraph [ref=e245]: Gestão inteligente de documentos jurídicos com indexação avançada.
+                - generic [ref=e246]:
+                  - img [ref=e248]
+                  - generic [ref=e251]:
+                    - heading "Controle de Acesso" [level=4] [ref=e252]
+                    - paragraph [ref=e253]: Permissões granulares e auditoria completa de ações.
+                - generic [ref=e254]:
+                  - img [ref=e256]
+                  - generic [ref=e264]:
+                    - heading "MarqletAI Integrada" [level=4] [ref=e265]
+                    - paragraph [ref=e266]: Inteligência artificial nativa para automação e insights jurídicos avançados.
+                - generic [ref=e267]:
+                  - img [ref=e269]
+                  - generic [ref=e274]:
+                    - heading "Painel do Cliente" [level=4] [ref=e275]
+                    - paragraph [ref=e276]: Portal exclusivo para clientes do escritório acompanharem seus processos.
+              - button "Conhecer Marqlet" [ref=e277]:
+                - text: Conhecer Marqlet
+                - img [ref=e278]
+        - generic [ref=e282]:
+          - generic [ref=e284]: "03"
+          - generic [ref=e286]:
+            - generic [ref=e287]: "03"
+            - heading "Tecnologias" [level=2] [ref=e289]
+        - generic [ref=e292]:
+          - generic [ref=e293]:
+            - generic [ref=e294]: Engenharia de Software
+            - heading "Nossa Powerhouse Tecnológica" [level=2] [ref=e295]
+            - paragraph [ref=e296]: Superamos o desenvolvimento tradicional para construir ativos digitais estratégicos. Projetamos plataformas SaaS e sistemas críticos com foco em escalabilidade, governança e longevidade, atuando como parceiros técnicos de negócios que exigem robustez enterprise.
+          - generic [ref=e297]:
+            - generic [ref=e300]:
+              - heading "Frontend" [level=3] [ref=e304]
+              - paragraph [ref=e305]: Experiência digital imersiva com performance otimizada para escala global.
+              - generic [ref=e306]:
+                - generic [ref=e307]: React
+                - generic [ref=e308]: TypeScript
+                - generic [ref=e309]: Tailwind CSS
+                - generic [ref=e310]: Framer Motion
+                - generic [ref=e311]: Vite
+                - generic [ref=e312]: TanStack Query
+                - generic [ref=e313]: Radix/Shadcn
+            - generic [ref=e316]:
+              - heading "Backend" [level=3] [ref=e320]
+              - paragraph [ref=e321]: Arquitetura resiliente e segura para processamento de regras de negócio críticas.
+              - generic [ref=e322]:
+                - generic [ref=e323]: Node.js 20
+                - generic [ref=e324]: tRPC
+                - generic [ref=e325]: Express
+                - generic [ref=e326]: Vitest
+                - generic [ref=e327]: Zod
+                - generic [ref=e328]: Wouter
+            - generic [ref=e331]:
+              - heading "Dados" [level=3] [ref=e335]
+              - paragraph [ref=e336]: Governança e integridade para ativos de informação de alto valor estratégico.
+              - generic [ref=e337]:
+                - generic [ref=e338]: PostgreSQL
+                - generic [ref=e339]: MySQL 8
+                - generic [ref=e340]: Drizzle ORM
+                - generic [ref=e341]: Docker
+                - generic [ref=e342]: AWS S3
+                - generic [ref=e343]: Supabase
+            - generic [ref=e346]:
+              - heading "Integração" [level=3] [ref=e350]
+              - paragraph [ref=e351]: Interoperabilidade sistêmica para automação e orquestração de fluxos complexos.
+              - generic [ref=e352]:
+                - generic [ref=e353]: Nginx
+                - generic [ref=e354]: Linux VPS
+                - generic [ref=e355]: PM2
+                - generic [ref=e356]: Let's Encrypt
+                - generic [ref=e357]: Webhooks
+                - generic [ref=e358]: CI/CD
+        - generic [ref=e359]:
+          - generic [ref=e361]: "04"
+          - generic [ref=e363]:
+            - generic [ref=e364]: "04"
+            - heading "Equipe" [level=2] [ref=e366]
+        - generic [ref=e369]:
+          - generic [ref=e370]:
+            - generic [ref=e371]: Nosso Time
+            - heading "Os Arquitetos por Trás do Código" [level=2] [ref=e372]
+            - paragraph [ref=e373]: Uma equipe multidisciplinar que combina Engenharia de Produção, Desenvolvimento Full-Stack e Estratégia Jurídica.
+          - generic [ref=e374]:
+            - generic [ref=e375]:
+              - img "Carlos Henrique" [ref=e378]
+              - generic [ref=e379]:
+                - heading "Carlos Henrique" [level=3] [ref=e380]
+                - paragraph [ref=e381]: Technical COO
+                - paragraph [ref=e382]: Engenheiro de Produção com MBA em Finanças. Full-Stack Developer com domínio de React, Node e tRPC.
+                - generic [ref=e383]:
+                  - link "LinkedIn de Carlos Henrique" [ref=e384]:
+                    - /url: https://www.linkedin.com/company/riaheru
+                    - img [ref=e385]
+                  - link "Email de Carlos Henrique" [ref=e389]:
+                    - /url: mailto:contato@riaheru.com
+                    - img [ref=e390]
+            - generic [ref=e393]:
+              - img "Rian Lenger" [ref=e396]
+              - generic [ref=e397]:
+                - heading "Rian Lenger" [level=3] [ref=e398]
+                - paragraph [ref=e399]: Head de Dados
+                - paragraph [ref=e400]: Engenheiro de Produção e Arquiteto de Backend. Especialista em MySQL, APIs e Segurança.
+                - generic [ref=e401]:
+                  - link "LinkedIn de Rian Lenger" [ref=e402]:
+                    - /url: https://www.linkedin.com/company/riaheru
+                    - img [ref=e403]
+                  - link "Email de Rian Lenger" [ref=e407]:
+                    - /url: mailto:contato@riaheru.com
+                    - img [ref=e408]
+            - generic [ref=e411]:
+              - img "Ruan Lenger" [ref=e414]
+              - generic [ref=e415]:
+                - heading "Ruan Lenger" [level=3] [ref=e416]
+                - paragraph [ref=e417]: Head de Integração
+                - paragraph [ref=e418]: Engenheiro de Produção focado em Automação. Especialista em Webhooks e microsserviços.
+                - generic [ref=e419]:
+                  - link "LinkedIn de Ruan Lenger" [ref=e420]:
+                    - /url: https://www.linkedin.com/company/riaheru
+                    - img [ref=e421]
+                  - link "Email de Ruan Lenger" [ref=e425]:
+                    - /url: mailto:contato@riaheru.com
+                    - img [ref=e426]
+            - generic [ref=e429]:
+              - img "Dra. Letícia Gomes" [ref=e432]
+              - generic [ref=e433]:
+                - heading "Dra. Letícia Gomes" [level=3] [ref=e434]
+                - paragraph [ref=e435]: CLO
+                - paragraph [ref=e436]: Advogada Estrategista. Especialista em compliance, LGPD e blindagem jurídica.
+                - generic [ref=e437]:
+                  - link "LinkedIn de Dra. Letícia Gomes" [ref=e438]:
+                    - /url: https://www.linkedin.com/company/riaheru
+                    - img [ref=e439]
+                  - link "Email de Dra. Letícia Gomes" [ref=e443]:
+                    - /url: mailto:contato@riaheru.com
+                    - img [ref=e444]
+        - generic [ref=e448]:
+          - generic [ref=e449]:
+            - generic [ref=e450]:
+              - heading "Vamos criar algo extraordinário" [level=3] [ref=e451]
+              - paragraph [ref=e452]: Transformando ideias em experiências digitais memoráveis
+            - generic [ref=e453]:
+              - link "LinkedIn" [ref=e454]:
+                - /url: "#"
+              - link "Twitter" [ref=e455]:
+                - /url: "#"
+          - generic [ref=e456]:
+            - paragraph [ref=e457]: © 2026 Riaheru Ventures — Todos os direitos reservados
+            - paragraph [ref=e458]: Feito com ♥ e muito café
+  - contentinfo [ref=e459]:
+    - generic [ref=e461]:
+      - generic [ref=e462]:
+        - link "Riaheru" [ref=e463]:
+          - /url: /
+          - img "Riaheru" [ref=e464]
+        - paragraph [ref=e465]: Hub de tecnologia híbrido que combina Engenharia de Software, Consultoria Estratégica e Venture Building.
+        - generic [ref=e466]:
+          - link "contato@riaheru.com" [ref=e467]:
+            - /url: mailto:contato@riaheru.com
+            - img [ref=e469]
+            - generic [ref=e472]: contato@riaheru.com
+          - link "+55 (11) 99999-9999" [ref=e473]:
+            - /url: tel:+5511999999999
+            - img [ref=e475]
+            - generic [ref=e477]: +55 (11) 99999-9999
+          - link "São Paulo, Brasil" [ref=e478]:
+            - /url: https://www.google.com/maps/search/?api=1&query=S%C3%A3o+Paulo%2C+Brasil
+            - img [ref=e480]
+            - generic [ref=e483]: São Paulo, Brasil
+      - generic [ref=e484]:
+        - heading "Serviços" [level=4] [ref=e485]
+        - list [ref=e486]:
+          - listitem [ref=e487]:
+            - link "Desenvolvimento" [ref=e488]:
+              - /url: /#fabrica
+          - listitem [ref=e489]:
+            - link "Consultoria" [ref=e490]:
+              - /url: /#consultoria
+          - listitem [ref=e491]:
+            - link "Ventures" [ref=e492]:
+              - /url: /#ventures
+      - generic [ref=e493]:
+        - heading "Empresa" [level=4] [ref=e494]
+        - list [ref=e495]:
+          - listitem [ref=e496]:
+            - link "Sobre Nós" [ref=e497]:
+              - /url: /sobre
+          - listitem [ref=e498]:
+            - link "Expertise" [ref=e499]:
+              - /url: /#stack
+          - listitem [ref=e500]:
+            - link "Carreiras" [ref=e501]:
+              - /url: /carreiras
+      - generic [ref=e502]:
+        - heading "Legal" [level=4] [ref=e503]
+        - list [ref=e504]:
+          - listitem [ref=e505]:
+            - link "Privacidade" [ref=e506]:
+              - /url: /Politica-de-Privacidade-Riaheru-Ventures TESTE.docx
+          - listitem [ref=e507]:
+            - button "Preferências de Cookies" [ref=e508]:
+              - img [ref=e509]
+              - text: Preferências de Cookies
+    - generic [ref=e513]:
+      - paragraph [ref=e515]: © 2025 Riaheru. |Code is Law. Efficiency is Mandatory.
+      - generic [ref=e516]:
+        - generic [ref=e519]: ONLINE
+        - button "Voltar ao topo" [ref=e520]:
+          - img [ref=e521]
+  - generic [ref=e526]:
+    - generic [ref=e527]:
+      - img [ref=e529]
+      - generic [ref=e531]:
+        - heading "Utilizamos Cookies" [level=3] [ref=e532]
+        - paragraph [ref=e533]:
+          - text: Usamos cookies para melhorar sua experiência, personalizar conteúdo e analisar o tráfego do site. Você pode escolher quais cookies aceitar.
+          - link "Política de Privacidade" [ref=e534]:
+            - /url: /Politica-de-Privacidade-Riaheru-Ventures TESTE.docx
+    - generic [ref=e535]:
+      - generic [ref=e536]:
+        - img [ref=e537]
+        - generic [ref=e539]: EssenciaisSempre ativos
+      - generic [ref=e540]:
+        - img [ref=e541]
+        - generic [ref=e544]: Funcionais
+      - generic [ref=e545]:
+        - img [ref=e546]
+        - generic [ref=e548]: Marketing
+    - generic [ref=e549]:
+      - button "Aceitar Todos" [ref=e550]
+      - button "Apenas Essenciais" [ref=e551]
+      - button "Personalizar" [ref=e552]:
+        - img [ref=e553]
+        - generic [ref=e556]: Personalizar
+```

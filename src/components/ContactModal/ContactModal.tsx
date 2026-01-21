@@ -7,6 +7,8 @@ import { CONTACT_INFO } from '../../constants';
 export function ContactModal() {
     const { isContactOpen, closeContactModal } = useModal();
     const [isLoading, setIsLoading] = useState(false);
+    const [privacyConsent, setPrivacyConsent] = useState(false);
+    const [consentError, setConsentError] = useState(false);
     const modalRef = useRef<HTMLDivElement>(null);
     const firstFieldRef = useRef<HTMLInputElement>(null);
     const lastActiveRef = useRef<HTMLElement | null>(null);
@@ -78,11 +80,20 @@ export function ContactModal() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        // Validar consentimento
+        if (!privacyConsent) {
+            setConsentError(true);
+            return;
+        }
+        setConsentError(false);
         setIsLoading(true);
 
         const formData = new FormData(e.currentTarget);
         const name = String(formData.get('nome') ?? '').trim();
         const email = String(formData.get('email') ?? '').trim();
+        const empresa = String(formData.get('empresa') ?? '').trim();
+        const telefone = String(formData.get('telefone') ?? '').trim();
         const message = String(formData.get('mensagem') ?? '').trim();
 
         try {
@@ -93,7 +104,7 @@ export function ContactModal() {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
                     },
-                    body: JSON.stringify({ name, email, message }),
+                    body: JSON.stringify({ name, email, empresa, telefone, message, privacyConsent: true }),
                 });
 
                 if (!response.ok) {
@@ -104,6 +115,7 @@ export function ContactModal() {
             }
 
             e.currentTarget.reset();
+            setPrivacyConsent(false);
             closeContactModal();
             alert('Obrigado! Recebemos sua mensagem e entraremos em contato em breve.');
         } catch (error) {
@@ -193,6 +205,36 @@ export function ContactModal() {
                                                 />
                                             </div>
 
+                                            {/* Campos opcionais */}
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label htmlFor="empresa" className="block text-sm font-medium text-gray-700 mb-1.5">
+                                                        Empresa <span className="text-gray-400 font-normal">(opcional)</span>
+                                                    </label>
+                                                    <input
+                                                        id="empresa"
+                                                        name="empresa"
+                                                        type="text"
+                                                        autoComplete="organization"
+                                                        className="w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl outline-none transition-all focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 focus:bg-white"
+                                                        placeholder="Nome da empresa"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label htmlFor="telefone" className="block text-sm font-medium text-gray-700 mb-1.5">
+                                                        Telefone <span className="text-gray-400 font-normal">(opcional)</span>
+                                                    </label>
+                                                    <input
+                                                        id="telefone"
+                                                        name="telefone"
+                                                        type="tel"
+                                                        autoComplete="tel"
+                                                        className="w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl outline-none transition-all focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 focus:bg-white"
+                                                        placeholder="(11) 99999-9999"
+                                                    />
+                                                </div>
+                                            </div>
+
                                             <div>
                                                 <label htmlFor="mensagem" className="block text-sm font-medium text-gray-700 mb-1.5">
                                                     Como podemos ajudar?
@@ -205,6 +247,58 @@ export function ContactModal() {
                                                     className="w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl outline-none transition-all focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 focus:bg-white resize-none"
                                                     placeholder="Descreva brevemente seu projeto..."
                                                 />
+                                            </div>
+
+                                            {/* Checkbox de consentimento */}
+                                            <div className="pt-2">
+                                                <label className="flex items-start gap-3 cursor-pointer group">
+                                                    <div className="relative flex-shrink-0 mt-0.5">
+                                                        <input
+                                                            type="checkbox"
+                                                            data-testid="privacy-consent"
+                                                            checked={privacyConsent}
+                                                            onChange={(e) => {
+                                                                setPrivacyConsent(e.target.checked);
+                                                                if (e.target.checked) setConsentError(false);
+                                                            }}
+                                                            className="sr-only peer"
+                                                        />
+                                                        <div className={`w-5 h-5 rounded border-2 transition-all duration-200 flex items-center justify-center
+                                                            ${privacyConsent
+                                                                ? 'bg-[var(--accent-primary)] border-[var(--accent-primary)]'
+                                                                : consentError
+                                                                    ? 'border-red-400 bg-red-50'
+                                                                    : 'border-gray-300 bg-white group-hover:border-gray-400'
+                                                            }`}
+                                                        >
+                                                            {privacyConsent && (
+                                                                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                    <span className={`text-sm leading-relaxed ${consentError ? 'text-red-600' : 'text-gray-600'}`}>
+                                                        Li e concordo com a{' '}
+                                                        <a
+                                                            href="/Politica-de-Privacidade-Riaheru-Ventures TESTE.docx"
+                                                            download
+                                                            className="text-[var(--accent-primary)] hover:underline font-medium"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        >
+                                                            Política de Privacidade
+                                                        </a>
+                                                        {' '}e autorizo o tratamento dos meus dados pessoais para fins de contato comercial.
+                                                    </span>
+                                                </label>
+                                                {consentError && (
+                                                    <p data-testid="consent-error" className="mt-2 text-sm text-red-500 flex items-center gap-1">
+                                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                        </svg>
+                                                        É necessário concordar com a Política de Privacidade para continuar.
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
 
