@@ -230,7 +230,7 @@ export function ContactModal() {
                                                         type="tel"
                                                         autoComplete="tel"
                                                         className="w-full px-4 py-3 text-gray-900 bg-gray-50 border border-gray-200 rounded-xl outline-none transition-all focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 focus:bg-white"
-                                                        placeholder="(11) 99999-9999"
+                                                        placeholder={CONTACT_INFO.WHATSAPP_DISPLAY}
                                                     />
                                                 </div>
                                             </div>

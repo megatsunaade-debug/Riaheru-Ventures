@@ -1,202 +1,179 @@
-import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { SectionTitle } from '../components/ui/SectionTitle';
-import { Check, Code2, Shield, Cpu, Scale } from 'lucide-react';
+import { ArrowRight, Code2, Shield, Cpu, Scale, Quote } from 'lucide-react';
+import { useModal } from '../context/ModalContext';
 
 const leadership = [
     {
         name: 'Carlos Henrique Marques Pereira',
         role: 'Co-Founder & Technical COO',
-        description: 'Engenheiro de Produção com MBA em Finanças e mais de 10 anos de experiência em gestão. Domina a stack moderna (React, Node.js, tRPC) garantindo que a arquitetura seja tecnicamente impecável e financeiramente viável.',
-        icon: Code2,
-        initials: 'CH',
+        description: 'Engenheiro de Produção com MBA em Finanças. Domina a stack moderna garantindo arquitetura impecável.',
         image: '/carlos-henrique.webp',
+        color: '#0052CC',
     },
     {
         name: 'Rian Lenger',
         role: 'Co-Founder & Head de Dados',
-        description: 'Engenheiro de Produção e Arquiteto de Infraestrutura. Especialista em modelagem de Bancos de Dados Relacionais (SQL) e APIs robustas para sustentar grandes operações.',
-        icon: Shield,
-        initials: 'RL',
+        description: 'Engenheiro de Produção e Arquiteto de Infraestrutura. Especialista em SQL e APIs robustas.',
         image: '/rian-lenger.webp',
+        color: '#00C853',
     },
     {
         name: 'Ruan Lenger',
         role: 'Co-Founder & Head de Integração',
-        description: 'Engenheiro de Produção e Especialista em Automação. Mestre em Webhooks, Microsserviços e Automação de Fluxos que eliminam gargalos manuais.',
-        icon: Cpu,
-        initials: 'RL',
+        description: 'Engenheiro de Produção. Mestre em Webhooks, Microsserviços e Automação.',
         image: '/ruan-lenger.webp',
+        color: '#FF6B35',
     },
-
     {
         name: 'Dra. Letícia Gomes Marques',
         role: 'Co-Founder & Chief Legal Officer',
-        description: 'Advogada com experiência em Direito Administrativo e Trabalhista. Garante a conformidade com LGPD e riscos mitigados desde a primeira linha de código.',
-        icon: Scale,
-        initials: 'LG',
+        description: 'Advogada especializada em Direito Administrativo. Garante conformidade LGPD desde a primeira linha.',
         image: '/leticia-gomes.webp',
+        color: '#9C27B0',
     }
 ];
 
-const dna = [
-    {
-        title: 'Front-end Imersivo',
-        description: 'React 19, TypeScript e Tailwind CSS para interfaces que reagem instantaneamente.'
-    },
-    {
-        title: 'Back-end Type-Safe',
-        description: 'Node.js e tRPC para uma comunicação à prova de falhas entre servidor e cliente.'
-    },
-    {
-        title: 'Infraestrutura de Guerra',
-        description: 'Docker, Nginx e Bancos de Dados otimizados para alta performance e segurança.'
-    }
+const expertise = [
+    { icon: Code2, title: 'Front-end Imersivo', description: 'React, TypeScript e Tailwind CSS' },
+    { icon: Shield, title: 'Back-end Type-Safe', description: 'Node.js, tRPC e APIs robustas' },
+    { icon: Cpu, title: 'Infraestrutura', description: 'Docker, Nginx e cloud escalável' },
+    { icon: Scale, title: 'Compliance', description: 'LGPD, segurança e governança' },
 ];
 
 export function About() {
+    const { openContactModal } = useModal();
+
     return (
-        <div className="bg-white">
+        <div className="bg-[var(--off-white)]">
             <Helmet>
                 <title>Sobre Nós | Riaheru</title>
                 <meta name="description" content="Conheça a Riaheru: Onde a lógica da engenharia encontra a inovação do código." />
             </Helmet>
 
-            {/* Hero Header */}
-            <section className="relative pb-24 bg-[var(--bg-dark)]" style={{ paddingTop: '10rem' }}>
+            {/* Hero */}
+            <section className="pt-32 pb-20 bg-[var(--off-white)]">
                 <div className="container">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="max-w-3xl"
-                    >
-                        <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 text-[var(--accent-light)] text-sm font-medium mb-6">
-                            Sobre a Riaheru
-                        </span>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white">
-                            Onde a Lógica da Engenharia encontra a{' '}
-                            <span className="text-[var(--accent-light)]">Inovação do Código</span>.
+                    <div className="max-w-3xl">
+                        <span className="label label-accent block mb-4">Sobre nós</span>
+                        <h1 className="mb-6">
+                            Engenharia de software com{' '}
+                            <span className="text-[var(--accent)]">propósito</span>
                         </h1>
-                        <p className="text-lg md:text-xl text-white/60 leading-relaxed">
-                            Somos uma Software House híbrida que nasceu da inconformidade com o mercado tradicional.
-                            Não entregamos apenas código — construímos <strong className="text-white">ativos digitais de alto valor</strong>.
+                        <p className="text-xl text-[var(--gray-600)] leading-relaxed mb-8">
+                            Somos uma software house híbrida que nasceu da inconformidade com o mercado tradicional.
+                            Não entregamos apenas código — construímos ativos digitais de alto valor.
                         </p>
-                    </motion.div>
+                        <button onClick={openContactModal} className="btn">
+                            Falar com a gente
+                            <ArrowRight size={18} />
+                        </button>
+                    </div>
                 </div>
             </section>
 
-            {/* Leadership Section */}
-            <section className="py-20 md:py-28 bg-white">
+            {/* Quote - REDESENHADO */}
+            <section className="py-20 bg-[var(--black)]">
                 <div className="container">
-                    <SectionTitle
-                        tag="Nossa Liderança"
-                        title="Engenharia, Direito & Tecnologia"
-                        description="O diferencial da Riaheru está em quem lidera a estratégia. Somos engenheiros e juristas que dominam a tecnologia."
-                        align="center"
-                    />
+                    <div className="max-w-3xl mx-auto text-center">
+                        <Quote size={48} className="mx-auto mb-8 text-[var(--accent)]" strokeWidth={1} />
+                        <blockquote className="text-3xl md:text-4xl font-semibold text-white leading-tight mb-8">
+                            Na Riaheru, eficiência é mandatória e o código é a lei.
+                        </blockquote>
+                        <div className="flex items-center justify-center gap-3">
+                            <div className="w-12 h-px bg-[var(--accent)]" />
+                            <span className="text-sm text-gray-400 font-medium">Nossa filosofia</span>
+                            <div className="w-12 h-px bg-[var(--accent)]" />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                        {leadership.map((leader, index) => (
-                            <motion.div
-                                key={leader.name}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="group relative rounded-2xl bg-white border border-gray-100 shadow-lg hover:shadow-xl p-6 transition-all duration-300 flex gap-5"
+            {/* Team */}
+            <section className="py-20 bg-[var(--white)]">
+                <div className="container">
+                    <div className="max-w-2xl mb-16">
+                        <span className="label block mb-4">Liderança</span>
+                        <h2>Quem faz acontecer</h2>
+                        <p className="mt-4">
+                            Engenheiros e juristas que dominam tecnologia e entregam resultados.
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {leadership.map((person) => (
+                            <div
+                                key={person.name}
+                                className="card flex gap-5"
                             >
                                 {/* Avatar */}
                                 <div className="shrink-0">
-                                    {leader.image ? (
-                                        <div className="w-24 h-24 rounded-xl overflow-hidden shadow-lg shadow-[var(--accent-primary)]/20 ring-1 ring-gray-100">
-                                            <img
-                                                src={leader.image}
-                                                alt={leader.name}
-                                                className="w-full h-full object-cover object-top"
-                                            />
-                                        </div>
-                                    ) : (
-                                        <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-[var(--accent-primary)] to-[var(--accent-dark)] flex items-center justify-center shadow-lg shadow-[var(--accent-primary)]/20">
-                                            <span className="text-white font-bold text-2xl font-mono">
-                                                {leader.initials}
-                                            </span>
-                                        </div>
-                                    )}
+                                    <div
+                                        className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-offset-2"
+                                        style={{ ringColor: person.color }}
+                                    >
+                                        <img
+                                            src={person.image}
+                                            alt={person.name}
+                                            className="w-full h-full object-cover object-top"
+                                        />
+                                    </div>
                                 </div>
 
-                                {/* Content */}
-                                <div className="flex-1">
-                                    <h3 className="text-lg font-bold text-gray-900 mb-1">
-                                        {leader.name}
-                                    </h3>
-                                    <p className="text-[var(--accent-primary)] text-sm font-medium mb-3">
-                                        {leader.role}
+                                {/* Info */}
+                                <div>
+                                    <h3 className="text-lg font-semibold mb-1">{person.name}</h3>
+                                    <p
+                                        className="text-sm font-medium mb-3"
+                                        style={{ color: person.color }}
+                                    >
+                                        {person.role}
                                     </p>
-                                    <p className="text-gray-600 text-sm leading-relaxed">
-                                        {leader.description}
+                                    <p className="text-sm text-[var(--gray-600)]">
+                                        {person.description}
                                     </p>
                                 </div>
-                            </motion.div>
+                            </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* DNA Section */}
-            <section className="py-20 md:py-28 bg-[var(--bg-light-alt)]">
+            {/* Expertise */}
+            <section className="py-20 bg-[var(--gray-50)]">
                 <div className="container">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <SectionTitle
-                                tag="The Riaheru Way"
-                                title="Nosso DNA Técnico"
-                                description="Utilizamos as mesmas ferramentas que as maiores tech companies do mundo usam para escalar."
-                                align="left"
-                            />
-
-                            <ul className="space-y-5 mt-8">
-                                {dna.map((item, index) => (
-                                    <motion.li
-                                        key={item.title}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.15 }}
-                                        className="flex gap-4 group"
-                                    >
-                                        <div className="shrink-0 mt-1">
-                                            <div className="w-8 h-8 rounded-full bg-[var(--accent-primary)]/10 flex items-center justify-center border border-[var(--accent-primary)]/20 group-hover:scale-110 transition-transform duration-300">
-                                                <Check size={16} className="text-[var(--accent-primary)]" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h4 className="font-bold text-gray-900 text-lg mb-1">{item.title}</h4>
-                                            <p className="text-gray-600 leading-relaxed">{item.description}</p>
-                                        </div>
-                                    </motion.li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            className="relative p-10 rounded-2xl bg-[var(--bg-dark)] text-center shadow-2xl overflow-hidden"
-                        >
-                            {/* Background effects */}
-                            <div className="absolute top-0 right-0 w-48 h-48 bg-[var(--accent-primary)]/20 rounded-full blur-3xl" />
-                            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl" />
-
-                            <div className="relative z-10">
-                                <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 italic leading-tight">
-                                    "Na Riaheru, eficiência é mandatória e o código é a lei."
-                                </h3>
-                                <div className="w-20 h-1 bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-light)] mx-auto rounded-full" />
-                            </div>
-                        </motion.div>
+                    <div className="max-w-2xl mb-16">
+                        <span className="label block mb-4">Expertise</span>
+                        <h2>Nosso DNA técnico</h2>
+                        <p className="mt-4">
+                            Utilizamos as mesmas ferramentas das maiores tech companies do mundo.
+                        </p>
                     </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {expertise.map((item) => (
+                            <div key={item.title} className="card text-center">
+                                <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]">
+                                    <item.icon size={24} strokeWidth={1.5} />
+                                </div>
+                                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                                <p className="text-sm text-[var(--gray-600)]">{item.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA */}
+            <section className="py-20 bg-[var(--off-white)]">
+                <div className="container text-center">
+                    <h2 className="mb-6">Pronto para começar?</h2>
+                    <p className="text-lg text-[var(--gray-600)] mb-8 max-w-xl mx-auto">
+                        Vamos conversar sobre como podemos ajudar sua empresa a escalar.
+                    </p>
+                    <button onClick={openContactModal} className="btn">
+                        Iniciar conversa
+                        <ArrowRight size={18} />
+                    </button>
                 </div>
             </section>
         </div>
