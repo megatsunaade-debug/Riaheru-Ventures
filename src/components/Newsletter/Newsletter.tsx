@@ -1,196 +1,73 @@
-import { motion } from 'framer-motion';
-import { Mail, Send, Sparkles, CheckCircle2 } from 'lucide-react';
-import { useState, type FormEvent } from 'react';
+import { ArrowUpRight, MessageCircle, Sparkles } from 'lucide-react';
+
+import { m } from '@/lib/motion';
+import { CONTACT_INFO } from '../../constants';
+import { useModal } from '../../hooks/useModal';
+import { Button } from '../ui/Button';
 
 export function Newsletter() {
-    const [email, setEmail] = useState('');
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const validateEmail = (email: string) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    };
-
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setErrorMessage('');
-
-        if (!email || !validateEmail(email)) {
-            setStatus('error');
-            setErrorMessage('Por favor, insira um e-mail válido');
-            return;
-        }
-
-        setStatus('loading');
-
-        try {
-            // TODO: Integrar com serviço de newsletter (Mailchimp, SendGrid, etc)
-            // Simulando chamada de API
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-
-            // Log para desenvolvimento
-            console.log('Newsletter subscription:', email);
-
-            setStatus('success');
-            setEmail('');
-
-            // Reset status após 3 segundos
-            setTimeout(() => {
-                setStatus('idle');
-            }, 3000);
-        } catch (error) {
-            setStatus('error');
-            setErrorMessage('Erro ao processar inscrição. Tente novamente.');
-            console.error('Newsletter error:', error);
-        }
-    };
+    const { openContactModal } = useModal();
 
     return (
-        <section className="relative w-full bg-gradient-to-br from-[#0c1929] via-[#132238] to-[#0c1929] overflow-hidden flex flex-col justify-center items-center py-24 md:py-32">
-            {/* Background Elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Glows */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--accent-primary)]/10 rounded-full blur-[120px] animate-pulse-glow" />
-            </div>
-
-            <div className="relative z-10 w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-                <div className="w-full max-w-4xl text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-12"
-                    >
-                        {/* Badge */}
-                        <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-[var(--accent-primary)]/30 bg-[var(--accent-primary)]/10 text-[var(--accent-light)] text-xs font-bold tracking-[0.15em] uppercase shadow-lg shadow-[var(--accent-primary)]/10 mb-8">
-                            <Sparkles size={14} className="text-[var(--accent-primary)]" />
-                            Newsletter
+        <section className="bg-[var(--off-white)] py-20 md:py-24">
+            <div className="container">
+                <m.div
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.55 }}
+                    className="overflow-hidden rounded-[32px] border border-[color:rgba(12,18,34,0.08)] bg-[linear-gradient(135deg,#0c1222_0%,#102541_55%,#163154_100%)] p-8 shadow-[var(--shadow-lg)] md:p-12"
+                >
+                    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(280px,0.7fr)] lg:items-center">
+                        <div>
+                            <span className="on-dark-kicker inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em]">
+                                <Sparkles size={14} />
+                                Radar Riaheru
+                            </span>
+                            <h2 className="on-dark-heading mt-6 max-w-2xl text-4xl font-bold leading-[1.05] md:text-5xl">
+                                Atualizações reais,
+                                <span className="text-[var(--accent-light)]"> sem captura fake.</span>
+                            </h2>
+                            <p className="on-dark-copy mt-5 max-w-2xl text-lg leading-relaxed">
+                                Enquanto a newsletter ainda não está integrada, concentramos novidades em conversas diretas e no LinkedIn. Sem formulário ilusório, sem promessa vazia.
+                            </p>
+                            <div className="mt-8 flex flex-wrap gap-4">
+                                <a
+                                    href={CONTACT_INFO.LINKEDIN}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="btn"
+                                >
+                                    Acompanhar no LinkedIn
+                                    <ArrowUpRight size={18} />
+                                </a>
+                                <Button
+                                    variant="outline"
+                                    onClick={openContactModal}
+                                    className="on-dark-outline-button"
+                                >
+                                    Abrir conversa
+                                    <MessageCircle size={18} />
+                                </Button>
+                            </div>
                         </div>
 
-                        {/* Headline */}
-                        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6 leading-[1.1]">
-                            Fique por dentro das{' '}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-primary)]">
-                                Inovações
-                            </span>
-                        </h2>
-
-                        {/* Description */}
-                        <p className="text-lg md:text-xl text-[var(--text-muted-light)] leading-relaxed max-w-2xl mx-auto">
-                            Receba insights exclusivos sobre tecnologia, desenvolvimento de software e tendências do mercado diretamente no seu e-mail.
-                        </p>
-                    </motion.div>
-
-                    {/* Newsletter Form */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="relative w-full"
-                    >
-                        <form onSubmit={handleSubmit} className="relative w-full">
-                            <div className="relative flex flex-col sm:flex-row gap-4 p-2 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 shadow-2xl w-full">
-                                {/* Input Wrapper */}
-                                <div className="relative flex-1 min-w-0">
-                                    <Mail
-                                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 pointer-events-none"
-                                        size={20}
-                                    />
-                                    <input
-                                        type="email"
-                                        value={email}
-                                        onChange={(e) => {
-                                            setEmail(e.target.value);
-                                            if (status === 'error') {
-                                                setStatus('idle');
-                                                setErrorMessage('');
-                                            }
-                                        }}
-                                        placeholder="seu@email.com"
-                                        disabled={status === 'loading' || status === 'success'}
-                                        className="w-full pl-12 pr-4 py-4 bg-transparent text-white placeholder:text-white/40 outline-none text-base disabled:opacity-50 disabled:cursor-not-allowed"
-                                    />
+                        <div className="grid gap-4">
+                            {[
+                                'Atualizações de cases e bastidores de produto.',
+                                'Pontos de vista sobre arquitetura, IA aplicada e integrações.',
+                                'Contato direto quando fizer mais sentido conversar do que capturar lead.',
+                            ].map((item) => (
+                                <div
+                                    key={item}
+                                    className="on-dark-panel rounded-3xl px-5 py-5 text-sm leading-relaxed backdrop-blur-sm"
+                                >
+                                    {item}
                                 </div>
-
-                                {/* Submit Button */}
-                                <motion.button
-                                    type="submit"
-                                    disabled={status === 'loading' || status === 'success'}
-                                    whileHover={status === 'idle' || status === 'error' ? { scale: 1.02 } : {}}
-                                    whileTap={status === 'idle' || status === 'error' ? { scale: 0.98 } : {}}
-                                    className={`
-                                        inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold text-base
-                                        transition-all duration-300 whitespace-nowrap min-w-[160px] shrink-0
-                                        ${status === 'success'
-                                            ? 'bg-emerald-500 text-white cursor-default'
-                                            : 'bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white hover:shadow-lg hover:shadow-[var(--accent-primary)]/30'
-                                        }
-                                        ${status === 'loading' ? 'opacity-80 cursor-wait' : ''}
-                                        ${status === 'idle' || status === 'error' ? 'hover:brightness-110' : ''}
-                                        disabled:cursor-not-allowed
-                                    `}
-                                >
-                                    {status === 'loading' && (
-                                        <>
-                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                            Enviando...
-                                        </>
-                                    )}
-                                    {status === 'success' && (
-                                        <>
-                                            <CheckCircle2 size={20} />
-                                            Inscrito!
-                                        </>
-                                    )}
-                                    {(status === 'idle' || status === 'error') && (
-                                        <>
-                                            Inscrever-se
-                                            <Send size={18} />
-                                        </>
-                                    )}
-                                </motion.button>
-                            </div>
-
-                            {/* Error Message */}
-                            {status === 'error' && errorMessage && (
-                                <motion.p
-                                    initial={{ opacity: 0, y: -10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="text-red-400 text-sm mt-3 text-center"
-                                >
-                                    {errorMessage}
-                                </motion.p>
-                            )}
-                        </form>
-
-                        {/* Trust Indicators */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-8 text-sm text-white/40"
-                        >
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 size={16} className="text-[var(--accent-primary)] shrink-0" />
-                                <span>Sem spam</span>
-                            </div>
-                            <div className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 size={16} className="text-[var(--accent-primary)] shrink-0" />
-                                <span>Conteúdo exclusivo</span>
-                            </div>
-                            <div className="hidden sm:block w-1 h-1 rounded-full bg-white/20" />
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 size={16} className="text-[var(--accent-primary)] shrink-0" />
-                                <span>Cancele a qualquer momento</span>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                </div>
+                            ))}
+                        </div>
+                    </div>
+                </m.div>
             </div>
         </section>
     );

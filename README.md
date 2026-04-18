@@ -1,78 +1,56 @@
-# Riaheru-Ventures
-Site da empresa Riaheru Ventures
+# Riaheru
 
----
+Site institucional da Riaheru Ventures construído com `React 19`, `TypeScript`, `Vite`, `Tailwind CSS 4` e `Framer Motion`.
 
-## Estrutura do Projeto (Template Vite)
+## Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- `React` + `react-router-dom` para shell e rotas institucionais
+- `TypeScript` para tipagem do app
+- `Tailwind CSS 4` + tokens em `src/index.css` para o design system
+- `Framer Motion` para animações de entrada e transições leves
+- `Playwright` para cobertura E2E dos fluxos de cookies e contato
 
-Currently, two official plugins are available:
+## Fluxos atuais
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Home, Sobre, Carreiras e Termos compartilham a mesma linguagem visual
+- CTA primário unificado em `Iniciar projeto`
+- Modal de contato suporta:
+  - envio real via `VITE_CONTACT_ENDPOINT`, se configurado
+  - fallback honesto para `mailto`, sem simular backend
+  - atalho direto para WhatsApp
+- Consentimento de cookies com banner, rejeição de não essenciais e modal acessível de preferências
+- Newsletter substituída por CTA institucional até existir integração real
 
-## React Compiler
+## Scripts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
+npm run build
+npm run lint
+npx playwright test
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Variáveis de ambiente
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Opcionalmente, o modal de contato pode usar:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+VITE_CONTACT_ENDPOINT=https://sua-api.exemplo.com/contact
+VITE_CONTACT_EMAIL=contato@riaheru.com
 ```
+
+Sem `VITE_CONTACT_ENDPOINT`, o formulário abre o cliente de email do usuário com o briefing já preenchido.
+
+## Estrutura relevante
+
+- `src/App.tsx`: shell do app e rotas
+- `src/components/`: seções e UI compartilhada
+- `src/context/` e `src/hooks/`: contexto/modal/cookies
+- `src/providers/`: providers de aplicação
+- `e2e/`: testes Playwright
+
+## Qualidade
+
+- `npm run lint` deve permanecer verde
+- `npx tsc -b` valida tipagem do projeto
+- `npx playwright test` cobre os fluxos críticos de cookies e contato

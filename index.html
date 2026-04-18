@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/png" href="/LOGO header.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Riaheru - Software House de Alta Performance</title>
 
@@ -17,11 +17,42 @@
   <meta property="og:description" content="Soluções de software de alta performance para o seu negócio." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://riaheru.com" />
+  <meta property="og:image" content="https://riaheru.com/LOGO.png" />
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Riaheru - Software House de Alta Performance" />
   <meta name="twitter:description" content="Soluções de software de alta performance para o seu negócio." />
+  <meta name="twitter:image" content="https://riaheru.com/LOGO.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://riaheru.com" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Riaheru Ventures",
+    "url": "https://riaheru.com",
+    "logo": "https://riaheru.com/LOGO.png",
+    "description": "Software house especializada em desenvolvimento de soluções de alta performance.",
+    "foundingDate": "2022",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "São Paulo",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/riaheru"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "commercial",
+      "availableLanguage": "Portuguese"
+    }
+  }
+  </script>
 
   <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +63,9 @@
 </head>
 
 <body>
+  <a href="#main-content"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-[var(--accent)] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-medium">Pular
+    para o conteúdo</a>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

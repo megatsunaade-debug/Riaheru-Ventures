@@ -1,80 +1,152 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
-import { useCookieConsent, type CookiePreferences } from '../../hooks/useCookieConsent';
+
+import { m } from '@/lib/motion';
+import { type CookiePreferences } from '../../context/cookie-consent-context';
+import { useCookieConsent } from '../../hooks/useCookieConsent';
 
 interface CookieSettingsProps {
     onClose: () => void;
 }
 
 export function CookieSettings({ onClose }: CookieSettingsProps) {
-    const { preferences, savePreferences } = useCookieConsent();
+    const { preferences, savePreferences, acceptAll } = useCookieConsent();
     const [prefs, setPrefs] = useState<CookiePreferences>(preferences);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+        const previousOverflow = document.body.style.overflow;
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                onClose();
+            }
+        };
+
+        document.body.style.overflow = 'hidden';
+        closeButtonRef.current?.focus();
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [onClose]);
 
     const toggle = (id: keyof CookiePreferences) => {
-        if (id === 'essential') return;
-        setPrefs(p => ({ ...p, [id]: !p[id] }));
+        if (id === 'essential') {
+            return;
+        }
+
+        setPrefs((current) => ({ ...current, [id]: !current[id] }));
     };
 
-    const save = () => { savePreferences(prefs); onClose(); };
+    const save = () => {
+        savePreferences(prefs);
+        onClose();
+    };
 
     return (
-        <motion.div
+        <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[250] flex items-center justify-center p-4"
         >
-            <div onClick={onClose} className="absolute inset-0 bg-black/20" />
+            <button
+                type="button"
+                aria-label="Fechar preferências de cookies"
+                onClick={onClose}
+                className="absolute inset-0 bg-black/35"
+            />
 
-            <motion.div
+            <m.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="relative bg-white rounded-lg shadow-lg w-full max-w-xs p-4"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="cookie-settings-title"
+                className="relative w-full max-w-lg rounded-[28px] border border-[var(--border-subtle)] bg-white p-6 shadow-[var(--shadow-lg)]"
             >
-                <div className="flex items-center justify-between mb-4">
-                    <span className="font-medium text-sm">Cookies</span>
-                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
-                        <X size={16} />
+                <div className="mb-5 flex items-start justify-between gap-4">
+                    <div>
+                        <h2 id="cookie-settings-title" className="text-xl font-semibold text-[var(--text-dark)]">
+                            Preferências de Cookies
+                        </h2>
+                        <p className="mt-2 text-sm leading-relaxed text-[var(--gray-600)]">
+                            Controle quais categorias opcionais podem ser ativadas nesta experiência.
+                        </p>
+                    </div>
+                    <button
+                        ref={closeButtonRef}
+                        onClick={onClose}
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--gray-600)] transition-colors hover:bg-[var(--gray-50)] hover:text-[var(--text-dark)]"
+                        aria-label="Fechar"
+                    >
+                        <X size={18} />
                     </button>
                 </div>
 
-                <div className="space-y-3 mb-4">
-                    {(['essential', 'functional', 'marketing'] as const).map(id => (
-                        <div key={id} className="flex items-center justify-between text-sm">
-                            <span className="text-gray-600 capitalize">
-                                {id === 'essential' ? 'Essenciais' : id === 'functional' ? 'Funcionais' : 'Marketing'}
-                            </span>
-                            <button
-                                onClick={() => toggle(id)}
-                                disabled={id === 'essential'}
-                                className={`w-8 h-4 rounded-full transition-colors ${prefs[id] ? 'bg-[var(--accent)]' : 'bg-gray-200'
-                                    } ${id === 'essential' ? 'opacity-50' : ''}`}
-                            >
-                                <motion.div
-                                    animate={{ x: prefs[id] ? 16 : 2 }}
-                                    className="w-3 h-3 bg-white rounded-full shadow-sm"
-                                />
-                            </button>
+                <div className="space-y-4">
+                    {[
+                        {
+                            id: 'essential' as const,
+                            title: 'Cookies Essenciais',
+                            description: 'Necessários para navegação básica, segurança e armazenamento das suas preferências.',
+                        },
+                        {
+                            id: 'functional' as const,
+                            title: 'Cookies Funcionais',
+                            description: 'Ativam recursos de conveniência, personalização e recordação de contexto.',
+                        },
+                        {
+                            id: 'marketing' as const,
+                            title: 'Cookies de Marketing',
+                            description: 'Reservados para medições e ações de conversão futuras, sempre com consentimento explícito.',
+                        },
+                    ].map((item) => (
+                        <div key={item.id} className="rounded-3xl border border-[var(--border-subtle)] bg-[var(--gray-50)] p-4">
+                            <div className="flex items-start justify-between gap-4">
+                                <div>
+                                    <h3 className="text-sm font-semibold text-[var(--text-dark)]">{item.title}</h3>
+                                    <p className="mt-2 text-sm leading-relaxed text-[var(--gray-600)]">{item.description}</p>
+                                </div>
+
+                                <button
+                                    type="button"
+                                    onClick={() => toggle(item.id)}
+                                    disabled={item.id === 'essential'}
+                                    aria-pressed={prefs[item.id]}
+                                    className={`relative inline-flex h-8 w-14 shrink-0 rounded-full transition-colors ${prefs[item.id] ? 'bg-[var(--accent-primary)]' : 'bg-[var(--gray-200)]'
+                                        } ${item.id === 'essential' ? 'opacity-60' : ''}`}
+                                >
+                                    <m.span
+                                        animate={{ x: prefs[item.id] ? 28 : 4 }}
+                                        className="absolute top-1 h-6 w-6 rounded-full bg-white shadow-sm"
+                                    />
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
 
-                <div className="flex gap-2">
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                     <button
-                        onClick={() => { savePreferences({ essential: true, functional: true, marketing: true }); onClose(); }}
-                        className="flex-1 text-xs py-2 bg-[var(--accent)] text-white rounded-md hover:bg-[var(--accent-dark)]"
+                        onClick={() => {
+                            acceptAll();
+                            onClose();
+                        }}
+                        className="btn flex-1 justify-center"
                     >
-                        Aceitar
+                        Aceitar tudo
                     </button>
                     <button
                         onClick={save}
-                        className="flex-1 text-xs py-2 border border-gray-200 rounded-md hover:bg-gray-50"
+                        className="btn btn-outline flex-1 justify-center"
                     >
-                        Salvar
+                        Salvar preferências
                     </button>
                 </div>
-            </motion.div>
-        </motion.div>
+            </m.div>
+        </m.div>
     );
 }

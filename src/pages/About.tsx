@@ -1,6 +1,9 @@
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, Code2, Shield, Cpu, Scale, Quote } from 'lucide-react';
-import { useModal } from '../context/ModalContext';
+import { ArrowRight, Code2, Cpu, Quote, Scale, Shield } from 'lucide-react';
+
+import { Button } from '../components/ui/Button';
+import { SectionTitle } from '../components/ui/SectionTitle';
+import { useModal } from '../hooks/useModal';
 
 const leadership = [
     {
@@ -20,7 +23,7 @@ const leadership = [
     {
         name: 'Ruan Lenger',
         role: 'Co-Founder & Head de Integração',
-        description: 'Engenheiro de Produção. Mestre em Webhooks, Microsserviços e Automação.',
+        description: 'Engenheiro de Produção. Mestre em webhooks, microsserviços e automação.',
         image: '/ruan-lenger.webp',
         color: '#FF6B35',
     },
@@ -47,85 +50,98 @@ export function About() {
         <div className="bg-[var(--off-white)]">
             <Helmet>
                 <title>Sobre Nós | Riaheru</title>
-                <meta name="description" content="Conheça a Riaheru: Onde a lógica da engenharia encontra a inovação do código." />
+                <meta
+                    name="description"
+                    content="Conheça a Riaheru: engenharia de software com visão de negócio, liderança técnica multidisciplinar e execução orientada a resultado."
+                />
             </Helmet>
 
-            {/* Hero */}
-            <section className="pt-32 pb-20 bg-[var(--off-white)]">
+            <section className="pt-32 pb-20">
                 <div className="container">
-                    <div className="max-w-3xl">
+                    <div className="max-w-4xl">
                         <span className="label label-accent block mb-4">Sobre nós</span>
                         <h1 className="mb-6">
                             Engenharia de software com{' '}
                             <span className="text-[var(--accent)]">propósito</span>
                         </h1>
-                        <p className="text-xl text-[var(--gray-600)] leading-relaxed mb-8">
+                        <p className="mb-8 text-xl leading-relaxed text-[var(--gray-600)]">
                             Somos uma software house híbrida que nasceu da inconformidade com o mercado tradicional.
-                            Não entregamos apenas código — construímos ativos digitais de alto valor.
+                            Não entregamos apenas código: construímos ativos digitais robustos, com responsabilidade técnica e leitura clara de negócio.
                         </p>
-                        <button onClick={openContactModal} className="btn">
-                            Falar com a gente
-                            <ArrowRight size={18} />
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            {/* Quote - REDESENHADO */}
-            <section className="py-20 bg-[var(--black)]">
-                <div className="container">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <Quote size={48} className="mx-auto mb-8 text-[var(--accent)]" strokeWidth={1} />
-                        <blockquote className="text-3xl md:text-4xl font-semibold text-white leading-tight mb-8">
-                            Na Riaheru, eficiência é mandatória e o código é a lei.
-                        </blockquote>
-                        <div className="flex items-center justify-center gap-3">
-                            <div className="w-12 h-px bg-[var(--accent)]" />
-                            <span className="text-sm text-gray-400 font-medium">Nossa filosofia</span>
-                            <div className="w-12 h-px bg-[var(--accent)]" />
+                        <div className="flex flex-wrap gap-4">
+                            <Button onClick={openContactModal}>
+                                Iniciar projeto
+                                <ArrowRight size={18} />
+                            </Button>
+                            <a href="/#trabalhos" className="btn btn-outline">
+                                Ver trabalhos
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Team */}
-            <section className="py-20 bg-[var(--white)]">
+            <section className="pb-20">
                 <div className="container">
-                    <div className="max-w-2xl mb-16">
-                        <span className="label block mb-4">Liderança</span>
-                        <h2>Quem faz acontecer</h2>
-                        <p className="mt-4">
-                            Engenheiros e juristas que dominam tecnologia e entregam resultados.
-                        </p>
+                    <div className="grid gap-6 md:grid-cols-3">
+                        {[
+                            ['Execução sênior', 'Produto, engenharia e operação alinhados desde o início do projeto.'],
+                            ['Arquitetura útil', 'Decisões técnicas orientadas a longevidade, manutenção e velocidade real.'],
+                            ['Conformidade prática', 'LGPD, governança e risco tratados como parte do produto, não como apêndice.'],
+                        ].map(([title, description]) => (
+                            <div key={title} className="card">
+                                <h3 className="text-xl font-semibold">{title}</h3>
+                                <p className="mt-3 text-[var(--gray-600)]">{description}</p>
+                            </div>
+                        ))}
                     </div>
+                </div>
+            </section>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section className="bg-[var(--black)] py-20">
+                <div className="container">
+                    <div className="mx-auto max-w-3xl text-center">
+                        <Quote size={48} className="mx-auto mb-8 text-[var(--accent)]" strokeWidth={1} />
+                        <blockquote className="mb-8 text-3xl font-semibold leading-tight text-white md:text-4xl">
+                            Na Riaheru, eficiência é mandatória e o código é a lei.
+                        </blockquote>
+                        <div className="flex items-center justify-center gap-3">
+                            <div className="h-px w-12 bg-[var(--accent)]" />
+                            <span className="text-sm font-medium text-gray-400">Nossa filosofia</span>
+                            <div className="h-px w-12 bg-[var(--accent)]" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="bg-[var(--white)] py-20">
+                <div className="container">
+                    <SectionTitle
+                        tag="Liderança"
+                        title="Quem faz acontecer"
+                        description="Engenheiros e juristas que entendem o detalhe técnico sem perder a leitura estratégica do negócio."
+                    />
+
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                         {leadership.map((person) => (
-                            <div
-                                key={person.name}
-                                className="card flex gap-5"
-                            >
-                                {/* Avatar */}
+                            <div key={person.name} className="card flex gap-5">
                                 <div className="shrink-0">
                                     <div
-                                        className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-offset-2"
-                                        style={{ ringColor: person.color }}
+                                        className="h-16 w-16 overflow-hidden rounded-full ring-2 ring-offset-2"
+                                        style={{ ['--tw-ring-color' as string]: person.color }}
                                     >
                                         <img
                                             src={person.image}
                                             alt={person.name}
-                                            className="w-full h-full object-cover object-top"
+                                            className="h-full w-full object-cover object-top"
+                                            loading="lazy"
                                         />
                                     </div>
                                 </div>
 
-                                {/* Info */}
                                 <div>
-                                    <h3 className="text-lg font-semibold mb-1">{person.name}</h3>
-                                    <p
-                                        className="text-sm font-medium mb-3"
-                                        style={{ color: person.color }}
-                                    >
+                                    <h3 className="mb-1 text-lg font-semibold">{person.name}</h3>
+                                    <p className="mb-3 text-sm font-medium" style={{ color: person.color }}>
                                         {person.role}
                                     </p>
                                     <p className="text-sm text-[var(--gray-600)]">
@@ -138,24 +154,21 @@ export function About() {
                 </div>
             </section>
 
-            {/* Expertise */}
-            <section className="py-20 bg-[var(--gray-50)]">
+            <section className="bg-[var(--gray-50)] py-20">
                 <div className="container">
-                    <div className="max-w-2xl mb-16">
-                        <span className="label block mb-4">Expertise</span>
-                        <h2>Nosso DNA técnico</h2>
-                        <p className="mt-4">
-                            Utilizamos as mesmas ferramentas das maiores tech companies do mundo.
-                        </p>
-                    </div>
+                    <SectionTitle
+                        tag="Expertise"
+                        title="Nosso DNA técnico"
+                        description="A mesma régua que aplicamos em nossos projetos institucionais é a régua que levamos para produtos, integrações e operações críticas."
+                    />
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
                         {expertise.map((item) => (
                             <div key={item.title} className="card text-center">
-                                <div className="w-12 h-12 mx-auto mb-4 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center text-[var(--accent)]">
+                                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
                                     <item.icon size={24} strokeWidth={1.5} />
                                 </div>
-                                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                                <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
                                 <p className="text-sm text-[var(--gray-600)]">{item.description}</p>
                             </div>
                         ))}
@@ -163,17 +176,16 @@ export function About() {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-20 bg-[var(--off-white)]">
+            <section className="py-20">
                 <div className="container text-center">
                     <h2 className="mb-6">Pronto para começar?</h2>
-                    <p className="text-lg text-[var(--gray-600)] mb-8 max-w-xl mx-auto">
-                        Vamos conversar sobre como podemos ajudar sua empresa a escalar.
+                    <p className="mx-auto mb-8 max-w-xl text-lg text-[var(--gray-600)]">
+                        Vamos conversar sobre como podemos ajudar sua empresa a escalar sem sacrificar clareza técnica ou qualidade de entrega.
                     </p>
-                    <button onClick={openContactModal} className="btn">
-                        Iniciar conversa
+                    <Button onClick={openContactModal}>
+                        Iniciar projeto
                         <ArrowRight size={18} />
-                    </button>
+                    </Button>
                 </div>
             </section>
         </div>

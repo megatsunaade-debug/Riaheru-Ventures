@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import { Linkedin, Mail } from 'lucide-react';
+
+import { m } from '@/lib/motion';
 import { SectionTitle } from '../ui/SectionTitle';
 
 const defaultLinks = {
@@ -61,7 +62,7 @@ export function Team() {
                 {/* Team Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {team.map((member, index) => (
-                        <motion.div
+                        <m.div
                             key={member.name}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -77,6 +78,7 @@ export function Team() {
                                             src={member.image}
                                             alt={member.name}
                                             className="w-full h-full object-cover object-top"
+                                            loading="lazy"
                                         />
                                     </div>
                                 ) : (
@@ -124,7 +126,7 @@ export function Team() {
                                     )}
                                 </div>
                             </div>
-                        </motion.div>
+                        </m.div>
                     ))}
                 </div>
             </div>

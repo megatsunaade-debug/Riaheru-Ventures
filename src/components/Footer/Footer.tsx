@@ -6,99 +6,106 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="py-16 bg-[var(--black)] text-white">
+        <footer className="relative border-t border-[color:rgba(255,255,255,0.08)] bg-[var(--black)] text-white">
             <div className="container">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-                    {/* Brand */}
-                    <div className="md:col-span-4">
-                        <a href="/" className="inline-block mb-4">
+                <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-12">
+                    <div className="md:col-span-5">
+                        <a href="/" className="inline-flex items-center gap-3">
                             <img
                                 src="/LOGO header.png"
                                 alt="Riaheru"
                                 className="h-8 w-auto brightness-0 invert"
                             />
                         </a>
-                        <p className="text-sm text-gray-400 leading-relaxed">
-                            Engenharia de software, consultoria estratégica e venture building
-                            para empresas que querem escalar.
+                        <p className="site-footer-copy mt-5 max-w-sm text-sm leading-relaxed">
+                            Engenharia de software, consultoria estratégica e produtos digitais com foco em clareza técnica, robustez operacional e execução sem ruído.
                         </p>
                     </div>
 
-                    {/* Links */}
                     <div className="md:col-span-2">
-                        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 block mb-4">
+                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-[0.22em]">
                             Empresa
                         </span>
-                        <nav className="space-y-3">
-                            <a href="/#servicos" className="block text-sm text-gray-400 hover:text-white transition-colors">
+                        <nav className="mt-4 space-y-3">
+                            <a href="/#servicos" className="site-footer-link block text-sm transition-colors">
                                 Serviços
                             </a>
-                            <a href="/#trabalhos" className="block text-sm text-gray-400 hover:text-white transition-colors">
+                            <a href="/#trabalhos" className="site-footer-link block text-sm transition-colors">
                                 Trabalhos
                             </a>
-                            <a href="/sobre" className="block text-sm text-gray-400 hover:text-white transition-colors">
+                            <a href="/sobre" className="site-footer-link block text-sm transition-colors">
                                 Sobre
+                            </a>
+                            <a href="/carreiras" className="site-footer-link block text-sm transition-colors">
+                                Carreiras
                             </a>
                         </nav>
                     </div>
 
-                    {/* Legal */}
                     <div className="md:col-span-2">
-                        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 block mb-4">
+                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-[0.22em]">
                             Legal
                         </span>
-                        <nav className="space-y-3">
+                        <nav className="mt-4 space-y-3">
                             <a
                                 href="/politica-privacidade-riaheru-ventures.pdf"
                                 download
-                                className="block text-sm text-gray-400 hover:text-white transition-colors"
+                                className="site-footer-link block text-sm transition-colors"
                             >
                                 Privacidade
                             </a>
+                            <a href="/termos" className="site-footer-link block text-sm transition-colors">
+                                Termos de uso
+                            </a>
                             <button
                                 onClick={openSettings}
-                                className="block text-sm text-gray-400 hover:text-white transition-colors text-left"
+                                className="site-footer-link block text-left text-sm transition-colors"
                             >
-                                Preferências de Cookies
+                                Preferências de cookies
                             </button>
                         </nav>
                     </div>
 
-                    {/* Contato */}
-                    <div className="md:col-span-4">
-                        <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 block mb-4">
+                    <div className="md:col-span-3">
+                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-[0.22em]">
                             Contato
                         </span>
-                        <div className="space-y-3">
+                        <div className="mt-4 space-y-3">
                             <a
                                 href={`mailto:${CONTACT_INFO.EMAIL}`}
-                                className="block text-sm text-gray-400 hover:text-white transition-colors"
+                                className="site-footer-link block text-sm transition-colors"
                             >
                                 {CONTACT_INFO.EMAIL}
                             </a>
                             <a
                                 href={`tel:+${CONTACT_INFO.WHATSAPP}`}
-                                className="block text-sm text-gray-400 hover:text-white transition-colors"
+                                className="site-footer-link block text-sm transition-colors"
                             >
                                 +55 {CONTACT_INFO.WHATSAPP_DISPLAY}
                             </a>
-                            <p className="text-sm text-gray-500">
+                            <a
+                                href={CONTACT_INFO.LINKEDIN}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="site-footer-link block text-sm transition-colors"
+                            >
+                                LinkedIn
+                            </a>
+                            <p className="site-footer-meta text-sm">
                                 São Paulo, Brasil
                             </p>
                         </div>
                     </div>
                 </div>
 
-                {/* Divider */}
-                <div className="h-px bg-gray-800 mb-8" />
+                <div className="h-px bg-white/10" />
 
-                {/* Copyright */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-sm text-gray-500">
+                <div className="flex flex-col gap-3 py-6 text-sm md:flex-row md:items-center md:justify-between">
+                    <p className="site-footer-meta">
                         © {currentYear} Riaheru Ventures. Todos os direitos reservados.
                     </p>
-                    <p className="text-sm text-gray-600">
-                        Feito com ☕ em São Paulo
+                    <p className="site-footer-meta">
+                        Feito em São Paulo para operações que exigem clareza, velocidade e confiabilidade.
                     </p>
                 </div>
             </div>

@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
+
+import { m } from '@/lib/motion';
 
 interface SectionTitleProps {
     tag?: string;
@@ -13,13 +14,13 @@ export function SectionTitle({
     tag,
     title,
     description,
-    align = 'center',
+    align = 'left',
     dark = false
 }: SectionTitleProps) {
     const alignClass = align === 'center' ? 'text-center items-center' : 'text-left items-start';
 
     return (
-        <motion.div
+        <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -28,17 +29,16 @@ export function SectionTitle({
         >
             {tag && (
                 <span className={`
-                    font-mono text-xs tracking-widest uppercase
-                    px-3 py-1.5 rounded-full border w-fit font-medium
+                    label w-fit rounded-full border px-4 py-2 font-semibold
                     ${dark
-                        ? 'bg-white/5 border-white/10 text-[var(--accent-light)]'
-                        : 'bg-[var(--accent-primary)]/10 border-[var(--accent-primary)]/20 text-[var(--accent-primary)]'
+                        ? 'bg-white/8 border-white/10 text-[var(--accent-light)]'
+                        : 'bg-[var(--accent-primary)]/8 border-[var(--accent-primary)]/14 text-[var(--accent-primary)]'
                     }
                 `}>
                     {tag}
                 </span>
             )}
-            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight ${dark ? 'text-white' : 'text-[var(--text-dark)]'
+            <h2 className={`max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight ${dark ? 'text-white' : 'text-[var(--text-dark)]'
                 }`}>
                 {title}
             </h2>
@@ -48,6 +48,6 @@ export function SectionTitle({
                     {description}
                 </p>
             )}
-        </motion.div>
+        </m.div>
     );
 }
