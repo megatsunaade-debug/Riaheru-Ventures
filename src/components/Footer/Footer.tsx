@@ -1,3 +1,5 @@
+import { ArrowUpRight } from 'lucide-react';
+
 import { CONTACT_INFO } from '../../constants';
 import { useCookieConsent } from '../../hooks/useCookieConsent';
 
@@ -6,63 +8,69 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="relative border-t border-[color:rgba(255,255,255,0.08)] bg-[var(--black)] text-white">
-            <div className="container">
-                <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-12">
+        <footer className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--bg)] text-[var(--text)]">
+            <div className="grid-texture pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
+            <div className="container relative">
+                <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-12 md:py-20">
                     <div className="md:col-span-5">
-                        <a href="/" className="inline-flex items-center gap-3">
+                        <a href="/" className="inline-flex items-center gap-2.5">
                             <img
                                 src="/LOGO header.png"
                                 alt="Riaheru"
-                                className="h-8 w-auto brightness-0 invert"
+                                className="h-7 w-auto brightness-0 invert"
                             />
                         </a>
-                        <p className="site-footer-copy mt-5 max-w-sm text-sm leading-relaxed">
-                            Engenharia de software B2B, venture building e arquitetura para produtos digitais, sistemas críticos e operações que exigem continuidade.
+                        <p className="mt-6 max-w-sm text-sm leading-relaxed text-[var(--text-muted)]">
+                            Engenharia de software B2B, venture building e arquitetura para
+                            produtos digitais, sistemas críticos e operações que exigem
+                            continuidade.
                         </p>
+                        <div className="mt-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-[var(--text-dim)]">
+                            <span className="h-1.5 w-1.5 bg-[var(--highlight)]" aria-hidden="true" />
+                            São Paulo · Brasil
+                        </div>
                     </div>
 
                     <div className="md:col-span-2">
-                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-normal">
+                        <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[var(--text-dim)]">
                             Empresa
                         </span>
-                        <nav className="mt-4 space-y-3">
-                            <a href="/#servicos" className="site-footer-link block text-sm transition-colors">
-                                Serviços
-                            </a>
-                            <a href="/#trabalhos" className="site-footer-link block text-sm transition-colors">
-                                Trabalhos
-                            </a>
-                            <a href="/#stack" className="site-footer-link block text-sm transition-colors">
-                                Processo
-                            </a>
-                            <a href="/sobre" className="site-footer-link block text-sm transition-colors">
-                                Sobre
-                            </a>
-                            <a href="/carreiras" className="site-footer-link block text-sm transition-colors">
-                                Carreiras
-                            </a>
+                        <nav className="mt-5 space-y-3">
+                            {[
+                                ['Serviços', '/#servicos'],
+                                ['Cases', '/#trabalhos'],
+                                ['Processo', '/#processo'],
+                                ['Sobre', '/sobre'],
+                            ].map(([label, href]) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    className="block text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
+                                >
+                                    {label}
+                                </a>
+                            ))}
                         </nav>
                     </div>
 
                     <div className="md:col-span-2">
-                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-normal">
+                        <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[var(--text-dim)]">
                             Legal
                         </span>
-                        <nav className="mt-4 space-y-3">
+                        <nav className="mt-5 space-y-3">
                             <a
                                 href="/politica-privacidade-riaheru-ventures.pdf"
                                 download
-                                className="site-footer-link block text-sm transition-colors"
+                                className="block text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 Privacidade
                             </a>
-                            <a href="/termos" className="site-footer-link block text-sm transition-colors">
+                            <a href="/termos" className="block text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]">
                                 Termos de uso
                             </a>
                             <button
                                 onClick={openSettings}
-                                className="site-footer-link block text-left text-sm transition-colors"
+                                className="block text-left text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 Preferências de cookies
                             </button>
@@ -70,19 +78,19 @@ export function Footer() {
                     </div>
 
                     <div className="md:col-span-3">
-                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-normal">
+                        <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-[var(--text-dim)]">
                             Contato
                         </span>
-                        <div className="mt-4 space-y-3">
+                        <div className="mt-5 space-y-3">
                             <a
                                 href={`mailto:${CONTACT_INFO.EMAIL}`}
-                                className="site-footer-link block text-sm transition-colors"
+                                className="block text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 {CONTACT_INFO.EMAIL}
                             </a>
                             <a
                                 href={`tel:+${CONTACT_INFO.WHATSAPP}`}
-                                className="site-footer-link block text-sm transition-colors"
+                                className="block text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 +55 {CONTACT_INFO.WHATSAPP_DISPLAY}
                             </a>
@@ -90,25 +98,24 @@ export function Footer() {
                                 href={CONTACT_INFO.LINKEDIN}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="site-footer-link block text-sm transition-colors"
+                                className="inline-flex items-center gap-1 text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                             >
                                 LinkedIn
+                                <ArrowUpRight size={14} />
                             </a>
-                            <p className="site-footer-meta text-sm">
-                                São Paulo, Brasil
-                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div className="h-px bg-white/10" />
+                <div className="h-px bg-[var(--border)]" />
 
                 <div className="flex flex-col gap-3 py-6 text-sm md:flex-row md:items-center md:justify-between">
-                    <p className="site-footer-meta">
+                    <p className="text-[var(--text-dim)]">
                         © {currentYear} Riaheru Ventures. Todos os direitos reservados.
                     </p>
-                    <p className="site-footer-meta">
-                        Feito em São Paulo para empresas que precisam de tecnologia clara, segura e operacional.
+                    <p className="text-[var(--text-dim)]">
+                        Feito em São Paulo para empresas que precisam de tecnologia clara,
+                        segura e operacional.
                     </p>
                 </div>
             </div>

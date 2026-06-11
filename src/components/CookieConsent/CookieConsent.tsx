@@ -26,11 +26,11 @@ export function CookieConsent() {
                         exit={{ y: 50, opacity: 0 }}
                         className="fixed inset-x-4 bottom-4 z-[200] md:left-4 md:right-auto md:max-w-xl"
                     >
-                        <div className="rounded-[28px] border border-[var(--border-subtle)] bg-white/95 p-5 shadow-[var(--shadow-lg)] backdrop-blur-xl">
+                        <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-2)] p-5 shadow-[var(--shadow-lg)] backdrop-blur-xl">
                             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                                 <div className="max-w-md">
-                                    <p className="text-sm font-semibold text-[var(--text-dark)]">Usamos cookies com critério</p>
-                                    <p className="mt-2 text-sm leading-relaxed text-[var(--gray-600)]">
+                                    <p className="text-sm font-semibold text-[var(--text)]">Usamos cookies com critério</p>
+                                    <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
                                         Guardamos preferências essenciais agora e só ativamos recursos adicionais com o seu consentimento.
                                     </p>
                                 </div>
@@ -52,7 +52,7 @@ export function CookieConsent() {
                                     <button
                                         data-testid="accept-all-cookies"
                                         onClick={acceptAll}
-                                        className="btn min-h-10 px-4 py-2 text-xs"
+                                        className="btn btn-primary min-h-10 px-4 py-2 text-xs"
                                     >
                                         Aceitar
                                     </button>
@@ -68,8 +68,8 @@ export function CookieConsent() {
                     <Suspense
                         fallback={(
                             <div className="fixed inset-0 z-[250] flex items-center justify-center p-4" aria-hidden="true">
-                                <div className="absolute inset-0 bg-black/25" />
-                                <div className="relative h-[320px] w-full max-w-lg animate-pulse rounded-[28px] border border-[var(--border-subtle)] bg-white shadow-[var(--shadow-lg)]" />
+                                <div className="absolute inset-0 bg-black/40" />
+                                <div className="relative h-[320px] w-full max-w-lg animate-pulse rounded-2xl border border-[var(--border)] bg-[var(--bg-2)] shadow-[var(--shadow-lg)]" />
                             </div>
                         )}
                     >

@@ -3,12 +3,11 @@ import { Menu, X } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useModal } from '../../hooks/useModal';
-import { Button } from '../ui/Button';
 
 const navLinks = [
     { name: 'Serviços', href: '/#servicos' },
-    { name: 'Trabalhos', href: '/#trabalhos' },
-    { name: 'Processo', href: '/#stack' },
+    { name: 'Cases', href: '/#trabalhos' },
+    { name: 'Processo', href: '/#processo' },
     { name: 'Sobre', href: '/sobre' },
 ];
 
@@ -19,12 +18,13 @@ export function Header() {
     const navigate = useNavigate();
     const { openContactModal } = useModal();
 
-    const headerOffset = 92;
+    const headerOffset = 84;
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+            setIsScrolled(window.scrollY > 24);
         };
+        handleScroll();
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -97,27 +97,33 @@ export function Header() {
 
     return (
         <>
-            <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isScrolled ? 'border-b border-[var(--border-subtle)] bg-[color:rgba(248,250,252,0.85)] backdrop-blur-xl py-4' : 'border-b border-transparent bg-transparent py-6'}`}>
+            <header
+                className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+                    isScrolled
+                        ? 'border-b border-[var(--border)] bg-[color:rgba(5,7,13,0.72)] py-3.5 backdrop-blur-xl'
+                        : 'border-b border-transparent bg-transparent py-5'
+                }`}
+            >
                 <nav className="container" aria-label="Principal">
                     <div className="flex items-center justify-between">
                         <a
                             href="/"
                             onClick={(e) => handleNavClick(e, '/')}
-                            className="flex items-center gap-3"
+                            className="flex items-center gap-2.5"
                             aria-label="Ir para a página inicial da Riaheru"
                         >
                             <img
                                 src="/LOGO header.png"
                                 alt="Riaheru"
-                                className={`h-8 w-auto transition-all duration-300 ${!isScrolled ? 'brightness-0 invert' : ''}`}
+                                className="h-7 w-auto brightness-0 invert"
                             />
                         </a>
 
-                        <div className="hidden items-center gap-8 md:flex">
+                        <div className="hidden items-center gap-9 md:flex">
                             {navLinks.map((link) => {
                                 const isActive = link.href === '/sobre'
                                     ? location.pathname === '/sobre'
-                                    : location.pathname === '/' && link.href.startsWith('/#');
+                                    : false;
 
                                 return (
                                     <a
@@ -125,38 +131,33 @@ export function Header() {
                                         href={link.href}
                                         onClick={(e) => handleNavClick(e, link.href)}
                                         aria-current={isActive ? 'page' : undefined}
-                                        className={`text-sm font-semibold transition-colors ${
+                                        className={`text-sm font-medium tracking-tight transition-colors ${
                                             isActive
-                                            ? (isScrolled ? 'text-[var(--accent)]' : 'text-white')
-                                            : (isScrolled ? 'text-[var(--gray-600)] hover:text-[var(--text-dark)]' : 'text-white/70 hover:text-white')
+                                                ? 'text-[var(--text)]'
+                                                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
                                         }`}
                                     >
                                         {link.name}
                                     </a>
                                 );
                             })}
-                            <Button
-                                size="sm"
+                            <button
+                                type="button"
                                 onClick={openContactModal}
-                                className={!isScrolled ? "shadow-none bg-white text-black hover:bg-white/90 border-transparent relative overflow-hidden group" : "shadow-[var(--shadow-sm)]"}
+                                className="btn btn-primary min-h-10 px-5 py-2.5 text-sm"
                             >
-                                <span className={!isScrolled ? "relative z-10" : ""}>Iniciar projeto</span>
-                                {!isScrolled && <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-black/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />}
-                            </Button>
+                                Iniciar projeto
+                            </button>
                         </div>
 
                         <button
                             onClick={() => setIsMobileMenuOpen((current) => !current)}
-                            className={`inline-flex h-11 w-11 items-center justify-center rounded-full border shadow-[var(--shadow-sm)] md:hidden transition-colors ${
-                                isScrolled 
-                                ? 'border-[var(--border-subtle)] bg-white text-[var(--gray-600)]' 
-                                : 'border-white/10 bg-white/5 text-white backdrop-blur-md'
-                            }`}
+                            className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--surface-2)] text-[var(--text)] backdrop-blur-md transition-colors hover:border-[var(--border-strong)] md:hidden"
                             aria-label="Menu"
                             aria-expanded={isMobileMenuOpen}
                             aria-controls="mobile-navigation"
                         >
-                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
                         </button>
                     </div>
                 </nav>
@@ -167,41 +168,40 @@ export function Header() {
                     <button
                         type="button"
                         aria-label="Fechar menu"
-                        className="absolute inset-0 bg-[color:rgba(15,23,42,0.2)] backdrop-blur-sm"
+                        className="absolute inset-0 bg-[color:rgba(5,7,13,0.75)] backdrop-blur-sm"
                         onClick={() => setIsMobileMenuOpen(false)}
                     />
                     <div
                         id="mobile-navigation"
-                        className="absolute inset-x-4 top-20 rounded-[28px] border border-[var(--border-subtle)] bg-white/96 p-6 shadow-[var(--shadow-lg)]"
+                        className="absolute inset-x-4 top-20 rounded-xl border border-[var(--border)] bg-[var(--bg-2)] p-5 shadow-[var(--shadow-lg)]"
                     >
-                        <nav className="flex flex-col gap-2" aria-label="Navegação mobile">
+                        <nav className="flex flex-col gap-1" aria-label="Navegação mobile">
                             {navLinks.map((link) => (
                                 <a
                                     key={link.name}
                                     href={link.href}
                                     onClick={(e) => handleNavClick(e, link.href)}
-                                    className="rounded-2xl px-4 py-4 text-lg font-medium text-[var(--text-dark)] transition-colors hover:bg-[var(--gray-50)]"
+                                    className="rounded-lg px-4 py-3.5 text-base font-medium text-[var(--text)] transition-colors hover:bg-[var(--surface-2)]"
                                 >
                                     {link.name}
                                 </a>
                             ))}
-                            <div className="mt-4 border-t border-[var(--border-subtle)] pt-4">
-                                <Button
+                            <div className="mt-3 border-t border-[var(--border)] pt-3">
+                                <button
+                                    type="button"
                                     onClick={() => {
                                         setIsMobileMenuOpen(false);
                                         openContactModal();
                                     }}
-                                    className="w-full justify-center"
+                                    className="btn btn-primary min-h-12 w-full px-6 py-3"
                                 >
                                     Iniciar projeto
-                                </Button>
+                                </button>
                             </div>
                         </nav>
                     </div>
                 </div>
             )}
-
-            <div className="h-[76px]" />
         </>
     );
 }

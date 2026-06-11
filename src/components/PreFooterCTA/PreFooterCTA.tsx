@@ -2,7 +2,6 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 import { m } from '@/lib/motion';
 import { useModal } from '../../hooks/useModal';
-import { Button } from '../ui/Button';
 
 const commitments = ['Resposta objetiva', 'Contexto protegido', 'Próximo passo claro'];
 
@@ -10,14 +9,11 @@ export function PreFooterCTA() {
     const { openContactModal } = useModal();
 
     return (
-        <section className="relative overflow-hidden bg-[#070a12] py-20 text-white md:py-28">
+        <section className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--bg)] py-24 md:py-32">
+            <div className="grid-texture pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
             <div
-                className="pointer-events-none absolute inset-0 opacity-[0.06]"
-                style={{
-                    backgroundImage: `linear-gradient(rgba(255,255,255,0.48) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.48) 1px, transparent 1px)`,
-                    backgroundSize: '40px 40px',
-                }}
+                className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent"
+                aria-hidden="true"
             />
 
             <div className="container relative z-10">
@@ -28,34 +24,34 @@ export function PreFooterCTA() {
                     transition={{ duration: 0.6, ease: 'easeOut' }}
                     className="mx-auto max-w-4xl text-center"
                 >
-                    <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
-                        Próximo passo
-                    </span>
+                    <span className="mono-label mono-label--accent justify-center">Próximo passo</span>
 
-                    <h2 className="on-dark-heading mt-6 text-4xl font-bold leading-tight tracking-normal md:text-6xl">
-                        Traga o problema. A gente organiza o caminho técnico.
+                    <h2 className="mt-7 text-pretty text-4xl font-semibold leading-[1.05] tracking-tight text-[var(--text)] md:text-6xl">
+                        Traga o problema.{' '}
+                        <span className="text-[var(--text-dim)]">A gente organiza o caminho técnico.</span>
                     </h2>
 
-                    <p className="on-dark-copy mx-auto mt-6 max-w-2xl text-lg leading-relaxed md:text-xl">
-                        Em uma primeira conversa, entendemos o estágio do negócio, os riscos do sistema e qual formato de parceria faz sentido para avançar com segurança.
+                    <p className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-[var(--text-muted)]">
+                        Em uma primeira conversa, entendemos o estágio do negócio, os riscos
+                        do sistema e qual formato de parceria faz sentido para avançar com
+                        segurança.
                     </p>
 
                     <div className="mt-9">
-                        <Button
-                            variant="primary"
-                            size="lg"
+                        <button
+                            type="button"
                             onClick={openContactModal}
-                            className="btn-shimmer text-base"
+                            className="btn btn-primary min-h-14 px-8 py-4 text-base"
                         >
                             Iniciar conversa
-                            <ArrowRight size={20} />
-                        </Button>
+                            <ArrowRight size={19} />
+                        </button>
                     </div>
 
-                    <div className="on-dark-meta mt-9 flex flex-wrap items-center justify-center gap-5 text-sm">
+                    <div className="mt-9 flex flex-wrap items-center justify-center gap-6 text-sm text-[var(--text-muted)]">
                         {commitments.map((item) => (
                             <div key={item} className="flex items-center gap-2">
-                                <CheckCircle2 size={17} className="text-emerald-400" strokeWidth={1.8} />
+                                <CheckCircle2 size={16} className="text-[var(--accent)]" strokeWidth={1.8} />
                                 {item}
                             </div>
                         ))}

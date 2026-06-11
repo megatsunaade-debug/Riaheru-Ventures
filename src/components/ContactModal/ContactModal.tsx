@@ -9,6 +9,10 @@ type SubmitState =
     | { tone: 'idle'; message: '' }
     | { tone: 'success' | 'error' | 'info'; message: string };
 
+const fieldClass =
+    'w-full rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-[var(--text)] outline-none transition-all placeholder:text-[var(--text-dim)] focus:border-[var(--accent)] focus:bg-[var(--surface-2)] focus:ring-2 focus:ring-[var(--accent)]/20';
+const labelClass = 'mb-1.5 block text-sm font-medium text-[var(--text-muted)]';
+
 export function ContactModal() {
     const { isContactOpen, closeContactModal } = useModal();
     const [isLoading, setIsLoading] = useState(false);
@@ -177,40 +181,41 @@ export function ContactModal() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={closeContactModal}
-                        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+                        className="fixed inset-0 bg-[color:rgba(3,5,10,0.8)] backdrop-blur-sm"
                     />
 
                     <div className="fixed inset-0 z-10 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center p-4">
                             <m.div
-                                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                                initial={{ opacity: 0, scale: 0.96, y: 18 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                                exit={{ opacity: 0, scale: 0.96, y: 18 }}
                                 transition={{ duration: 0.2, ease: 'easeOut' }}
                                 ref={modalRef}
-                                className="relative w-full max-w-xl rounded-[32px] border border-[var(--border-subtle)] bg-white shadow-[var(--shadow-lg)]"
+                                className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-2)] shadow-[var(--shadow-lg)]"
                             >
+                                <div className="grid-texture pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
                                 <button
                                     onClick={closeContactModal}
-                                    className="absolute right-5 top-5 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--gray-600)] transition-colors hover:bg-[var(--gray-50)] hover:text-[var(--text-dark)]"
+                                    className="absolute right-5 top-5 z-10 inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
                                     aria-label="Fechar"
                                 >
-                                    <X size={22} strokeWidth={2} />
+                                    <X size={20} strokeWidth={2} />
                                 </button>
 
-                                <div className="px-6 pb-6 pt-14 md:px-8 md:pb-8">
+                                <div className="relative px-6 pb-6 pt-14 md:px-8 md:pb-8">
                                     <div className="mb-8">
-                                        <span className="label label-accent block mb-4">Iniciar projeto</span>
-                                        <h3 className="text-2xl font-bold text-gray-900 md:text-3xl" id="modal-title">
+                                        <span className="mono-label mono-label--accent">Iniciar projeto</span>
+                                        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-[var(--text)] md:text-3xl" id="modal-title">
                                             Traga o contexto.
                                         </h3>
-                                        <p className="mt-3 text-base leading-relaxed text-gray-500">
+                                        <p className="mt-3 text-base leading-relaxed text-[var(--text-muted)]">
                                             Compartilhe o cenário, o momento do produto e o que precisa avançar. Responderemos com objetividade.
                                         </p>
                                     </div>
 
                                     {!hasDirectEndpoint && (
-                                        <div className="mb-6 rounded-2xl border border-[var(--accent-primary)]/12 bg-[var(--accent-primary)]/6 px-4 py-4 text-sm leading-relaxed text-[var(--text-dark)]">
+                                        <div className="mb-6 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-sm leading-relaxed text-[var(--text-muted)]">
                                             Ao enviar, abrimos seu cliente de email com o briefing preenchido. É um hand-off explícito, sem simular envio por um backend que ainda não existe.
                                         </div>
                                     )}
@@ -219,11 +224,11 @@ export function ContactModal() {
                                         <div
                                             data-testid="contact-feedback"
                                             role={submitState.tone === 'error' ? 'alert' : 'status'}
-                                            className={`mb-6 rounded-2xl px-4 py-4 text-sm leading-relaxed ${submitState.tone === 'error'
-                                                ? 'border border-red-200 bg-red-50 text-red-700'
+                                            className={`mb-6 rounded-lg px-4 py-4 text-sm leading-relaxed ${submitState.tone === 'error'
+                                                ? 'border border-red-500/30 bg-red-500/10 text-red-300'
                                                 : submitState.tone === 'success'
-                                                    ? 'border border-emerald-200 bg-emerald-50 text-emerald-700'
-                                                    : 'border border-[var(--accent-primary)]/12 bg-[var(--accent-primary)]/6 text-[var(--text-dark)]'
+                                                    ? 'border border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+                                                    : 'border border-[var(--accent)]/30 bg-[var(--accent-soft)] text-[var(--text)]'
                                                 }`}
                                         >
                                             {submitState.message}
@@ -233,7 +238,7 @@ export function ContactModal() {
                                     <form onSubmit={handleSubmit}>
                                         <div className="space-y-5">
                                             <div>
-                                                <label htmlFor="nome" className="mb-1.5 block text-sm font-medium text-gray-700">
+                                                <label htmlFor="nome" className={labelClass}>
                                                     Nome
                                                 </label>
                                                 <input
@@ -243,13 +248,13 @@ export function ContactModal() {
                                                     required
                                                     autoComplete="name"
                                                     ref={firstFieldRef}
-                                                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-[var(--accent-primary)] focus:bg-white focus:ring-2 focus:ring-[var(--accent-primary)]/20"
+                                                    className={fieldClass}
                                                     placeholder="Seu nome completo"
                                                 />
                                             </div>
 
                                             <div>
-                                                <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-gray-700">
+                                                <label htmlFor="email" className={labelClass}>
                                                     Email corporativo
                                                 </label>
                                                 <input
@@ -258,42 +263,42 @@ export function ContactModal() {
                                                     type="email"
                                                     required
                                                     autoComplete="email"
-                                                    className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-[var(--accent-primary)] focus:bg-white focus:ring-2 focus:ring-[var(--accent-primary)]/20"
+                                                    className={fieldClass}
                                                     placeholder="voce@empresa.com"
                                                 />
                                             </div>
 
                                             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                                 <div>
-                                                    <label htmlFor="empresa" className="mb-1.5 block text-sm font-medium text-gray-700">
-                                                        Empresa <span className="font-normal text-gray-400">(opcional)</span>
+                                                    <label htmlFor="empresa" className={labelClass}>
+                                                        Empresa <span className="font-normal text-[var(--text-dim)]">(opcional)</span>
                                                     </label>
                                                     <input
                                                         id="empresa"
                                                         name="empresa"
                                                         type="text"
                                                         autoComplete="organization"
-                                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-[var(--accent-primary)] focus:bg-white focus:ring-2 focus:ring-[var(--accent-primary)]/20"
+                                                        className={fieldClass}
                                                         placeholder="Nome da empresa"
                                                     />
                                                 </div>
                                                 <div>
-                                                    <label htmlFor="telefone" className="mb-1.5 block text-sm font-medium text-gray-700">
-                                                        Telefone <span className="font-normal text-gray-400">(opcional)</span>
+                                                    <label htmlFor="telefone" className={labelClass}>
+                                                        Telefone <span className="font-normal text-[var(--text-dim)]">(opcional)</span>
                                                     </label>
                                                     <input
                                                         id="telefone"
                                                         name="telefone"
                                                         type="tel"
                                                         autoComplete="tel"
-                                                        className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-[var(--accent-primary)] focus:bg-white focus:ring-2 focus:ring-[var(--accent-primary)]/20"
+                                                        className={fieldClass}
                                                         placeholder={CONTACT_INFO.WHATSAPP_DISPLAY}
                                                     />
                                                 </div>
                                             </div>
 
                                             <div>
-                                                <label htmlFor="mensagem" className="mb-1.5 block text-sm font-medium text-gray-700">
+                                                <label htmlFor="mensagem" className={labelClass}>
                                                     Como podemos ajudar?
                                                 </label>
                                                 <textarea
@@ -301,7 +306,7 @@ export function ContactModal() {
                                                     name="mensagem"
                                                     required
                                                     rows={4}
-                                                    className="w-full resize-none rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-[var(--accent-primary)] focus:bg-white focus:ring-2 focus:ring-[var(--accent-primary)]/20"
+                                                    className={`${fieldClass} resize-none`}
                                                     placeholder="Descreva brevemente seu projeto..."
                                                 />
                                             </div>
@@ -323,10 +328,10 @@ export function ContactModal() {
                                                         />
                                                         <div
                                                             className={`flex h-5 w-5 items-center justify-center rounded border-2 transition-all duration-200 ${privacyConsent
-                                                                ? 'border-[var(--accent-primary)] bg-[var(--accent-primary)]'
+                                                                ? 'border-[var(--accent)] bg-[var(--accent)]'
                                                                 : consentError
-                                                                    ? 'border-red-400 bg-red-50'
-                                                                    : 'border-gray-300 bg-white group-hover:border-gray-400'
+                                                                    ? 'border-red-400 bg-red-500/10'
+                                                                    : 'border-[var(--border-strong)] bg-transparent group-hover:border-[var(--text-dim)]'
                                                                 }`}
                                                         >
                                                             {privacyConsent && (
@@ -336,12 +341,12 @@ export function ContactModal() {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <span className={`text-sm leading-relaxed ${consentError ? 'text-red-600' : 'text-gray-600'}`}>
+                                                    <span className={`text-sm leading-relaxed ${consentError ? 'text-red-400' : 'text-[var(--text-muted)]'}`}>
                                                         Li e concordo com a{' '}
                                                         <a
                                                             href="/politica-privacidade-riaheru-ventures.pdf"
                                                             download
-                                                            className="font-medium text-[var(--accent-primary)] hover:underline"
+                                                            className="font-medium text-[var(--accent)] hover:underline"
                                                             onClick={(event) => event.stopPropagation()}
                                                         >
                                                             Política de Privacidade
@@ -350,7 +355,7 @@ export function ContactModal() {
                                                     </span>
                                                 </label>
                                                 {consentError && (
-                                                    <p data-testid="consent-error" className="mt-2 flex items-center gap-1 text-sm text-red-500">
+                                                    <p data-testid="consent-error" className="mt-2 flex items-center gap-1 text-sm text-red-400">
                                                         <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                                                             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                         </svg>
@@ -364,7 +369,7 @@ export function ContactModal() {
                                             type="submit"
                                             disabled={isLoading}
                                             aria-busy={isLoading}
-                                            className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--accent-primary)] px-6 py-4 text-base font-semibold text-white shadow-lg shadow-[var(--accent-primary)]/20 transition-all duration-200 hover:bg-[var(--accent-secondary)] disabled:opacity-70"
+                                            className="btn btn-accent mt-8 min-h-13 w-full px-6 py-4 text-base"
                                         >
                                             {isLoading
                                                 ? 'Processando...'
@@ -377,10 +382,10 @@ export function ContactModal() {
 
                                     <div className="relative my-6">
                                         <div className="absolute inset-0 flex items-center">
-                                            <div className="w-full border-t border-gray-200"></div>
+                                            <div className="w-full border-t border-[var(--border)]"></div>
                                         </div>
                                         <div className="relative flex justify-center">
-                                            <span className="bg-white px-3 text-sm text-gray-500">
+                                            <span className="bg-[var(--bg-2)] px-3 text-sm text-[var(--text-dim)]">
                                                 Ou prefere WhatsApp?
                                             </span>
                                         </div>
@@ -389,7 +394,7 @@ export function ContactModal() {
                                     <button
                                         type="button"
                                         onClick={() => window.open(`https://wa.me/${CONTACT_INFO.WHATSAPP}`, '_blank')}
-                                        className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-gray-200 bg-white px-6 py-3 font-medium text-gray-600 transition-all hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700"
+                                        className="btn btn-outline min-h-12 w-full px-6 py-3"
                                     >
                                         <MessageCircle size={20} />
                                         Chamar no WhatsApp

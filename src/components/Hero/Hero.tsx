@@ -1,152 +1,134 @@
-import { ArrowRight, CheckCircle2, LockKeyhole, Workflow } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-import { CASE_STUDIES } from '@/data/cases';
 import { m } from '@/lib/motion';
 import { useModal } from '../../hooks/useModal';
 
-const heroSignals = [
-    { icon: Workflow, text: 'Produto, arquitetura e operação no mesmo plano' },
-    { icon: LockKeyhole, text: 'Segurança, LGPD e governança desde a fundação' },
-    { icon: CheckCircle2, text: 'Entrega sênior com documentação e continuidade' },
+const disciplines = [
+    { id: '01', label: 'Sistemas críticos' },
+    { id: '02', label: 'Automação & dados' },
+    { id: '03', label: 'IA aplicada' },
+    { id: '04', label: 'Operações' },
 ];
 
-const marqletCase = CASE_STUDIES.find((caseStudy) => caseStudy.id === 'marqlet');
-const nimetCase = CASE_STUDIES.find((caseStudy) => caseStudy.id === 'nimet');
-const industrialCase = CASE_STUDIES.find((caseStudy) => caseStudy.id === 'industrial-platform');
+const stats = [
+    { value: 'B2B', label: 'Foco exclusivo' },
+    { value: 'Full-stack', label: 'Produto a operação' },
+    { value: 'LGPD', label: 'Governança nativa' },
+];
 
 export function Hero() {
     const { openContactModal } = useModal();
 
     return (
-        <section className="relative isolate flex min-h-[calc(100svh-76px)] flex-col overflow-hidden bg-[#070a12] text-white">
+        <section className="relative isolate overflow-hidden border-b border-[var(--border)] bg-[var(--bg)]">
+            <div className="grid-texture pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
             <div
-                className="pointer-events-none absolute inset-0 opacity-[0.07]"
-                style={{
-                    backgroundImage: `linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)`,
-                    backgroundSize: '44px 44px',
-                }}
+                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/40 to-transparent"
+                aria-hidden="true"
             />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(7,10,18,0.96)_0%,rgba(7,10,18,0.88)_44%,rgba(0,82,204,0.18)_100%)]" />
 
-            <div className="container relative z-10 grid flex-1 gap-12 py-16 md:py-20 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] lg:items-center">
-                <m.div
-                    initial={{ opacity: 0, y: 22 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.55, ease: 'easeOut' }}
-                    className="max-w-3xl"
-                >
-                    <span className="on-dark-kicker inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
-                        Elite Engineering & Venture Building
-                    </span>
+            <div className="container relative z-10 pb-16 pt-32 md:pb-24 md:pt-40">
+                <div className="grid items-end gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+                    <m.div
+                        initial={{ opacity: 0, y: 22 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                    >
+                        <span className="mono-label mono-label--accent">
+                            Software engineering &amp; venture building
+                        </span>
 
-                    <h1 className="on-dark-heading mt-7 text-[clamp(4rem,12vw,8.25rem)] font-black leading-[0.86] tracking-normal">
-                        Riaheru
-                    </h1>
+                        <h1 className="mt-8 text-[clamp(3.4rem,10vw,7.5rem)] font-semibold leading-[0.9] tracking-[-0.03em] text-[var(--text)]">
+                            Riaheru
+                            <span className="text-[var(--text-dim)]">.</span>
+                        </h1>
 
-                    <p className="on-dark-heading mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-normal md:text-5xl">
-                        Engenharia B2B para produtos digitais, sistemas críticos e operações que precisam escalar.
-                    </p>
+                        <p className="mt-8 max-w-2xl text-pretty text-2xl font-medium leading-[1.2] tracking-tight text-[var(--text)] md:text-[2.1rem]">
+                            Engenharia B2B para produtos digitais, sistemas críticos e
+                            operações que precisam{' '}
+                            <span className="text-[var(--accent)]">escalar com segurança</span>.
+                        </p>
 
-                    <p className="on-dark-copy mt-6 max-w-2xl text-lg leading-relaxed md:text-xl">
-                        Unimos estratégia de produto, arquitetura robusta e execução sênior para construir ativos digitais com segurança, clareza operacional e visão de negócio.
-                    </p>
+                        <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--text-muted)] md:text-lg">
+                            Unimos estratégia de produto, arquitetura robusta e execução
+                            sênior para construir ativos digitais com clareza operacional e
+                            visão de negócio.
+                        </p>
 
-                    <div className="mt-9 flex flex-wrap gap-4">
-                        <button
-                            type="button"
-                            onClick={openContactModal}
-                            className="btn min-h-14 px-7 py-4 text-base shadow-lg shadow-[var(--accent)]/20"
-                        >
-                            Iniciar conversa estratégica
-                            <ArrowRight size={19} />
-                        </button>
-                        <a href="#trabalhos" className="btn btn-outline on-dark-outline-button min-h-14 px-7 py-4 text-base">
-                            Ver cases
-                        </a>
-                    </div>
-                </m.div>
-
-                <m.div
-                    initial={{ opacity: 0, x: 28 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.7, delay: 0.12, ease: 'easeOut' }}
-                    className="relative"
-                    aria-label="Cases de produto da Riaheru"
-                >
-                    <div className="relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] p-3 shadow-[0_34px_90px_rgba(0,0,0,0.35)] backdrop-blur">
-                        {marqletCase?.image && (
-                            <a
-                                href={marqletCase.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group block overflow-hidden rounded-lg border border-white/10 bg-white"
+                        <div className="mt-10 flex flex-wrap gap-3">
+                            <button
+                                type="button"
+                                onClick={openContactModal}
+                                className="btn btn-primary min-h-13 px-7 py-3.5 text-base"
                             >
-                                <img
-                                    src={marqletCase.image}
-                                    alt={marqletCase.imageAlt}
-                                    className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                                    fetchPriority="high"
-                                />
+                                Iniciar conversa estratégica
+                                <ArrowRight size={18} />
+                            </button>
+                            <a
+                                href="#trabalhos"
+                                className="btn btn-outline min-h-13 px-7 py-3.5 text-base"
+                            >
+                                Ver cases
                             </a>
-                        )}
+                        </div>
+                    </m.div>
 
-                        <div className="mt-3 grid gap-3 md:grid-cols-[0.9fr_1.1fr]">
-                            {nimetCase?.image && (
-                                <a
-                                    href={nimetCase.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="group overflow-hidden rounded-lg border border-white/10 bg-[#0d111b]"
-                                >
-                                    <img
-                                        src={nimetCase.image}
-                                        alt={nimetCase.imageAlt}
-                                        className="h-full min-h-48 w-full object-cover object-left-top opacity-90 transition-transform duration-700 group-hover:scale-[1.03]"
-                                        loading="lazy"
-                                    />
-                                </a>
-                            )}
-
-                            <div className="rounded-lg border border-white/10 bg-[#0b1020] p-5">
-                                <span className="text-xs font-semibold uppercase tracking-normal text-[var(--accent-light)]">
-                                    Case confidencial
+                    <m.div
+                        initial={{ opacity: 0, y: 22 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.12, ease: 'easeOut' }}
+                        className="w-full"
+                    >
+                        <div className="panel overflow-hidden">
+                            <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
+                                <span className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--text-dim)]">
+                                    Disciplinas
                                 </span>
-                                <h2 className="on-dark-heading mt-4 text-2xl font-semibold tracking-normal">
-                                    {industrialCase?.title}
-                                </h2>
-                                <p className="on-dark-copy mt-3 text-sm leading-relaxed">
-                                    {industrialCase?.description}
-                                </p>
-                                <div className="mt-5 space-y-3">
-                                    {industrialCase?.tags.slice(0, 4).map((tag) => (
-                                        <div key={tag} className="flex items-center gap-2 text-sm text-white/72">
-                                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--highlight)]" />
-                                            {tag}
+                                <span className="h-1.5 w-1.5 bg-[var(--highlight)]" aria-hidden="true" />
+                            </div>
+                            <ul>
+                                {disciplines.map((item) => (
+                                    <li
+                                        key={item.id}
+                                        className="group flex items-center justify-between border-b border-[var(--border)] px-5 py-5 transition-colors last:border-b-0 hover:bg-[var(--surface-2)]"
+                                    >
+                                        <div className="flex items-center gap-4">
+                                            <span className="font-mono text-xs text-[var(--text-dim)]">
+                                                {item.id}
+                                            </span>
+                                            <span className="text-base font-medium tracking-tight text-[var(--text)]">
+                                                {item.label}
+                                            </span>
                                         </div>
-                                    ))}
-                                </div>
+                                        <ArrowRight
+                                            size={16}
+                                            className="text-[var(--text-dim)] transition-all group-hover:translate-x-1 group-hover:text-[var(--accent)]"
+                                        />
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </m.div>
+                </div>
+
+                <m.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+                    className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--border)] sm:grid-cols-3"
+                >
+                    {stats.map((stat) => (
+                        <div key={stat.label} className="bg-[var(--bg)] px-6 py-7">
+                            <div className="font-[var(--font-primary)] text-2xl font-semibold tracking-tight text-[var(--text)]">
+                                {stat.value}
+                            </div>
+                            <div className="mt-1.5 text-sm text-[var(--text-muted)]">
+                                {stat.label}
                             </div>
                         </div>
-                    </div>
+                    ))}
                 </m.div>
             </div>
-
-            <m.div
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.35, ease: 'easeOut' }}
-                className="relative z-10 border-t border-white/10 bg-white/[0.02]"
-            >
-                <div className="container grid gap-4 py-6 md:grid-cols-3">
-                    {heroSignals.map((signal) => (
-                        <div key={signal.text} className="flex items-center gap-3 text-sm text-white/76">
-                            <signal.icon size={18} className="shrink-0 text-[var(--accent-light)]" strokeWidth={1.8} />
-                            <span>{signal.text}</span>
-                        </div>
-                    ))}
-                </div>
-            </m.div>
         </section>
     );
 }

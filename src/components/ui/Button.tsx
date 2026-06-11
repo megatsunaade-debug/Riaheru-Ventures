@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
-    variant?: 'primary' | 'outline' | 'ghost';
+    variant?: 'primary' | 'accent' | 'outline' | 'ghost';
     size?: 'sm' | 'md' | 'lg';
 }
 
@@ -18,13 +18,15 @@ export function Button({
             ? 'btn btn-outline'
             : variant === 'ghost'
                 ? 'btn btn-ghost'
-                : 'btn';
+                : variant === 'accent'
+                    ? 'btn btn-accent'
+                    : 'btn btn-primary';
 
     const sizeClass =
         size === 'sm'
             ? 'min-h-10 px-4 py-2 text-sm'
             : size === 'lg'
-                ? 'min-h-14 px-8 py-4 text-base'
+                ? 'min-h-14 px-7 py-4 text-base'
                 : 'min-h-12 px-6 py-3 text-sm';
 
     return (

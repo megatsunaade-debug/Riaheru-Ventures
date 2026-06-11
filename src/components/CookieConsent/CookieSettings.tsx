@@ -65,21 +65,21 @@ export function CookieSettings({ onClose }: CookieSettingsProps) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="cookie-settings-title"
-                className="relative w-full max-w-lg rounded-[28px] border border-[var(--border-subtle)] bg-white p-6 shadow-[var(--shadow-lg)]"
+                className="relative w-full max-w-lg rounded-2xl border border-[var(--border)] bg-[var(--bg-2)] p-6 shadow-[var(--shadow-lg)]"
             >
                 <div className="mb-5 flex items-start justify-between gap-4">
                     <div>
-                        <h2 id="cookie-settings-title" className="text-xl font-semibold text-[var(--text-dark)]">
+                        <h2 id="cookie-settings-title" className="text-xl font-semibold tracking-tight text-[var(--text)]">
                             Preferências de Cookies
                         </h2>
-                        <p className="mt-2 text-sm leading-relaxed text-[var(--gray-600)]">
+                        <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">
                             Controle quais categorias opcionais podem ser ativadas nesta experiência.
                         </p>
                     </div>
                     <button
                         ref={closeButtonRef}
                         onClick={onClose}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--gray-600)] transition-colors hover:bg-[var(--gray-50)] hover:text-[var(--text-dark)]"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
                         aria-label="Fechar"
                     >
                         <X size={18} />
@@ -104,11 +104,11 @@ export function CookieSettings({ onClose }: CookieSettingsProps) {
                             description: 'Reservados para medições e ações de conversão futuras, sempre com consentimento explícito.',
                         },
                     ].map((item) => (
-                        <div key={item.id} className="rounded-3xl border border-[var(--border-subtle)] bg-[var(--gray-50)] p-4">
+                        <div key={item.id} className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
                             <div className="flex items-start justify-between gap-4">
                                 <div>
-                                    <h3 className="text-sm font-semibold text-[var(--text-dark)]">{item.title}</h3>
-                                    <p className="mt-2 text-sm leading-relaxed text-[var(--gray-600)]">{item.description}</p>
+                                    <h3 className="text-sm font-semibold text-[var(--text)]">{item.title}</h3>
+                                    <p className="mt-2 text-sm leading-relaxed text-[var(--text-muted)]">{item.description}</p>
                                 </div>
 
                                 <button
@@ -116,12 +116,12 @@ export function CookieSettings({ onClose }: CookieSettingsProps) {
                                     onClick={() => toggle(item.id)}
                                     disabled={item.id === 'essential'}
                                     aria-pressed={prefs[item.id]}
-                                    className={`relative inline-flex h-8 w-14 shrink-0 rounded-full transition-colors ${prefs[item.id] ? 'bg-[var(--accent-primary)]' : 'bg-[var(--gray-200)]'
+                                    className={`relative inline-flex h-8 w-14 shrink-0 rounded-full transition-colors ${prefs[item.id] ? 'bg-[var(--accent-strong)]' : 'bg-[var(--surface-2)] border border-[var(--border-strong)]'
                                         } ${item.id === 'essential' ? 'opacity-60' : ''}`}
                                 >
                                     <m.span
                                         animate={{ x: prefs[item.id] ? 28 : 4 }}
-                                        className="absolute top-1 h-6 w-6 rounded-full bg-white shadow-sm"
+                                        className="absolute top-1 h-6 w-6 rounded-full bg-white"
                                     />
                                 </button>
                             </div>
@@ -135,7 +135,7 @@ export function CookieSettings({ onClose }: CookieSettingsProps) {
                             acceptAll();
                             onClose();
                         }}
-                        className="btn flex-1 justify-center"
+                        className="btn btn-primary flex-1 justify-center"
                     >
                         Aceitar tudo
                     </button>
