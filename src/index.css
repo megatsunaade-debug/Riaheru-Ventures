@@ -68,7 +68,7 @@ h6 {
   font-family: var(--font-primary);
   font-weight: 600;
   line-height: 1.08;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   color: var(--text-dark);
 }
 
@@ -124,7 +124,7 @@ select {
   justify-content: center;
   gap: 0.5rem;
   border: 1px solid transparent;
-  border-radius: 18px;
+  border-radius: 10px;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: var(--white);
   font-family: var(--font-primary);
@@ -218,7 +218,7 @@ select {
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0;
   color: var(--gray-400);
 }
 
@@ -229,7 +229,7 @@ select {
 .card {
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid var(--border-subtle);
-  border-radius: 24px;
+  border-radius: 10px;
   padding: 1.75rem;
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(16px);

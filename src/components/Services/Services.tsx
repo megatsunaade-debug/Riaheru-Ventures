@@ -1,125 +1,111 @@
-import { Cpu, ServerCog, Target } from 'lucide-react';
+import { ArrowRight, BrainCircuit, ServerCog, Target } from 'lucide-react';
 
 import { m } from '@/lib/motion';
+import { useModal } from '../../hooks/useModal';
 
 const services = [
     {
         id: 'venture',
         icon: Target,
-        title: 'Tech Partner & Venture Building',
-        description: 'Não somos uma fábrica convencional. Atuamos com visão de donos (Skin in the Game), aportando engenharia de elite para co-criar startups, plataformas SaaS e spin-offs empresariais.',
-        accent: 'rgba(255, 107, 53, 1)', // highlight
-        bgHover: 'rgba(255, 107, 53, 0.05)',
-        gridArea: 'lg:col-span-8',
-        highlight: true,
+        title: 'Venture Building',
+        summary:
+            'Entramos como parceiro técnico para transformar tese, mercado e operação em produto digital real.',
+        details: [
+            'Discovery de produto e arquitetura inicial',
+            'Construção de MVPs e plataformas SaaS',
+            'Evolução contínua com visão de negócio',
+        ],
     },
     {
         id: 'engineering',
         icon: ServerCog,
         title: 'Engenharia Dedicada',
-        description: 'Squads avançados operando como extensão do seu CTO. Desenvolvemos desde o backend de alta liquidez até UIs perfeitas ao pixel.',
-        accent: 'rgba(0, 82, 204, 1)',
-        bgHover: 'rgba(0, 82, 204, 0.05)',
-        gridArea: 'lg:col-span-4',
-        highlight: false,
+        summary:
+            'Squads enxutos para construir, modernizar ou estabilizar sistemas que sustentam receita e operação.',
+        details: [
+            'Frontend, backend e integrações',
+            'APIs, bancos, filas e automações',
+            'Documentação técnica e transferência de conhecimento',
+        ],
     },
     {
         id: 'architecture',
-        icon: Cpu,
-        title: 'Consultoria de Arquitetura e IA',
-        description: 'Resolvemos dívidas técnicas críticas. Refatoração para Cloud-native, integrações RAG/IA corporativas e aumento de tolerância a falhas reais.',
-        accent: 'rgba(0, 82, 204, 1)',
-        bgHover: 'rgba(0, 82, 204, 0.05)',
-        gridArea: 'lg:col-span-12',
-        highlight: false,
+        icon: BrainCircuit,
+        title: 'Arquitetura, IA e Operação',
+        summary:
+            'Diagnóstico e execução para ambientes que precisam de segurança, dados confiáveis e automação aplicada.',
+        details: [
+            'Revisão de arquitetura e segurança',
+            'IA aplicada a fluxos internos e bases RAG',
+            'Deploy, observabilidade, backup e governança',
+        ],
     },
 ];
 
 export function Services() {
-    return (
-        <section id="servicos" className="relative py-24 md:py-32 bg-[#080B12] overflow-hidden text-white border-b border-white/5">
-            {/* Tech background elements */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px),
-                                          linear-gradient(90deg, rgba(255, 255, 255, 0.4) 1px, transparent 1px)`,
-                        backgroundSize: '40px 40px',
-                    }}
-                />
-            </div>
-            
-            <m.div 
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--accent-dark)]/10 blur-[150px] rounded-full pointer-events-none"
-            />
+    const { openContactModal } = useModal();
 
-            <div className="container relative z-10">
-                {/* Header */}
+    return (
+        <section id="servicos" className="bg-white py-20 md:py-28">
+            <div className="container">
                 <m.div
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5 }}
-                    className="max-w-3xl mb-16"
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="grid gap-10 border-b border-[var(--border-subtle)] pb-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
                 >
-                    <span className="on-dark-kicker inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-widest mb-6">
-                        O Modelo Riaheru
-                    </span>
-                    <h2 className="on-dark-heading text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                        Engenharia e Estratégia sem atalhos.
-                    </h2>
-                    <p className="on-dark-copy text-xl leading-relaxed">
-                        Construir tecnologia que escala requer mais do que escrever código. Exige arquitetura limpa, segurança rigorosa e visão profunda do negócio.
-                    </p>
+                    <div>
+                        <span className="label label-accent block">O que entregamos</span>
+                        <h2 className="mt-5 max-w-3xl text-4xl font-bold tracking-normal md:text-6xl">
+                            Construção técnica para empresas que precisam decidir com confiança.
+                        </h2>
+                    </div>
+                    <div className="max-w-2xl lg:justify-self-end">
+                        <p className="text-lg leading-relaxed text-[var(--text-secondary)] md:text-xl">
+                            A Riaheru atua onde produto, tecnologia e operação se encontram: sistemas próprios, plataformas B2B, automações críticas e presença digital com padrão profissional.
+                        </p>
+                        <button
+                            type="button"
+                            onClick={openContactModal}
+                            className="link-arrow mt-6"
+                        >
+                            Conversar sobre o seu contexto
+                            <ArrowRight size={18} />
+                        </button>
+                    </div>
                 </m.div>
 
-                {/* Grid de serviços (Assymmetric layout for premium feel) */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="grid gap-0 lg:grid-cols-3">
                     {services.map((service, index) => (
-                        <m.div
+                        <m.article
                             key={service.id}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={false}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: index * 0.15 }}
-                            whileHover={{ y: -4 }}
-                            className={`group relative p-8 md:p-10 bg-white/[0.02] border border-white/5 rounded-3xl cursor-default transition-all duration-300 hover:border-white/10 overflow-hidden ${service.gridArea}`}
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
+                            className="group border-b border-[var(--border-subtle)] py-10 lg:border-b-0 lg:border-r lg:px-8 lg:last:border-r-0"
                         >
-                            {/* Hover effect background */}
-                            <div
-                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                                style={{ backgroundColor: service.bgHover }}
-                            />
-                            
-                            {/* Accent line for Highlighted service */}
-                            {service.highlight && (
-                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--highlight)] to-[var(--accent)]" />
-                            )}
-
-                            {/* Icon */}
-                            <div className="relative z-10 h-full flex flex-col">
-                                <div
-                                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8 border border-white/5 transition-transform duration-300 group-hover:scale-105"
-                                    style={{
-                                        backgroundColor: 'rgba(255,255,255,0.03)',
-                                        color: service.accent,
-                                    }}
-                                >
-                                    <service.icon size={26} strokeWidth={1.5} />
-                                </div>
-
-                                {/* Content */}
-                                <h3 className="on-dark-heading text-2xl font-bold mb-4">{service.title}</h3>
-                                <p className="on-dark-copy text-lg leading-relaxed mt-auto">
-                                    {service.description}
-                                </p>
+                            <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-lg border border-[var(--border-subtle)] bg-[var(--off-white)] text-[var(--accent-primary)] transition-colors group-hover:border-[var(--accent-primary)]/24 group-hover:bg-[var(--accent-primary)] group-hover:text-white">
+                                <service.icon size={24} strokeWidth={1.7} />
                             </div>
-                        </m.div>
+
+                            <h3 className="text-2xl font-semibold tracking-normal text-[var(--text-dark)]">
+                                {service.title}
+                            </h3>
+                            <p className="mt-4 text-base leading-relaxed text-[var(--text-secondary)]">
+                                {service.summary}
+                            </p>
+
+                            <ul className="mt-8 space-y-3">
+                                {service.details.map((detail) => (
+                                    <li key={detail} className="flex gap-3 text-sm leading-relaxed text-[var(--gray-600)]">
+                                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--highlight)]" />
+                                        <span>{detail}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </m.article>
                     ))}
                 </div>
             </div>

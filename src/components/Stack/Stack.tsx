@@ -1,90 +1,145 @@
+import { Activity, Code2, Database, FileCheck2, LifeBuoy, Network, RefreshCw, Search, ShieldCheck } from 'lucide-react';
+
 import { m } from '@/lib/motion';
 
-import { SectionTitle } from '../ui/SectionTitle';
+const processSteps = [
+    {
+        icon: Search,
+        title: 'Diagnóstico',
+        text: 'Mapeamos objetivos, riscos, usuários, sistemas existentes e restrições de operação antes de propor tecnologia.',
+    },
+    {
+        icon: Network,
+        title: 'Arquitetura',
+        text: 'Definimos fronteiras, dados, integrações, segurança, stack e estratégia de evolução com visão de longo prazo.',
+    },
+    {
+        icon: Code2,
+        title: 'Construção',
+        text: 'Implementamos em ciclos curtos, com base tipada, revisão técnica, documentação e validação contínua.',
+    },
+    {
+        icon: Activity,
+        title: 'Operação',
+        text: 'Preparamos deploy, monitoramento, backup, rotinas administrativas e handoff para reduzir dependência informal.',
+    },
+    {
+        icon: RefreshCw,
+        title: 'Evolução',
+        text: 'Priorizamos melhorias com base em uso real, impacto de negócio, segurança e custo de manutenção.',
+    },
+];
 
-const stackCategories = [
+const trustPillars = [
     {
-        name: 'Frontend',
-        description: 'Experiências digitais rápidas, acessíveis e consistentes em desktop e mobile.',
-        technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'React Router', 'Vite'],
+        icon: ShieldCheck,
+        title: 'Segurança e LGPD',
+        text: 'Permissões, consentimento, segregação de acesso e cuidado com dados desde o desenho do produto.',
     },
     {
-        name: 'Backend',
-        description: 'Arquitetura resiliente para regras de negócio sensíveis, integrações e escalabilidade.',
-        technologies: ['Node.js', 'TypeScript', 'tRPC', 'REST APIs', 'Zod', 'Vitest'],
+        icon: Database,
+        title: 'Dados confiáveis',
+        text: 'Modelagem, persistência, backup e rastreabilidade para decisões operacionais menos frágeis.',
     },
     {
-        name: 'Dados',
-        description: 'Modelagem, governança e leitura de dados como parte da estratégia operacional.',
-        technologies: ['PostgreSQL', 'MySQL', 'Drizzle ORM', 'Supabase', 'Docker', 'Observabilidade'],
+        icon: FileCheck2,
+        title: 'Documentação útil',
+        text: 'Registro técnico, fluxos, regras de negócio e handoff para que o sistema sobreviva à primeira entrega.',
     },
     {
-        name: 'Integração',
-        description: 'Automação de fluxos complexos com segurança, rastreabilidade e baixo atrito.',
-        technologies: ['Webhooks', 'Nginx', 'Linux VPS', 'CI/CD', 'PM2', 'Lets Encrypt'],
+        icon: LifeBuoy,
+        title: 'Continuidade',
+        text: 'Suporte, governança de mudanças e evolução planejada para ambientes que não podem parar sem aviso.',
     },
 ];
 
 export function Stack() {
     return (
-        <section id="stack" className="relative bg-white py-20 md:py-28">
-            <div className="container max-w-7xl">
-                <SectionTitle
-                    tag="Engenharia de Software"
-                    title={
-                        <>
-                            Nossa <span className="text-[var(--accent-primary)]">Powerhouse</span> tecnológica
-                        </>
-                    }
-                    description="Superamos o desenvolvimento tradicional para construir ativos digitais estratégicos. Projetamos plataformas SaaS e sistemas críticos com foco em escalabilidade, governança e longevidade."
-                />
+        <section id="stack" className="bg-[#070a12] py-20 text-white md:py-28">
+            <div className="container">
+                <m.div
+                    initial={false}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    className="max-w-4xl"
+                >
+                    <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
+                        Como trabalhamos
+                    </span>
+                    <h2 className="on-dark-heading mt-6 text-4xl font-bold tracking-normal md:text-6xl">
+                        Engenharia que organiza a decisão antes de acelerar a entrega.
+                    </h2>
+                    <p className="on-dark-copy mt-6 max-w-3xl text-lg leading-relaxed md:text-xl">
+                        A qualidade do software começa antes do código: clareza de escopo, arquitetura proporcional ao risco e operação planejada desde o primeiro ciclo.
+                    </p>
+                </m.div>
 
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    {stackCategories.map((category, categoryIndex) => (
-                        <m.div
-                            key={category.name}
-                            initial={{ opacity: 0, y: 40 }}
+                <div className="mt-14 grid gap-0 border-y border-white/10 lg:grid-cols-5">
+                    {processSteps.map((step, index) => (
+                        <m.article
+                            key={step.title}
+                            initial={false}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: '-50px' }}
-                            transition={{ duration: 0.6, delay: categoryIndex * 0.12 }}
-                            whileHover={{ y: -6, scale: 1.02 }}
-                            className="group relative rounded-2xl border border-gray-100 bg-white p-7 shadow-lg transition-all duration-500 hover:shadow-2xl"
+                            viewport={{ once: true, margin: '-80px' }}
+                            transition={{ duration: 0.48, delay: index * 0.08, ease: 'easeOut' }}
+                            className="border-b border-white/10 py-8 lg:border-b-0 lg:border-r lg:px-6 lg:last:border-r-0"
                         >
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--accent-primary)]/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                            <div className="relative z-10">
-                                <div className="mb-4 flex items-center gap-4">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] transition-all duration-500 group-hover:scale-110 group-hover:bg-[var(--accent-primary)] group-hover:text-white group-hover:shadow-lg group-hover:shadow-[var(--accent-primary)]/30">
-                                        <div className="h-3.5 w-3.5 rounded-full bg-current" />
-                                    </div>
-                                    <h3 className="text-xl font-bold text-[var(--text-dark)] transition-colors duration-300 group-hover:text-[var(--accent-primary)]">
-                                        {category.name}
-                                    </h3>
+                            <div className="flex items-center justify-between gap-4">
+                                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/6 text-[var(--accent-light)]">
+                                    <step.icon size={21} strokeWidth={1.7} />
                                 </div>
-
-                                <p className="mb-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-                                    {category.description}
-                                </p>
-
-                                <div className="flex flex-wrap gap-2.5">
-                                    {category.technologies.map((tech, techIndex) => (
-                                        <m.span
-                                            key={tech}
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            whileInView={{ opacity: 1, scale: 1 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.3, delay: (categoryIndex * 0.1) + (techIndex * 0.05) }}
-                                            whileHover={{ scale: 1.05 }}
-                                            className="cursor-default rounded-lg border border-gray-100 bg-gray-50 px-4 py-2 text-sm font-medium text-[var(--text-secondary)] transition-all duration-300 hover:border-[var(--accent-primary)]/30 hover:bg-[var(--accent-primary)]/10 hover:text-[var(--accent-primary)] hover:shadow-md"
-                                        >
-                                            {tech}
-                                        </m.span>
-                                    ))}
-                                </div>
+                                <span className="font-mono text-sm text-white/34">
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
                             </div>
-                        </m.div>
+                            <h3 className="on-dark-heading mt-7 text-xl font-semibold tracking-normal">
+                                {step.title}
+                            </h3>
+                            <p className="on-dark-copy mt-3 text-sm leading-relaxed">
+                                {step.text}
+                            </p>
+                        </m.article>
                     ))}
                 </div>
+
+                <m.div
+                    initial={false}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={{ duration: 0.52, ease: 'easeOut' }}
+                    className="mt-16 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start"
+                >
+                    <div>
+                        <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
+                            Confiança operacional
+                        </span>
+                        <h2 className="on-dark-heading mt-6 text-3xl font-bold tracking-normal md:text-5xl">
+                            O site vende. O sistema precisa continuar funcionando.
+                        </h2>
+                    </div>
+
+                    <div className="grid gap-0 border-t border-white/10 sm:grid-cols-2">
+                        {trustPillars.map((pillar, index) => (
+                            <m.article
+                                key={pillar.title}
+                                initial={false}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-70px' }}
+                                transition={{ duration: 0.45, delay: index * 0.07, ease: 'easeOut' }}
+                                className="border-b border-white/10 py-6 sm:odd:pr-7 sm:even:border-l sm:even:pl-7"
+                            >
+                                <pillar.icon size={22} className="text-[var(--highlight)]" strokeWidth={1.7} />
+                                <h3 className="on-dark-heading mt-5 text-lg font-semibold tracking-normal">
+                                    {pillar.title}
+                                </h3>
+                                <p className="on-dark-copy mt-3 text-sm leading-relaxed">
+                                    {pillar.text}
+                                </p>
+                            </m.article>
+                        ))}
+                    </div>
+                </m.div>
             </div>
         </section>
     );

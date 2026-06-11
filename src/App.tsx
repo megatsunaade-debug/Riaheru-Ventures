@@ -117,10 +117,10 @@ function App() {
         <Router>
             <ScrollToTop />
             <Helmet>
-                <title>Riaheru | Engenharia de Software</title>
+                <title>Riaheru Ventures | Engenharia B2B e Venture Building</title>
                 <meta
                     name="description"
-                    content="Software house híbrida especializada em produtos digitais, arquitetura robusta e execução técnica orientada a negócio."
+                    content="Engenharia de software B2B, venture building, arquitetura, automação e sistemas críticos para empresas que precisam de segurança, clareza e continuidade."
                 />
             </Helmet>
             <CookieConsentProvider>

@@ -18,12 +18,12 @@ export function Footer() {
                             />
                         </a>
                         <p className="site-footer-copy mt-5 max-w-sm text-sm leading-relaxed">
-                            Engenharia de software, consultoria estratégica e produtos digitais com foco em clareza técnica, robustez operacional e execução sem ruído.
+                            Engenharia de software B2B, venture building e arquitetura para produtos digitais, sistemas críticos e operações que exigem continuidade.
                         </p>
                     </div>
 
                     <div className="md:col-span-2">
-                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-[0.22em]">
+                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-normal">
                             Empresa
                         </span>
                         <nav className="mt-4 space-y-3">
@@ -32,6 +32,9 @@ export function Footer() {
                             </a>
                             <a href="/#trabalhos" className="site-footer-link block text-sm transition-colors">
                                 Trabalhos
+                            </a>
+                            <a href="/#stack" className="site-footer-link block text-sm transition-colors">
+                                Processo
                             </a>
                             <a href="/sobre" className="site-footer-link block text-sm transition-colors">
                                 Sobre
@@ -43,7 +46,7 @@ export function Footer() {
                     </div>
 
                     <div className="md:col-span-2">
-                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-[0.22em]">
+                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-normal">
                             Legal
                         </span>
                         <nav className="mt-4 space-y-3">
@@ -67,7 +70,7 @@ export function Footer() {
                     </div>
 
                     <div className="md:col-span-3">
-                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-[0.22em]">
+                        <span className="site-footer-label block text-xs font-semibold uppercase tracking-normal">
                             Contato
                         </span>
                         <div className="mt-4 space-y-3">
@@ -105,7 +108,7 @@ export function Footer() {
                         © {currentYear} Riaheru Ventures. Todos os direitos reservados.
                     </p>
                     <p className="site-footer-meta">
-                        Feito em São Paulo para operações que exigem clareza, velocidade e confiabilidade.
+                        Feito em São Paulo para empresas que precisam de tecnologia clara, segura e operacional.
                     </p>
                 </div>
             </div>

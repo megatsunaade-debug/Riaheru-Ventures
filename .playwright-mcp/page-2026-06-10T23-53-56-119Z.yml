@@ -1,0 +1,301 @@
+- generic [active] [ref=e1]:
+  - link "Pular para o conteúdo" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e4]:
+    - banner [ref=e5]:
+      - navigation "Principal" [ref=e6]:
+        - generic [ref=e7]:
+          - link "Ir para a página inicial da Riaheru" [ref=e8] [cursor=pointer]:
+            - /url: /
+            - img "Riaheru" [ref=e9]
+          - generic [ref=e10]:
+            - link "Serviços" [ref=e11] [cursor=pointer]:
+              - /url: /#servicos
+            - link "Trabalhos" [ref=e12] [cursor=pointer]:
+              - /url: /#trabalhos
+            - link "Processo" [ref=e13] [cursor=pointer]:
+              - /url: /#stack
+            - link "Sobre" [ref=e14] [cursor=pointer]:
+              - /url: /sobre
+            - button "Iniciar projeto" [ref=e15] [cursor=pointer]:
+              - generic [ref=e16]: Iniciar projeto
+    - main [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - generic [ref=e23]: Elite Engineering & Venture Building
+            - heading "Riaheru" [level=1] [ref=e24]
+            - paragraph [ref=e25]: Engenharia B2B para produtos digitais, sistemas críticos e operações que precisam escalar.
+            - paragraph [ref=e26]: Unimos estratégia de produto, arquitetura robusta e execução sênior para construir ativos digitais com segurança, clareza operacional e visão de negócio.
+            - generic [ref=e27]:
+              - button "Iniciar conversa estratégica" [ref=e28] [cursor=pointer]:
+                - text: Iniciar conversa estratégica
+                - img [ref=e29]
+              - link "Ver cases" [ref=e31] [cursor=pointer]:
+                - /url: "#trabalhos"
+          - generic "Cases de produto da Riaheru" [ref=e32]:
+            - generic [ref=e33]:
+              - link "Dashboard do Marqlet com indicadores jurídicos" [ref=e34] [cursor=pointer]:
+                - /url: https://marqlet.com
+                - img "Dashboard do Marqlet com indicadores jurídicos" [ref=e35]
+              - generic [ref=e36]:
+                - link "Home do site NIMET com hero de engenharia industrial" [ref=e37] [cursor=pointer]:
+                  - /url: https://nimet.com.br
+                  - img "Home do site NIMET com hero de engenharia industrial" [ref=e38]
+                - generic [ref=e39]:
+                  - text: Case confidencial
+                  - heading "Plataforma operacional industrial" [level=2] [ref=e40]
+                  - paragraph [ref=e41]: Sistema web interno para operação industrial, controle documental, filas de execução, planejamento de capacidade e indicadores gerenciais.
+                  - generic [ref=e42]:
+                    - generic [ref=e43]: FastAPI
+                    - generic [ref=e45]: PostgreSQL
+                    - generic [ref=e47]: Docker
+                    - generic [ref=e49]: Cloudflare Access
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - img [ref=e54]
+            - generic [ref=e58]: Produto, arquitetura e operação no mesmo plano
+          - generic [ref=e59]:
+            - img [ref=e60]
+            - generic [ref=e64]: Segurança, LGPD e governança desde a fundação
+          - generic [ref=e65]:
+            - img [ref=e66]
+            - generic [ref=e69]: Entrega sênior com documentação e continuidade
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]: O que entregamos
+            - heading "Construção técnica para empresas que precisam decidir com confiança." [level=2] [ref=e75]
+          - generic [ref=e76]:
+            - paragraph [ref=e77]: "A Riaheru atua onde produto, tecnologia e operação se encontram: sistemas próprios, plataformas B2B, automações críticas e presença digital com padrão profissional."
+            - button "Conversar sobre o seu contexto" [ref=e78]:
+              - text: Conversar sobre o seu contexto
+              - img [ref=e79]
+        - generic [ref=e81]:
+          - article [ref=e82]:
+            - img [ref=e84]
+            - heading "Venture Building" [level=3] [ref=e88]
+            - paragraph [ref=e89]: Entramos como parceiro técnico para transformar tese, mercado e operação em produto digital real.
+            - list [ref=e90]:
+              - listitem [ref=e91]:
+                - generic [ref=e93]: Discovery de produto e arquitetura inicial
+              - listitem [ref=e94]:
+                - generic [ref=e96]: Construção de MVPs e plataformas SaaS
+              - listitem [ref=e97]:
+                - generic [ref=e99]: Evolução contínua com visão de negócio
+          - article [ref=e100]:
+            - img [ref=e102]
+            - heading "Engenharia Dedicada" [level=3] [ref=e113]
+            - paragraph [ref=e114]: Squads enxutos para construir, modernizar ou estabilizar sistemas que sustentam receita e operação.
+            - list [ref=e115]:
+              - listitem [ref=e116]:
+                - generic [ref=e118]: Frontend, backend e integrações
+              - listitem [ref=e119]:
+                - generic [ref=e121]: APIs, bancos, filas e automações
+              - listitem [ref=e122]:
+                - generic [ref=e124]: Documentação técnica e transferência de conhecimento
+          - article [ref=e125]:
+            - img [ref=e127]
+            - heading "Arquitetura, IA e Operação" [level=3] [ref=e139]
+            - paragraph [ref=e140]: Diagnóstico e execução para ambientes que precisam de segurança, dados confiáveis e automação aplicada.
+            - list [ref=e141]:
+              - listitem [ref=e142]:
+                - generic [ref=e144]: Revisão de arquitetura e segurança
+              - listitem [ref=e145]:
+                - generic [ref=e147]: IA aplicada a fluxos internos e bases RAG
+              - listitem [ref=e148]:
+                - generic [ref=e150]: Deploy, observabilidade, backup e governança
+      - generic [ref=e152]:
+        - generic [ref=e153]:
+          - generic [ref=e154]: Cases e sistemas entregues
+          - heading "Prova real em produto, operação e presença digital." [level=2] [ref=e155]
+          - paragraph [ref=e156]: "A mesma régua técnica aparece em contextos diferentes: SaaS jurídico, site institucional de engenharia e plataforma interna para operação industrial."
+        - generic [ref=e157]:
+          - article [ref=e158]:
+            - link "Dashboard do Marqlet com indicadores jurídicos" [ref=e160] [cursor=pointer]:
+              - /url: https://marqlet.com
+              - img "Dashboard do Marqlet com indicadores jurídicos" [ref=e163]
+            - generic [ref=e164]:
+              - generic [ref=e165]: LegalTech SaaS | Venture Build
+              - generic [ref=e166]:
+                - img "Marqlet logo"
+              - paragraph [ref=e167]: Produto próprio para escritórios de advocacia, com dashboard operacional, modelo multi-tenant e base preparada para automações de IA.
+              - generic [ref=e168]:
+                - generic [ref=e169]:
+                  - text: Desafio
+                  - paragraph [ref=e170]: Transformar rotinas jurídicas, dados de clientes e acompanhamento processual em uma experiência única, segura e escalável.
+                - generic [ref=e171]:
+                  - text: Entrega
+                  - paragraph [ref=e172]: Arquitetura full TypeScript, interface desktop-first, API tipada, PostgreSQL e fundações de segurança para uso multi-tenant.
+                - generic [ref=e173]:
+                  - text: Resultado
+                  - paragraph [ref=e174]: Um SaaS jurídico pronto para escalar produto, operação e evolução comercial sem depender de planilhas paralelas.
+              - generic [ref=e175]:
+                - generic [ref=e176]: React
+                - generic [ref=e177]: TypeScript
+                - generic [ref=e178]: tRPC
+                - generic [ref=e179]: PostgreSQL
+                - generic [ref=e180]: Multi-tenant
+                - generic [ref=e181]: IA aplicada
+              - link "Abrir projeto" [ref=e182] [cursor=pointer]:
+                - /url: https://marqlet.com
+                - text: Abrir projeto
+                - img [ref=e183]
+          - article [ref=e186]:
+            - link "Home do site NIMET com hero de engenharia industrial" [ref=e188] [cursor=pointer]:
+              - /url: https://nimet.com.br
+              - img "Home do site NIMET com hero de engenharia industrial" [ref=e191]
+            - generic [ref=e192]:
+              - generic [ref=e193]: Site institucional | Engenharia de campo
+              - heading "NIMET" [level=3] [ref=e194]
+              - paragraph [ref=e195]: Presença digital premium para empresa técnica, com narrativa comercial clara, SEO local e fluxo direto para solicitação de orçamento.
+              - generic [ref=e196]:
+                - generic [ref=e197]:
+                  - text: Desafio
+                  - paragraph [ref=e198]: Reposicionar uma operação de engenharia elétrica e manutenção como marca confiável para indústrias, empresas, condomínios e residências.
+                - generic [ref=e199]:
+                  - text: Entrega
+                  - paragraph [ref=e200]: Next.js estático, design responsivo, copy técnica, seções de serviços, processo, provas de confiança e chamada direta para WhatsApp.
+                - generic [ref=e201]:
+                  - text: Resultado
+                  - paragraph [ref=e202]: Um site institucional mais robusto, preparado para aquisição local, apresentação comercial e manutenção simples de conteúdo.
+              - generic [ref=e203]:
+                - generic [ref=e204]: Next.js
+                - generic [ref=e205]: SEO local
+                - generic [ref=e206]: Landing page
+                - generic [ref=e207]: WhatsApp
+                - generic [ref=e208]: Institucional
+                - generic [ref=e209]: Performance
+              - link "Abrir projeto" [ref=e210] [cursor=pointer]:
+                - /url: https://nimet.com.br
+                - text: Abrir projeto
+                - img [ref=e211]
+          - article [ref=e214]:
+            - generic [ref=e216]:
+              - generic [ref=e217]:
+                - img [ref=e219]
+                - generic [ref=e223]:
+                  - text: Ambiente protegido
+                  - heading "Case confidencial" [level=3] [ref=e224]
+              - generic [ref=e225]:
+                - generic [ref=e228]: Controle de permissões por área
+                - generic [ref=e231]: Documentos técnicos com revisão e emissão
+                - generic [ref=e234]: Planejamento de capacidade, lead time e risco
+                - generic [ref=e237]: Publicação protegida e operação conteinerizada
+            - generic [ref=e238]:
+              - generic [ref=e239]: Confidencial
+              - heading "Plataforma operacional industrial" [level=3] [ref=e240]
+              - paragraph [ref=e241]: Sistema web interno para operação industrial, controle documental, filas de execução, planejamento de capacidade e indicadores gerenciais.
+              - generic [ref=e242]:
+                - generic [ref=e243]:
+                  - text: Desafio
+                  - paragraph [ref=e244]: Reduzir controles paralelos, planilhas manuais e decisões operacionais dispersas em rotinas sensíveis de produção e serviços.
+                - generic [ref=e245]:
+                  - text: Entrega
+                  - paragraph [ref=e246]: Backend Python/FastAPI, PostgreSQL, Docker, publicação protegida, permissões por área, auditoria, geração de documentos e rotinas de backup.
+                - generic [ref=e247]:
+                  - text: Resultado
+                  - paragraph [ref=e248]: Mais rastreabilidade, governança operacional e visibilidade de prazo, capacidade, documentos, pessoas, estoque e risco de entrega.
+              - generic [ref=e249]:
+                - generic [ref=e250]: FastAPI
+                - generic [ref=e251]: PostgreSQL
+                - generic [ref=e252]: Docker
+                - generic [ref=e253]: Cloudflare Access
+                - generic [ref=e254]: PDF/DOCX
+                - generic [ref=e255]: Governança
+      - generic [ref=e257]:
+        - generic [ref=e258]:
+          - generic [ref=e259]: Como trabalhamos
+          - heading "Engenharia que organiza a decisão antes de acelerar a entrega." [level=2] [ref=e260]
+          - paragraph [ref=e261]: "A qualidade do software começa antes do código: clareza de escopo, arquitetura proporcional ao risco e operação planejada desde o primeiro ciclo."
+        - generic [ref=e262]:
+          - article [ref=e263]:
+            - generic [ref=e264]:
+              - img [ref=e266]
+              - generic [ref=e269]: "01"
+            - heading "Diagnóstico" [level=3] [ref=e270]
+            - paragraph [ref=e271]: Mapeamos objetivos, riscos, usuários, sistemas existentes e restrições de operação antes de propor tecnologia.
+          - article [ref=e272]:
+            - generic [ref=e273]:
+              - img [ref=e275]
+              - generic [ref=e280]: "02"
+            - heading "Arquitetura" [level=3] [ref=e281]
+            - paragraph [ref=e282]: Definimos fronteiras, dados, integrações, segurança, stack e estratégia de evolução com visão de longo prazo.
+          - article [ref=e283]:
+            - generic [ref=e284]:
+              - img [ref=e286]
+              - generic [ref=e290]: "03"
+            - heading "Construção" [level=3] [ref=e291]
+            - paragraph [ref=e292]: Implementamos em ciclos curtos, com base tipada, revisão técnica, documentação e validação contínua.
+          - article [ref=e293]:
+            - generic [ref=e294]:
+              - img [ref=e296]
+              - generic [ref=e298]: "04"
+            - heading "Operação" [level=3] [ref=e299]
+            - paragraph [ref=e300]: Preparamos deploy, monitoramento, backup, rotinas administrativas e handoff para reduzir dependência informal.
+          - article [ref=e301]:
+            - generic [ref=e302]:
+              - img [ref=e304]
+              - generic [ref=e309]: "05"
+            - heading "Evolução" [level=3] [ref=e310]
+            - paragraph [ref=e311]: Priorizamos melhorias com base em uso real, impacto de negócio, segurança e custo de manutenção.
+        - generic [ref=e312]:
+          - generic [ref=e313]:
+            - generic [ref=e314]: Confiança operacional
+            - heading "O site vende. O sistema precisa continuar funcionando." [level=2] [ref=e315]
+          - generic [ref=e316]:
+            - article [ref=e317]:
+              - img [ref=e318]
+              - heading "Segurança e LGPD" [level=3] [ref=e321]
+              - paragraph [ref=e322]: Permissões, consentimento, segregação de acesso e cuidado com dados desde o desenho do produto.
+            - article [ref=e323]:
+              - img [ref=e324]
+              - heading "Dados confiáveis" [level=3] [ref=e328]
+              - paragraph [ref=e329]: Modelagem, persistência, backup e rastreabilidade para decisões operacionais menos frágeis.
+            - article [ref=e330]:
+              - img [ref=e331]
+              - heading "Documentação útil" [level=3] [ref=e335]
+              - paragraph [ref=e336]: Registro técnico, fluxos, regras de negócio e handoff para que o sistema sobreviva à primeira entrega.
+            - article [ref=e337]:
+              - img [ref=e338]
+              - heading "Continuidade" [level=3] [ref=e345]
+              - paragraph [ref=e346]: Suporte, governança de mudanças e evolução planejada para ambientes que não podem parar sem aviso.
+      - generic [ref=e350]:
+        - generic [ref=e351]:
+          - generic [ref=e352]: Quando chamar a Riaheru
+          - heading "Se a operação já depende do software, ele precisa ser tratado como ativo estratégico." [level=2] [ref=e353]
+          - paragraph [ref=e354]: "A conversa inicial serve para entender risco, urgência, maturidade técnica e o melhor formato de parceria: produto, squad, arquitetura ou sustentação evolutiva."
+          - generic [ref=e355]:
+            - button "Abrir diagnóstico" [ref=e356] [cursor=pointer]:
+              - text: Abrir diagnóstico
+              - img [ref=e357]
+            - link "LinkedIn" [ref=e359] [cursor=pointer]:
+              - /url: https://linkedin.com/company/riaheru
+              - text: LinkedIn
+              - img [ref=e360]
+        - generic [ref=e363]:
+          - generic [ref=e364]:
+            - img [ref=e365]
+            - heading "Sinais de prioridade" [level=3] [ref=e367]
+          - generic [ref=e368]:
+            - paragraph [ref=e369]: Seu produto depende de planilhas, retrabalho ou decisões manuais demais.
+            - paragraph [ref=e370]: A stack atual cresceu sem governança e agora limita velocidade, segurança ou clareza.
+            - paragraph [ref=e371]: A empresa precisa lançar, modernizar ou escalar um sistema sem montar uma área técnica inteira do zero.
+      - generic [ref=e374]:
+        - generic [ref=e375]: Próximo passo
+        - heading "Traga o problema. A gente organiza o caminho técnico." [level=2] [ref=e376]
+        - paragraph [ref=e377]: Em uma primeira conversa, entendemos o estágio do negócio, os riscos do sistema e qual formato de parceria faz sentido para avançar com segurança.
+        - button "Iniciar conversa" [ref=e379] [cursor=pointer]:
+          - text: Iniciar conversa
+          - img [ref=e380]
+        - generic [ref=e382]:
+          - generic [ref=e383]:
+            - img [ref=e384]
+            - text: Resposta objetiva
+          - generic [ref=e387]:
+            - img [ref=e388]
+            - text: Contexto protegido
+          - generic [ref=e391]:
+            - img [ref=e392]
+            - text: Próximo passo claro
+    - contentinfo [ref=e395]

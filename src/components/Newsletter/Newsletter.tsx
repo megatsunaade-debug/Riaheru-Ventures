@@ -1,9 +1,15 @@
-import { ArrowUpRight, MessageCircle, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, MessageCircle } from 'lucide-react';
 
 import { m } from '@/lib/motion';
 import { CONTACT_INFO } from '../../constants';
 import { useModal } from '../../hooks/useModal';
 import { Button } from '../ui/Button';
+
+const signals = [
+    'Seu produto depende de planilhas, retrabalho ou decisões manuais demais.',
+    'A stack atual cresceu sem governança e agora limita velocidade, segurança ou clareza.',
+    'A empresa precisa lançar, modernizar ou escalar um sistema sem montar uma área técnica inteira do zero.',
+];
 
 export function Newsletter() {
     const { openContactModal } = useModal();
@@ -12,59 +18,60 @@ export function Newsletter() {
         <section className="bg-[var(--off-white)] py-20 md:py-24">
             <div className="container">
                 <m.div
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 0.55 }}
-                    className="overflow-hidden rounded-[32px] border border-[color:rgba(12,18,34,0.08)] bg-[linear-gradient(135deg,#0c1222_0%,#102541_55%,#163154_100%)] p-8 shadow-[var(--shadow-lg)] md:p-12"
+                    transition={{ duration: 0.55, ease: 'easeOut' }}
+                    className="overflow-hidden rounded-lg border border-[color:rgba(12,18,34,0.08)] bg-[#0c1222] shadow-[var(--shadow-lg)]"
                 >
-                    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(280px,0.7fr)] lg:items-center">
-                        <div>
-                            <span className="on-dark-kicker inline-flex items-center gap-2 rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em]">
-                                <Sparkles size={14} />
-                                Radar Riaheru
+                    <div className="grid gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
+                        <div className="p-8 md:p-12">
+                            <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
+                                Quando chamar a Riaheru
                             </span>
-                            <h2 className="on-dark-heading mt-6 max-w-2xl text-4xl font-bold leading-[1.05] md:text-5xl">
-                                Atualizações reais,
-                                <span className="text-[var(--accent-light)]"> sem captura fake.</span>
+                            <h2 className="on-dark-heading mt-6 max-w-2xl text-4xl font-bold leading-tight tracking-normal md:text-5xl">
+                                Se a operação já depende do software, ele precisa ser tratado como ativo estratégico.
                             </h2>
                             <p className="on-dark-copy mt-5 max-w-2xl text-lg leading-relaxed">
-                                Enquanto a newsletter ainda não está integrada, concentramos novidades em conversas diretas e no LinkedIn. Sem formulário ilusório, sem promessa vazia.
+                                A conversa inicial serve para entender risco, urgência, maturidade técnica e o melhor formato de parceria: produto, squad, arquitetura ou sustentação evolutiva.
                             </p>
+
                             <div className="mt-8 flex flex-wrap gap-4">
+                                <Button
+                                    variant="primary"
+                                    onClick={openContactModal}
+                                    className="min-h-14 px-7 py-4 text-base"
+                                >
+                                    Abrir diagnóstico
+                                    <ArrowRight size={18} />
+                                </Button>
                                 <a
                                     href={CONTACT_INFO.LINKEDIN}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="btn"
+                                    className="btn btn-outline on-dark-outline-button min-h-14 px-7 py-4 text-base"
                                 >
-                                    Acompanhar no LinkedIn
+                                    LinkedIn
                                     <ArrowUpRight size={18} />
                                 </a>
-                                <Button
-                                    variant="outline"
-                                    onClick={openContactModal}
-                                    className="on-dark-outline-button"
-                                >
-                                    Abrir conversa
-                                    <MessageCircle size={18} />
-                                </Button>
                             </div>
                         </div>
 
-                        <div className="grid gap-4">
-                            {[
-                                'Atualizações de cases e bastidores de produto.',
-                                'Pontos de vista sobre arquitetura, IA aplicada e integrações.',
-                                'Contato direto quando fizer mais sentido conversar do que capturar lead.',
-                            ].map((item) => (
-                                <div
-                                    key={item}
-                                    className="on-dark-panel rounded-3xl px-5 py-5 text-sm leading-relaxed backdrop-blur-sm"
-                                >
-                                    {item}
-                                </div>
-                            ))}
+                        <div className="border-t border-white/10 bg-white/[0.03] p-8 md:p-12 lg:border-l lg:border-t-0">
+                            <div className="flex items-center gap-3 text-white">
+                                <MessageCircle size={22} className="text-[var(--accent-light)]" strokeWidth={1.8} />
+                                <h3 className="on-dark-heading text-xl font-semibold tracking-normal">
+                                    Sinais de prioridade
+                                </h3>
+                            </div>
+
+                            <div className="mt-7 divide-y divide-white/10 border-y border-white/10">
+                                {signals.map((signal) => (
+                                    <p key={signal} className="on-dark-copy py-5 text-sm leading-relaxed">
+                                        {signal}
+                                    </p>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </m.div>

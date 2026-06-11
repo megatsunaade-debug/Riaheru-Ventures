@@ -21,7 +21,7 @@ export function SectionTitle({
 
     return (
         <m.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
@@ -38,7 +38,7 @@ export function SectionTitle({
                     {tag}
                 </span>
             )}
-            <h2 className={`max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight ${dark ? 'text-white' : 'text-[var(--text-dark)]'
+            <h2 className={`max-w-3xl text-3xl md:text-4xl lg:text-5xl font-bold tracking-normal ${dark ? 'text-white' : 'text-[var(--text-dark)]'
                 }`}>
                 {title}
             </h2>
