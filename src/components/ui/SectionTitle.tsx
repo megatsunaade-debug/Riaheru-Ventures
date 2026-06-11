@@ -7,6 +7,7 @@ interface SectionTitleProps {
     title: ReactNode;
     description?: string;
     align?: 'left' | 'center';
+    dark?: boolean;
 }
 
 export function SectionTitle({
@@ -14,8 +15,11 @@ export function SectionTitle({
     title,
     description,
     align = 'left',
+    dark = false,
 }: SectionTitleProps) {
     const alignClass = align === 'center' ? 'items-center text-center' : 'items-start text-left';
+    const titleClass = dark ? 'text-white' : 'text-[var(--text)]';
+    const descriptionClass = dark ? 'text-white/60' : 'text-[var(--text-muted)]';
 
     return (
         <m.div
@@ -30,11 +34,11 @@ export function SectionTitle({
                     {tag}
                 </span>
             )}
-            <h2 className="max-w-3xl text-pretty text-3xl font-semibold tracking-tight text-[var(--text)] md:text-4xl lg:text-5xl">
+            <h2 className={`max-w-3xl text-pretty text-3xl font-semibold tracking-tight md:text-4xl lg:text-5xl ${titleClass}`}>
                 {title}
             </h2>
             {description && (
-                <p className="max-w-3xl text-lg leading-relaxed text-[var(--text-muted)] md:text-xl">
+                <p className={`max-w-3xl text-lg leading-relaxed md:text-xl ${descriptionClass}`}>
                     {description}
                 </p>
             )}
