@@ -4,6 +4,7 @@ import { ArrowRight, Building2, CheckCircle2, Code2, FileCheck2, LockKeyhole, Ne
 import { m } from '@/lib/motion';
 import { Button } from '../components/ui/Button';
 import { SectionTitle } from '../components/ui/SectionTitle';
+import { useCanonical } from '../hooks/useCanonical';
 import { useModal } from '../hooks/useModal';
 
 const leadership = [
@@ -91,6 +92,7 @@ const expertise = [
 
 export function About() {
     const { openContactModal } = useModal();
+    useCanonical('https://riaheru.com/sobre');
 
     return (
         <div className="bg-[var(--off-white)]">
@@ -130,11 +132,11 @@ export function About() {
                         </p>
 
                         <div className="mt-9 flex flex-wrap gap-4">
-                            <Button onClick={openContactModal} size="lg">
+                            <Button onClick={() => openContactModal({ source: 'about_hero', page: '/sobre' })} size="lg">
                                 Iniciar projeto
                                 <ArrowRight size={19} />
                             </Button>
-                            <a href="/#trabalhos" className="btn btn-outline on-dark-outline-button min-h-14 px-8 py-4 text-base">
+                            <a href="/cases" className="btn btn-outline on-dark-outline-button min-h-14 px-8 py-4 text-base">
                                 Ver cases
                             </a>
                         </div>
@@ -298,7 +300,7 @@ export function About() {
                         Conte o momento do produto, a dor operacional ou o sistema que precisa evoluir. A resposta será objetiva e orientada a próximos passos.
                     </p>
                     <div className="mt-8">
-                        <Button onClick={openContactModal} size="lg">
+                        <Button onClick={() => openContactModal({ source: 'about_bottom', page: '/sobre' })} size="lg">
                             Iniciar projeto
                             <ArrowRight size={18} />
                         </Button>

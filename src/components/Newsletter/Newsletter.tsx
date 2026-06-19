@@ -1,4 +1,5 @@
 import { ArrowRight, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 import { m } from '@/lib/motion';
 import { CONTACT_INFO } from '../../constants';
@@ -13,6 +14,7 @@ const signals = [
 
 export function Newsletter() {
     const { openContactModal } = useModal();
+    const location = useLocation();
 
     return (
         <section className="bg-[var(--off-white)] py-20 md:py-24">
@@ -39,7 +41,7 @@ export function Newsletter() {
                             <div className="mt-8 flex flex-wrap gap-4">
                                 <Button
                                     variant="primary"
-                                    onClick={openContactModal}
+                                    onClick={() => openContactModal({ source: 'newsletter_legacy', page: location.pathname })}
                                     className="min-h-14 px-7 py-4 text-base"
                                 >
                                     Abrir diagnóstico

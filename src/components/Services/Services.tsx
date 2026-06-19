@@ -1,46 +1,9 @@
-import { ArrowRight, BrainCircuit, ServerCog, Target } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
+import { SERVICE_OFFERINGS } from '@/data/serviceOfferings';
 import { m } from '@/lib/motion';
 import { useModal } from '../../hooks/useModal';
-
-const services = [
-    {
-        id: 'venture',
-        icon: Target,
-        title: 'Venture Building',
-        summary:
-            'Entramos como parceiro técnico para transformar tese, mercado e operação em produto digital real.',
-        details: [
-            'Discovery de produto e arquitetura inicial',
-            'Construção de MVPs e plataformas SaaS',
-            'Evolução contínua com visão de negócio',
-        ],
-    },
-    {
-        id: 'engineering',
-        icon: ServerCog,
-        title: 'Engenharia Dedicada',
-        summary:
-            'Squads enxutos para construir, modernizar ou estabilizar sistemas que sustentam receita e operação.',
-        details: [
-            'Frontend, backend e integrações',
-            'APIs, bancos, filas e automações',
-            'Documentação técnica e transferência de conhecimento',
-        ],
-    },
-    {
-        id: 'architecture',
-        icon: BrainCircuit,
-        title: 'Arquitetura, IA e Operação',
-        summary:
-            'Diagnóstico e execução para ambientes que precisam de segurança, dados confiáveis e automação aplicada.',
-        details: [
-            'Revisão de arquitetura e segurança',
-            'IA aplicada a fluxos internos e bases RAG',
-            'Deploy, observabilidade, backup e governança',
-        ],
-    },
-];
 
 export function Services() {
     const { openContactModal } = useModal();
@@ -53,31 +16,21 @@ export function Services() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className="grid gap-10 border-b border-[var(--border-subtle)] pb-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
+                    className="grid gap-10 border-b border-[var(--border-subtle)] pb-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-end"
                 >
                     <div>
-                        <span className="label label-accent block">O que entregamos</span>
+                        <span className="label label-accent block">Rotas de atuação</span>
                         <h2 className="mt-5 max-w-3xl text-4xl font-bold tracking-normal md:text-6xl">
-                            Construção técnica para empresas que precisam decidir com confiança.
+                            Um estúdio para criar, acelerar e governar tecnologia B2B.
                         </h2>
                     </div>
-                    <div className="max-w-2xl lg:justify-self-end">
-                        <p className="text-lg leading-relaxed text-[var(--text-secondary)] md:text-xl">
-                            A Riaheru atua onde produto, tecnologia e operação se encontram: sistemas próprios, plataformas B2B, automações críticas e presença digital com padrão profissional.
-                        </p>
-                        <button
-                            type="button"
-                            onClick={openContactModal}
-                            className="link-arrow mt-6"
-                        >
-                            Conversar sobre o seu contexto
-                            <ArrowRight size={18} />
-                        </button>
-                    </div>
+                    <p className="max-w-2xl text-lg leading-relaxed text-[var(--text-secondary)] md:text-xl lg:justify-self-end">
+                        A Riaheru combina visão de produto, engenharia sênior e responsabilidade operacional. Cada rota tem um ponto de entrada claro, mas todas compartilham a mesma base técnica.
+                    </p>
                 </m.div>
 
                 <div className="grid gap-0 lg:grid-cols-3">
-                    {services.map((service, index) => (
+                    {SERVICE_OFFERINGS.map((service, index) => (
                         <m.article
                             key={service.id}
                             initial={false}
@@ -86,25 +39,42 @@ export function Services() {
                             transition={{ duration: 0.5, delay: index * 0.1, ease: 'easeOut' }}
                             className="group border-b border-[var(--border-subtle)] py-10 lg:border-b-0 lg:border-r lg:px-8 lg:last:border-r-0"
                         >
-                            <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-lg border border-[var(--border-subtle)] bg-[var(--off-white)] text-[var(--accent-primary)] transition-colors group-hover:border-[var(--accent-primary)]/24 group-hover:bg-[var(--accent-primary)] group-hover:text-white">
-                                <service.icon size={24} strokeWidth={1.7} />
-                            </div>
-
-                            <h3 className="text-2xl font-semibold tracking-normal text-[var(--text-dark)]">
+                            <span className="font-mono text-sm text-[var(--gray-300)]">
+                                {String(index + 1).padStart(2, '0')}
+                            </span>
+                            <h3 className="mt-6 text-3xl font-semibold tracking-normal text-[var(--text-dark)]">
                                 {service.title}
                             </h3>
                             <p className="mt-4 text-base leading-relaxed text-[var(--text-secondary)]">
                                 {service.summary}
                             </p>
 
-                            <ul className="mt-8 space-y-3">
-                                {service.details.map((detail) => (
-                                    <li key={detail} className="flex gap-3 text-sm leading-relaxed text-[var(--gray-600)]">
-                                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--highlight)]" />
-                                        <span>{detail}</span>
-                                    </li>
+                            <div className="mt-8 divide-y divide-[var(--border-subtle)] border-y border-[var(--border-subtle)]">
+                                {service.outcomes.map((outcome) => (
+                                    <p key={outcome} className="py-3 text-sm leading-relaxed text-[var(--gray-600)]">
+                                        {outcome}
+                                    </p>
                                 ))}
-                            </ul>
+                            </div>
+
+                            <div className="mt-8 flex flex-wrap gap-4">
+                                <Link to={service.route} className="link-arrow">
+                                    Ver rota
+                                    <ArrowRight size={18} />
+                                </Link>
+                                <button
+                                    type="button"
+                                    onClick={() => openContactModal({
+                                        source: `service_card_${service.id}`,
+                                        serviceId: service.id,
+                                        serviceLabel: service.title,
+                                        page: '/',
+                                    })}
+                                    className="text-sm font-semibold text-[var(--gray-500)] transition-colors hover:text-[var(--accent-primary)]"
+                                >
+                                    Conversar
+                                </button>
+                            </div>
                         </m.article>
                     ))}
                 </div>

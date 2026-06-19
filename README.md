@@ -12,11 +12,16 @@ Site institucional da Riaheru Ventures construído com `React 19`, `TypeScript`,
 
 ## Fluxos atuais
 
-- Home, Sobre, Carreiras e Termos compartilham a mesma linguagem visual
+- Home, Sobre, Cases, páginas de serviço, Carreiras e Termos compartilham a mesma linguagem visual
+- Páginas de serviço:
+  - `/servicos/venture-building`
+  - `/servicos/engenharia-dedicada`
+  - `/servicos/arquitetura-ia-operacao`
 - CTA primário unificado em `Iniciar projeto`
 - Modal de contato suporta:
   - envio real via `VITE_CONTACT_ENDPOINT`, se configurado
   - fallback honesto para `mailto`, sem simular backend
+  - contexto de origem, página e serviço de interesse quando o CTA fornece esses dados
   - atalho direto para WhatsApp
 - Consentimento de cookies com banner, rejeição de não essenciais e modal acessível de preferências
 - Newsletter substituída por CTA institucional até existir integração real
@@ -45,6 +50,8 @@ Sem `VITE_CONTACT_ENDPOINT`, o formulário abre o cliente de email do usuário c
 
 - `src/App.tsx`: shell do app e rotas
 - `src/components/`: seções e UI compartilhada
+- `src/data/serviceOfferings.ts`: rotas de serviço e copy estruturada
+- `src/data/cases.ts`: cases e imagens de prova
 - `src/context/` e `src/hooks/`: contexto/modal/cookies
 - `src/providers/`: providers de aplicação
 - `e2e/`: testes Playwright

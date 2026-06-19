@@ -5,12 +5,15 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import { Header } from '@/components';
 import { ModalProvider } from '@/context/ModalContext';
 import { INFO_PAGES } from '@/data/infoPages';
+import { SERVICE_OFFERINGS } from '@/data/serviceOfferings';
 import { useModal } from '@/hooks/useModal';
 import { Home } from '@/pages/Home';
 import { CookieConsentProvider } from '@/providers/CookieConsentProvider';
 
 const LazyAbout = lazy(() => import('@/pages/About').then((module) => ({ default: module.About })));
+const LazyCasesPage = lazy(() => import('@/pages/CasesPage').then((module) => ({ default: module.CasesPage })));
 const LazyInfoPage = lazy(() => import('@/pages/InfoPage').then((module) => ({ default: module.InfoPage })));
+const LazyServicePage = lazy(() => import('@/pages/ServicePage').then((module) => ({ default: module.ServicePage })));
 const LazyContactModal = lazy(() => import('@/components/ContactModal/ContactModal').then((module) => ({ default: module.ContactModal })));
 const LazyFooter = lazy(() => import('@/components/Footer/Footer').then((module) => ({ default: module.Footer })));
 const LazyCookieConsent = lazy(() => import('@/components/CookieConsent/CookieConsent').then((module) => ({ default: module.CookieConsent })));
@@ -130,6 +133,25 @@ function App() {
                         <main id="main-content" className="relative z-10">
                             <Routes>
                                 <Route path="/" element={<Home />} />
+                                <Route
+                                    path="/cases"
+                                    element={(
+                                        <Suspense fallback={<RouteFallback />}>
+                                            <LazyCasesPage />
+                                        </Suspense>
+                                    )}
+                                />
+                                {SERVICE_OFFERINGS.map((service) => (
+                                    <Route
+                                        key={service.id}
+                                        path={service.route}
+                                        element={(
+                                            <Suspense fallback={<RouteFallback />}>
+                                                <LazyServicePage service={service} />
+                                            </Suspense>
+                                        )}
+                                    />
+                                ))}
                                 <Route
                                     path="/sobre"
                                     element={(

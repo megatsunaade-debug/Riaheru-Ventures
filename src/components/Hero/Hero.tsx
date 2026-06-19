@@ -1,35 +1,36 @@
-import { ArrowRight, CheckCircle2, LockKeyhole, Workflow } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Workflow } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import { CASE_STUDIES } from '@/data/cases';
+import { SERVICE_OFFERINGS } from '@/data/serviceOfferings';
 import { m } from '@/lib/motion';
 import { useModal } from '../../hooks/useModal';
 
-const heroSignals = [
-    { icon: Workflow, text: 'Produto, arquitetura e operação no mesmo plano' },
-    { icon: LockKeyhole, text: 'Segurança, LGPD e governança desde a fundação' },
-    { icon: CheckCircle2, text: 'Entrega sênior com documentação e continuidade' },
-];
-
 const marqletCase = CASE_STUDIES.find((caseStudy) => caseStudy.id === 'marqlet');
 const nimetCase = CASE_STUDIES.find((caseStudy) => caseStudy.id === 'nimet');
-const industrialCase = CASE_STUDIES.find((caseStudy) => caseStudy.id === 'industrial-platform');
+
+const proofSignals = [
+    'Venture build com produto real',
+    'Arquitetura para operação crítica',
+    'Governança, LGPD e handoff útil',
+];
 
 export function Hero() {
     const { openContactModal } = useModal();
 
     return (
-        <section className="relative isolate flex min-h-[calc(100svh-76px)] flex-col overflow-hidden bg-[#070a12] text-white">
+        <section className="relative isolate flex min-h-[100svh] overflow-hidden bg-[#070a12] text-white">
             <div
-                className="pointer-events-none absolute inset-0 opacity-[0.07]"
+                className="pointer-events-none absolute inset-0 opacity-[0.075]"
                 style={{
                     backgroundImage: `linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)`,
                     backgroundSize: '44px 44px',
                 }}
             />
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,rgba(7,10,18,0.96)_0%,rgba(7,10,18,0.88)_44%,rgba(0,82,204,0.18)_100%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_76%_18%,rgba(76,154,255,0.28),transparent_28%),radial-gradient(circle_at_12%_80%,rgba(255,107,53,0.12),transparent_24%),linear-gradient(120deg,rgba(7,10,18,0.98)_0%,rgba(7,10,18,0.88)_55%,rgba(0,38,86,0.78)_100%)]" />
 
-            <div className="container relative z-10 grid flex-1 gap-12 py-16 md:py-20 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] lg:items-center">
+            <div className="container relative z-10 grid w-full gap-12 pb-12 pt-32 md:pb-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(460px,1.1fr)] lg:items-center">
                 <m.div
                     initial={{ opacity: 0, y: 22 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -37,33 +38,42 @@ export function Hero() {
                     className="max-w-3xl"
                 >
                     <span className="on-dark-kicker inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
-                        Elite Engineering & Venture Building
+                        Venture studio técnico para B2B
                     </span>
 
-                    <h1 className="on-dark-heading mt-7 text-[clamp(4rem,12vw,8.25rem)] font-black leading-[0.86] tracking-normal">
+                    <h1 className="on-dark-heading mt-7 text-[clamp(4rem,11vw,8rem)] font-black leading-[0.86] tracking-normal">
                         Riaheru
                     </h1>
 
                     <p className="on-dark-heading mt-7 max-w-2xl text-3xl font-semibold leading-tight tracking-normal md:text-5xl">
-                        Engenharia B2B para produtos digitais, sistemas críticos e operações que precisam escalar.
+                        Construímos produtos, sistemas e operações digitais que viram ativos de negócio.
                     </p>
 
                     <p className="on-dark-copy mt-6 max-w-2xl text-lg leading-relaxed md:text-xl">
-                        Unimos estratégia de produto, arquitetura robusta e execução sênior para construir ativos digitais com segurança, clareza operacional e visão de negócio.
+                        Produto, engenharia e governança no mesmo ciclo para empresas que precisam lançar, modernizar ou escalar tecnologia sem improviso.
                     </p>
 
                     <div className="mt-9 flex flex-wrap gap-4">
                         <button
                             type="button"
-                            onClick={openContactModal}
+                            onClick={() => openContactModal({ source: 'home_hero_primary', page: '/' })}
                             className="btn min-h-14 px-7 py-4 text-base shadow-lg shadow-[var(--accent)]/20"
                         >
                             Iniciar conversa estratégica
                             <ArrowRight size={19} />
                         </button>
-                        <a href="#trabalhos" className="btn btn-outline on-dark-outline-button min-h-14 px-7 py-4 text-base">
+                        <Link to="/cases" className="btn btn-outline on-dark-outline-button min-h-14 px-7 py-4 text-base">
                             Ver cases
-                        </a>
+                        </Link>
+                    </div>
+
+                    <div className="mt-10 grid gap-3 text-sm text-white/76 sm:grid-cols-3">
+                        {proofSignals.map((signal) => (
+                            <div key={signal} className="flex items-start gap-2">
+                                <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[var(--accent-light)]" strokeWidth={1.8} />
+                                <span>{signal}</span>
+                            </div>
+                        ))}
                     </div>
                 </m.div>
 
@@ -72,26 +82,36 @@ export function Hero() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.7, delay: 0.12, ease: 'easeOut' }}
                     className="relative"
-                    aria-label="Cases de produto da Riaheru"
+                    aria-label="Produtos e sistemas construídos pela Riaheru"
                 >
-                    <div className="relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] p-3 shadow-[0_34px_90px_rgba(0,0,0,0.35)] backdrop-blur">
+                    <div className="relative rounded-lg border border-white/10 bg-white/[0.045] p-3 shadow-[0_34px_90px_rgba(0,0,0,0.36)] backdrop-blur">
+                        <div className="flex items-center justify-between border-b border-white/10 px-2 pb-3 text-xs text-white/50">
+                            <span className="inline-flex items-center gap-2">
+                                <Workflow size={15} className="text-[var(--accent-light)]" />
+                                Product lab
+                            </span>
+                            <span>Build / Operate / Scale</span>
+                        </div>
+
                         {marqletCase?.image && (
                             <a
                                 href={marqletCase.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group block overflow-hidden rounded-lg border border-white/10 bg-white"
+                                className="group mt-3 block overflow-hidden rounded-lg border border-white/10 bg-white"
                             >
                                 <img
                                     src={marqletCase.image}
                                     alt={marqletCase.imageAlt}
+                                    width={1280}
+                                    height={720}
                                     className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                                     fetchPriority="high"
                                 />
                             </a>
                         )}
 
-                        <div className="mt-3 grid gap-3 md:grid-cols-[0.9fr_1.1fr]">
+                        <div className="mt-3 grid gap-3 md:grid-cols-[0.92fr_1.08fr]">
                             {nimetCase?.image && (
                                 <a
                                     href={nimetCase.link}
@@ -99,31 +119,34 @@ export function Hero() {
                                     rel="noopener noreferrer"
                                     className="group overflow-hidden rounded-lg border border-white/10 bg-[#0d111b]"
                                 >
-                                    <img
-                                        src={nimetCase.image}
-                                        alt={nimetCase.imageAlt}
-                                        className="h-full min-h-48 w-full object-cover object-left-top opacity-90 transition-transform duration-700 group-hover:scale-[1.03]"
-                                        loading="lazy"
-                                    />
+                                    <picture>
+                                        {nimetCase.imageAvif && <source srcSet={nimetCase.imageAvif} type="image/avif" />}
+                                        <img
+                                            src={nimetCase.image}
+                                            alt={nimetCase.imageAlt}
+                                            width={1280}
+                                            height={800}
+                                            className="h-full min-h-48 w-full object-cover object-left-top opacity-90 transition-transform duration-700 group-hover:scale-[1.03]"
+                                            loading="lazy"
+                                        />
+                                    </picture>
                                 </a>
                             )}
 
                             <div className="rounded-lg border border-white/10 bg-[#0b1020] p-5">
                                 <span className="text-xs font-semibold uppercase tracking-normal text-[var(--accent-light)]">
-                                    Case confidencial
+                                    Rotas de atuação
                                 </span>
-                                <h2 className="on-dark-heading mt-4 text-2xl font-semibold tracking-normal">
-                                    {industrialCase?.title}
-                                </h2>
-                                <p className="on-dark-copy mt-3 text-sm leading-relaxed">
-                                    {industrialCase?.description}
-                                </p>
-                                <div className="mt-5 space-y-3">
-                                    {industrialCase?.tags.slice(0, 4).map((tag) => (
-                                        <div key={tag} className="flex items-center gap-2 text-sm text-white/72">
-                                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--highlight)]" />
-                                            {tag}
-                                        </div>
+                                <div className="mt-4 divide-y divide-white/10">
+                                    {SERVICE_OFFERINGS.map((service) => (
+                                        <Link
+                                            key={service.id}
+                                            to={service.route}
+                                            className="group flex items-center justify-between gap-4 py-3 text-sm text-white/76 hover:text-white"
+                                        >
+                                            <span>{service.shortTitle}</span>
+                                            <ArrowRight size={15} className="shrink-0 text-white/34 transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent-light)]" />
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
@@ -131,22 +154,6 @@ export function Hero() {
                     </div>
                 </m.div>
             </div>
-
-            <m.div
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.35, ease: 'easeOut' }}
-                className="relative z-10 border-t border-white/10 bg-white/[0.02]"
-            >
-                <div className="container grid gap-4 py-6 md:grid-cols-3">
-                    {heroSignals.map((signal) => (
-                        <div key={signal.text} className="flex items-center gap-3 text-sm text-white/76">
-                            <signal.icon size={18} className="shrink-0 text-[var(--accent-light)]" strokeWidth={1.8} />
-                            <span>{signal.text}</span>
-                        </div>
-                    ))}
-                </div>
-            </m.div>
         </section>
     );
 }

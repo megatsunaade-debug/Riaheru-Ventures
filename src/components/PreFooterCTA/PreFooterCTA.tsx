@@ -1,4 +1,5 @@
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 import { m } from '@/lib/motion';
 import { useModal } from '../../hooks/useModal';
@@ -8,6 +9,7 @@ const commitments = ['Resposta objetiva', 'Contexto protegido', 'Próximo passo 
 
 export function PreFooterCTA() {
     const { openContactModal } = useModal();
+    const location = useLocation();
 
     return (
         <section className="relative overflow-hidden bg-[#070a12] py-20 text-white md:py-28">
@@ -33,18 +35,18 @@ export function PreFooterCTA() {
                     </span>
 
                     <h2 className="on-dark-heading mt-6 text-4xl font-bold leading-tight tracking-normal md:text-6xl">
-                        Traga o problema. A gente organiza o caminho técnico.
+                        Traga a tese, o sistema ou a operação. A gente organiza o caminho técnico.
                     </h2>
 
                     <p className="on-dark-copy mx-auto mt-6 max-w-2xl text-lg leading-relaxed md:text-xl">
-                        Em uma primeira conversa, entendemos o estágio do negócio, os riscos do sistema e qual formato de parceria faz sentido para avançar com segurança.
+                        Em uma primeira conversa, entendemos estágio, risco e urgência para indicar se faz sentido venture build, squad dedicado ou arquitetura aplicada.
                     </p>
 
                     <div className="mt-9">
                         <Button
                             variant="primary"
                             size="lg"
-                            onClick={openContactModal}
+                            onClick={() => openContactModal({ source: 'final_cta', page: location.pathname })}
                             className="btn-shimmer text-base"
                         >
                             Iniciar conversa

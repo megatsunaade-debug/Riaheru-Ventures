@@ -1,5 +1,6 @@
 import { MessageCircle, Send, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { AnimatePresence, m } from '@/lib/motion';
 import { CONTACT_INFO } from '../../constants';
@@ -10,7 +11,8 @@ type SubmitState =
     | { tone: 'success' | 'error' | 'info'; message: string };
 
 export function ContactModal() {
-    const { isContactOpen, closeContactModal } = useModal();
+    const { isContactOpen, closeContactModal, contactIntent } = useModal();
+    const location = useLocation();
     const [isLoading, setIsLoading] = useState(false);
     const [privacyConsent, setPrivacyConsent] = useState(false);
     const [consentError, setConsentError] = useState(false);
@@ -95,12 +97,18 @@ export function ContactModal() {
         message: string,
     ) => {
         const subject = encodeURIComponent(`Novo projeto - ${name}`);
+        const contextLines = [
+            contactIntent?.serviceLabel ? `Serviço de interesse: ${contactIntent.serviceLabel}` : '',
+            contactIntent?.source ? `Origem do CTA: ${contactIntent.source}` : '',
+            `Página: ${contactIntent?.page ?? location.pathname}`,
+        ].filter(Boolean);
         const body = encodeURIComponent(
             [
                 `Nome: ${name}`,
                 `Email: ${email}`,
                 empresa ? `Empresa: ${empresa}` : '',
                 telefone ? `Telefone: ${telefone}` : '',
+                ...contextLines,
                 '',
                 'Contexto do projeto:',
                 message,
@@ -137,7 +145,18 @@ export function ContactModal() {
                         Accept: 'application/json',
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ name, email, empresa, telefone, message, privacyConsent: true }),
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        empresa,
+                        telefone,
+                        message,
+                        privacyConsent: true,
+                        context: {
+                            ...contactIntent,
+                            page: contactIntent?.page ?? location.pathname,
+                        },
+                    }),
                 });
 
                 if (!response.ok) {
@@ -208,6 +227,15 @@ export function ContactModal() {
                                             Compartilhe o cenário, o momento do produto e o que precisa avançar. Responderemos com objetividade.
                                         </p>
                                     </div>
+
+                                    {contactIntent?.serviceLabel && (
+                                        <div
+                                            data-testid="contact-context"
+                                            className="mb-6 rounded-2xl border border-[var(--accent-primary)]/12 bg-[var(--accent-primary)]/6 px-4 py-3 text-sm font-semibold text-[var(--text-dark)]"
+                                        >
+                                            Serviço de interesse: {contactIntent.serviceLabel}
+                                        </div>
+                                    )}
 
                                     {!hasDirectEndpoint && (
                                         <div className="mb-6 rounded-2xl border border-[var(--accent-primary)]/12 bg-[var(--accent-primary)]/6 px-4 py-4 text-sm leading-relaxed text-[var(--text-dark)]">

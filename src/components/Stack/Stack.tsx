@@ -5,23 +5,23 @@ import { m } from '@/lib/motion';
 const processSteps = [
     {
         icon: Search,
-        title: 'Diagnóstico',
-        text: 'Mapeamos objetivos, riscos, usuários, sistemas existentes e restrições de operação antes de propor tecnologia.',
+        title: 'Tese',
+        text: 'Organizamos oportunidade, risco, usuário, operação e critérios de sucesso antes de escolher stack ou escopo.',
     },
     {
         icon: Network,
         title: 'Arquitetura',
-        text: 'Definimos fronteiras, dados, integrações, segurança, stack e estratégia de evolução com visão de longo prazo.',
+        text: 'Definimos fronteiras, dados, integrações, segurança e caminho de evolução proporcional ao risco.',
     },
     {
         icon: Code2,
-        title: 'Construção',
-        text: 'Implementamos em ciclos curtos, com base tipada, revisão técnica, documentação e validação contínua.',
+        title: 'Build',
+        text: 'Construímos em ciclos curtos com base tipada, revisão técnica, demonstração e validação de uso.',
     },
     {
         icon: Activity,
         title: 'Operação',
-        text: 'Preparamos deploy, monitoramento, backup, rotinas administrativas e handoff para reduzir dependência informal.',
+        text: 'Preparamos deploy, observabilidade, backup, rotinas administrativas e handoff para continuidade.',
     },
     {
         icon: RefreshCw,
@@ -55,7 +55,7 @@ const trustPillars = [
 
 export function Stack() {
     return (
-        <section id="stack" className="bg-[#070a12] py-20 text-white md:py-28">
+        <section id="metodo" className="bg-[#070a12] py-20 text-white md:py-28">
             <div className="container">
                 <m.div
                     initial={false}
@@ -65,13 +65,13 @@ export function Stack() {
                     className="max-w-4xl"
                 >
                     <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
-                        Como trabalhamos
+                        Método de estúdio
                     </span>
                     <h2 className="on-dark-heading mt-6 text-4xl font-bold tracking-normal md:text-6xl">
-                        Engenharia que organiza a decisão antes de acelerar a entrega.
+                        Decisão clara antes de código rápido.
                     </h2>
                     <p className="on-dark-copy mt-6 max-w-3xl text-lg leading-relaxed md:text-xl">
-                        A qualidade do software começa antes do código: clareza de escopo, arquitetura proporcional ao risco e operação planejada desde o primeiro ciclo.
+                        O trabalho começa no problema certo e termina com um sistema que alguém consegue operar, manter e evoluir.
                     </p>
                 </m.div>
 
@@ -115,7 +115,7 @@ export function Stack() {
                             Confiança operacional
                         </span>
                         <h2 className="on-dark-heading mt-6 text-3xl font-bold tracking-normal md:text-5xl">
-                            O site vende. O sistema precisa continuar funcionando.
+                            O produto precisa vender, operar e sobreviver ao primeiro lançamento.
                         </h2>
                     </div>
 

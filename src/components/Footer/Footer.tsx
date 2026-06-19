@@ -30,11 +30,11 @@ export function Footer() {
                             <a href="/#servicos" className="site-footer-link block text-sm transition-colors">
                                 Serviços
                             </a>
-                            <a href="/#trabalhos" className="site-footer-link block text-sm transition-colors">
-                                Trabalhos
+                            <a href="/cases" className="site-footer-link block text-sm transition-colors">
+                                Cases
                             </a>
-                            <a href="/#stack" className="site-footer-link block text-sm transition-colors">
-                                Processo
+                            <a href="/#metodo" className="site-footer-link block text-sm transition-colors">
+                                Método
                             </a>
                             <a href="/sobre" className="site-footer-link block text-sm transition-colors">
                                 Sobre

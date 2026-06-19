@@ -7,8 +7,8 @@ import { Button } from '../ui/Button';
 
 const navLinks = [
     { name: 'Serviços', href: '/#servicos' },
-    { name: 'Trabalhos', href: '/#trabalhos' },
-    { name: 'Processo', href: '/#stack' },
+    { name: 'Cases', href: '/cases' },
+    { name: 'Método', href: '/#metodo' },
     { name: 'Sobre', href: '/sobre' },
 ];
 
@@ -20,6 +20,11 @@ export function Header() {
     const { openContactModal } = useModal();
 
     const headerOffset = 92;
+    const isDarkTopRoute = location.pathname === '/'
+        || location.pathname === '/sobre'
+        || location.pathname === '/cases'
+        || location.pathname.startsWith('/servicos/');
+    const isOnDarkSurface = isDarkTopRoute && !isScrolled;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -95,9 +100,25 @@ export function Header() {
         navigate(href);
     };
 
+    const getIsActive = (href: string) => {
+        if (href === '/sobre') {
+            return location.pathname === '/sobre';
+        }
+
+        if (href === '/cases') {
+            return location.pathname === '/cases';
+        }
+
+        if (href === '/#servicos') {
+            return location.pathname.startsWith('/servicos/');
+        }
+
+        return false;
+    };
+
     return (
         <>
-            <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isScrolled ? 'border-b border-[var(--border-subtle)] bg-[color:rgba(248,250,252,0.85)] backdrop-blur-xl py-4' : 'border-b border-transparent bg-transparent py-6'}`}>
+            <header className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${isOnDarkSurface ? 'border-b border-transparent bg-transparent py-6' : 'border-b border-[var(--border-subtle)] bg-[color:rgba(248,250,252,0.88)] py-4 shadow-[0_18px_60px_rgba(15,23,42,0.06)] backdrop-blur-xl'}`}>
                 <nav className="container" aria-label="Principal">
                     <div className="flex items-center justify-between">
                         <a
@@ -109,15 +130,13 @@ export function Header() {
                             <img
                                 src="/LOGO header.png"
                                 alt="Riaheru"
-                                className={`h-8 w-auto transition-all duration-300 ${!isScrolled ? 'brightness-0 invert' : ''}`}
+                                className={`h-8 w-auto transition-all duration-300 ${isOnDarkSurface ? 'brightness-0 invert' : ''}`}
                             />
                         </a>
 
                         <div className="hidden items-center gap-8 md:flex">
                             {navLinks.map((link) => {
-                                const isActive = link.href === '/sobre'
-                                    ? location.pathname === '/sobre'
-                                    : location.pathname === '/' && link.href.startsWith('/#');
+                                const isActive = getIsActive(link.href);
 
                                 return (
                                     <a
@@ -127,8 +146,8 @@ export function Header() {
                                         aria-current={isActive ? 'page' : undefined}
                                         className={`text-sm font-semibold transition-colors ${
                                             isActive
-                                            ? (isScrolled ? 'text-[var(--accent)]' : 'text-white')
-                                            : (isScrolled ? 'text-[var(--gray-600)] hover:text-[var(--text-dark)]' : 'text-white/70 hover:text-white')
+                                            ? (isOnDarkSurface ? 'header-link-dark-active' : 'header-link-light-active')
+                                            : (isOnDarkSurface ? 'header-link-dark' : 'header-link-light')
                                         }`}
                                     >
                                         {link.name}
@@ -137,20 +156,20 @@ export function Header() {
                             })}
                             <Button
                                 size="sm"
-                                onClick={openContactModal}
-                                className={!isScrolled ? "shadow-none bg-white text-black hover:bg-white/90 border-transparent relative overflow-hidden group" : "shadow-[var(--shadow-sm)]"}
+                                onClick={() => openContactModal({ source: 'header_cta', page: location.pathname })}
+                                className={isOnDarkSurface ? "shadow-none bg-white text-black hover:bg-white/90 border-transparent relative overflow-hidden group" : "shadow-[var(--shadow-sm)]"}
                             >
-                                <span className={!isScrolled ? "relative z-10" : ""}>Iniciar projeto</span>
-                                {!isScrolled && <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-black/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />}
+                                <span className={isOnDarkSurface ? "relative z-10" : ""}>Iniciar projeto</span>
+                                {isOnDarkSurface && <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-black/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />}
                             </Button>
                         </div>
 
                         <button
                             onClick={() => setIsMobileMenuOpen((current) => !current)}
                             className={`inline-flex h-11 w-11 items-center justify-center rounded-full border shadow-[var(--shadow-sm)] md:hidden transition-colors ${
-                                isScrolled 
-                                ? 'border-[var(--border-subtle)] bg-white text-[var(--gray-600)]' 
-                                : 'border-white/10 bg-white/5 text-white backdrop-blur-md'
+                                isOnDarkSurface
+                                ? 'border-white/10 bg-white/5 text-white backdrop-blur-md'
+                                : 'border-[var(--border-subtle)] bg-white text-[var(--gray-600)]'
                             }`}
                             aria-label="Menu"
                             aria-expanded={isMobileMenuOpen}
@@ -189,7 +208,7 @@ export function Header() {
                                 <Button
                                     onClick={() => {
                                         setIsMobileMenuOpen(false);
-                                        openContactModal();
+                                        openContactModal({ source: 'mobile_menu_cta', page: location.pathname });
                                     }}
                                     className="w-full justify-center"
                                 >
@@ -200,8 +219,6 @@ export function Header() {
                     </div>
                 </div>
             )}
-
-            <div className="h-[76px]" />
         </>
     );
 }

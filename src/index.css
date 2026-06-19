@@ -210,6 +210,27 @@ select {
   color: var(--accent-dark);
 }
 
+.header-link-dark {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.header-link-dark:hover,
+.header-link-dark-active {
+  color: #ffffff;
+}
+
+.header-link-light {
+  color: var(--gray-600);
+}
+
+.header-link-light:hover {
+  color: var(--text-dark);
+}
+
+.header-link-light-active {
+  color: var(--accent-primary);
+}
+
 .label {
   display: inline-flex;
   align-items: center;

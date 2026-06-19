@@ -1,8 +1,10 @@
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
 import { CONTACT_INFO } from '../constants';
 import { Button } from '../components/ui/Button';
 import { SectionTitle } from '../components/ui/SectionTitle';
+import { useCanonical } from '../hooks/useCanonical';
 import { useModal } from '../hooks/useModal';
 
 interface InfoPageProps {
@@ -23,8 +25,10 @@ export function InfoPage({
     metaDescription,
 }: InfoPageProps) {
     const { openContactModal } = useModal();
+    const location = useLocation();
     const pageTitle = metaTitle ?? `${title} | Riaheru`;
     const pageDescription = metaDescription ?? description;
+    useCanonical(`https://riaheru.com${location.pathname}`);
 
     return (
         <div className="bg-[var(--off-white)]">
@@ -41,7 +45,7 @@ export function InfoPage({
                         description={description}
                     />
                     <div className="mt-8 flex flex-wrap gap-4">
-                        <Button onClick={openContactModal}>
+                        <Button onClick={() => openContactModal({ source: 'info_page_top', page: location.pathname })}>
                             Iniciar projeto
                         </Button>
                         <Button
@@ -86,7 +90,7 @@ export function InfoPage({
                                 <div className="rounded-2xl bg-[var(--gray-50)] px-4 py-3">Canal direto por email ou WhatsApp.</div>
                             </div>
                             <div className="mt-6">
-                                <Button onClick={openContactModal} className="w-full justify-center">
+                                <Button onClick={() => openContactModal({ source: 'info_page_aside', page: location.pathname })} className="w-full justify-center">
                                     Abrir conversa
                                 </Button>
                             </div>

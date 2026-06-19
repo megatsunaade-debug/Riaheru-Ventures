@@ -7,6 +7,7 @@ export type CaseStudy = {
     delivery: string;
     outcome: string;
     image?: string;
+    imageAvif?: string;
     imageAlt?: string;
     logo?: string;
     link?: string;
@@ -45,7 +46,8 @@ export const CASE_STUDIES: CaseStudy[] = [
             'Next.js estático, design responsivo, copy técnica, seções de serviços, processo, provas de confiança e chamada direta para WhatsApp.',
         outcome:
             'Um site institucional mais robusto, preparado para aquisição local, apresentação comercial e manutenção simples de conteúdo.',
-        image: '/nimet-home-desktop-after.png',
+        image: '/nimet-home-desktop-after.webp',
+        imageAvif: '/nimet-home-desktop-after.avif',
         imageAlt: 'Home do site NIMET com hero de engenharia industrial',
         link: 'https://nimet.com.br',
         tags: ['Next.js', 'SEO local', 'Landing page', 'WhatsApp', 'Institucional', 'Performance'],
