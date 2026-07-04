@@ -24,6 +24,12 @@ export function ContactModal() {
     const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
     const contactEmail = import.meta.env.VITE_CONTACT_EMAIL ?? CONTACT_INFO.EMAIL;
     const hasDirectEndpoint = Boolean(contactEndpoint);
+    const whatsappUrl = `https://wa.me/${CONTACT_INFO.WHATSAPP}`;
+
+    const openWhatsApp = () => {
+        const externalWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        externalWindow?.opener = null;
+    };
 
     useEffect(() => {
         if (!isContactOpen) {
@@ -380,7 +386,7 @@ export function ContactModal() {
                                                 {consentError && (
                                                     <p data-testid="consent-error" className="mt-2 flex items-center gap-1 text-sm text-red-500">
                                                         <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                                                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                                                         </svg>
                                                         É necessário concordar com a Política de Privacidade para continuar.
                                                     </p>
@@ -416,7 +422,7 @@ export function ContactModal() {
 
                                     <button
                                         type="button"
-                                        onClick={() => window.open(`https://wa.me/${CONTACT_INFO.WHATSAPP}`, '_blank')}
+                                        onClick={openWhatsApp}
                                         className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-gray-200 bg-white px-6 py-3 font-medium text-gray-600 transition-all hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700"
                                     >
                                         <MessageCircle size={20} />
