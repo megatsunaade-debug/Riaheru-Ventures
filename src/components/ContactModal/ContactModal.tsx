@@ -24,6 +24,14 @@ export function ContactModal() {
     const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
     const contactEmail = import.meta.env.VITE_CONTACT_EMAIL ?? CONTACT_INFO.EMAIL;
     const hasDirectEndpoint = Boolean(contactEndpoint);
+    const whatsappUrl = `https://wa.me/${CONTACT_INFO.WHATSAPP}`;
+
+    const openWhatsApp = () => {
+        const externalWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        if (externalWindow) {
+            externalWindow.opener = null;
+        }
+    };
 
     useEffect(() => {
         if (!isContactOpen) {
@@ -416,7 +424,7 @@ export function ContactModal() {
 
                                     <button
                                         type="button"
-                                        onClick={() => window.open(`https://wa.me/${CONTACT_INFO.WHATSAPP}`, '_blank')}
+                                        onClick={openWhatsApp}
                                         className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-gray-200 bg-white px-6 py-3 font-medium text-gray-600 transition-all hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700"
                                     >
                                         <MessageCircle size={20} />
