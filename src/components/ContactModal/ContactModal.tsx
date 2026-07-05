@@ -28,7 +28,9 @@ export function ContactModal() {
 
     const openWhatsApp = () => {
         const externalWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-        externalWindow?.opener = null;
+        if (externalWindow) {
+            externalWindow.opener = null;
+        }
     };
 
     useEffect(() => {
