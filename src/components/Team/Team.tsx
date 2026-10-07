@@ -47,7 +47,7 @@ const team = [
 export function Team() {
     return (
         <section id="sobre" className="relative py-20 md:py-28 bg-[var(--bg-dark)]">
-            <div className="container max-w-7xl">
+            <div className="container">
                 <SectionTitle
                     tag="Nosso Time"
                     title={

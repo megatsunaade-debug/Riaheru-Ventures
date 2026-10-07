@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, CheckCircle2, ExternalLink } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { CASE_STUDIES } from '@/data/cases';
@@ -191,25 +191,16 @@ export function ServicePage({ service }: ServicePageProps) {
                     <div className="grid gap-0 border-y border-white/10 md:grid-cols-2">
                         {relatedCases.map((caseStudy) => (
                             <article key={caseStudy.id} className="border-b border-white/10 py-8 md:border-b-0 md:border-r md:px-8 md:last:border-r-0">
-                                <span className="text-xs font-semibold uppercase tracking-normal text-white/44">
-                                    {caseStudy.confidential ? 'Confidencial' : caseStudy.eyebrow}
-                                </span>
+                                {caseStudy.kind === 'site' && (
+                                    <span className="text-xs font-semibold uppercase tracking-normal text-white/44">Site</span>
+                                )}
                                 <h3 className="on-dark-heading mt-4 text-2xl font-semibold tracking-normal">
                                     {caseStudy.title}
                                 </h3>
-                                <p className="on-dark-copy mt-4 text-sm leading-relaxed">
-                                    {caseStudy.outcome}
-                                </p>
-                                {caseStudy.link && (
-                                    <a
-                                        href={caseStudy.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="link-arrow mt-6 text-[var(--accent-light)]"
-                                    >
-                                        Abrir projeto
-                                        <ExternalLink size={16} />
-                                    </a>
+                                {caseStudy.kind === 'confidential' && (
+                                    <p className="on-dark-copy mt-4 text-sm leading-relaxed">
+                                        {caseStudy.subtitle}
+                                    </p>
                                 )}
                             </article>
                         ))}

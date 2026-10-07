@@ -44,6 +44,12 @@ html {
   font-size: 16px;
 }
 
+@media (min-width: 1024px) {
+  html {
+    font-size: clamp(16px, 1.40625vw, 18px);
+  }
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -112,9 +118,10 @@ select {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1620px;
+  min-width: 0;
   margin: 0 auto;
-  padding-inline: 1.5rem;
+  padding-inline: clamp(1.25rem, 3.2vw, 3.75rem);
 }
 
 .btn {

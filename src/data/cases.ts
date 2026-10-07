@@ -1,70 +1,65 @@
-export type CaseStudy = {
-    id: 'marqlet' | 'nimet' | 'industrial-platform';
+type SiteCase = {
+    id: 'marqlet' | 'nimet' | 'serralheria-cp' | 'sansi-arquitetura' | 'leticia-gomes-marques';
     title: string;
-    eyebrow: string;
-    description: string;
-    challenge: string;
-    delivery: string;
-    outcome: string;
-    image?: string;
-    imageAvif?: string;
-    imageAlt?: string;
-    logo?: string;
-    link?: string;
-    tags: string[];
-    confidential?: boolean;
+    kind: 'site';
+    summary?: string;
+    preview?: {
+        src: string;
+        alt: string;
+        avif?: string;
+    };
+    url?: string;
 };
+
+type ConfidentialCase = {
+    id: 'custom-system';
+    title: 'Sistema sob medida';
+    kind: 'confidential';
+    subtitle: 'Projeto desenvolvido para empresa confidencial';
+};
+
+export type CaseStudy = SiteCase | ConfidentialCase;
 
 export const CASE_STUDIES: CaseStudy[] = [
     {
-        id: 'marqlet',
-        title: 'Marqlet',
-        eyebrow: 'LegalTech SaaS | Venture Build',
-        description:
-            'Produto próprio para escritórios de advocacia, com dashboard operacional, modelo multi-tenant e base preparada para automações de IA.',
-        challenge:
-            'Transformar rotinas jurídicas, dados de clientes e acompanhamento processual em uma experiência única, segura e escalável.',
-        delivery:
-            'Arquitetura full TypeScript, interface desktop-first, API tipada, PostgreSQL e fundações de segurança para uso multi-tenant.',
-        outcome:
-            'Um SaaS jurídico pronto para escalar produto, operação e evolução comercial sem depender de planilhas paralelas.',
-        image: '/marqletdashboard.webp',
-        imageAlt: 'Dashboard do Marqlet com indicadores jurídicos',
-        logo: '/marqlet-logo-horizontal-dark.svg',
-        link: 'https://marqlet.com',
-        tags: ['React', 'TypeScript', 'tRPC', 'PostgreSQL', 'Multi-tenant', 'IA aplicada'],
+        id: 'marqlet', title: 'Marqlet', kind: 'site',
+        preview: {
+            src: '/images/cases/riaheru-case-marqlet.jpg',
+            alt: 'Captura do site Marqlet com apresentação da operação jurídica e prévia do painel.',
+        },
     },
     {
-        id: 'nimet',
-        title: 'NIMET',
-        eyebrow: 'Site institucional | Engenharia de campo',
-        description:
-            'Presença digital premium para empresa técnica, com narrativa comercial clara, SEO local e fluxo direto para solicitação de orçamento.',
-        challenge:
-            'Reposicionar uma operação de engenharia elétrica e manutenção como marca confiável para indústrias, empresas, condomínios e residências.',
-        delivery:
-            'Next.js estático, design responsivo, copy técnica, seções de serviços, processo, provas de confiança e chamada direta para WhatsApp.',
-        outcome:
-            'Um site institucional mais robusto, preparado para aquisição local, apresentação comercial e manutenção simples de conteúdo.',
-        image: '/nimet-home-desktop-after.webp',
-        imageAvif: '/nimet-home-desktop-after.avif',
-        imageAlt: 'Home do site NIMET com hero de engenharia industrial',
-        link: 'https://nimet.com.br',
-        tags: ['Next.js', 'SEO local', 'Landing page', 'WhatsApp', 'Institucional', 'Performance'],
+        id: 'nimet', title: 'Nimet', kind: 'site',
+        preview: {
+            src: '/images/cases/riaheru-case-nimet.jpg',
+            alt: 'Captura do site Nimet com apresentação dos serviços de engenharia e visual de instalações industriais.',
+        },
     },
     {
-        id: 'industrial-platform',
-        title: 'Plataforma operacional industrial',
-        eyebrow: 'Sistema interno | Operação crítica',
-        description:
-            'Sistema web interno para operação industrial, controle documental, filas de execução, planejamento de capacidade e indicadores gerenciais.',
-        challenge:
-            'Reduzir controles paralelos, planilhas manuais e decisões operacionais dispersas em rotinas sensíveis de produção e serviços.',
-        delivery:
-            'Backend Python/FastAPI, PostgreSQL, Docker, publicação protegida, permissões por área, auditoria, geração de documentos e rotinas de backup.',
-        outcome:
-            'Mais rastreabilidade, governança operacional e visibilidade de prazo, capacidade, documentos, pessoas, estoque e risco de entrega.',
-        tags: ['FastAPI', 'PostgreSQL', 'Docker', 'Cloudflare Access', 'PDF/DOCX', 'Governança'],
-        confidential: true,
+        id: 'serralheria-cp', title: 'Serralheria CP', kind: 'site',
+        preview: {
+            src: '/images/cases/riaheru-case-serralheria-cp.jpg',
+            alt: 'Captura do site Serralheria CP com chamada sobre soluções sob medida diante de um portão metálico.',
+        },
+    },
+    {
+        id: 'sansi-arquitetura', title: 'SANSI Arquitetura', kind: 'site',
+        preview: {
+            src: '/images/cases/riaheru-case-sansi-arquitetura.jpg',
+            alt: 'Captura do site SANSI Arquitetura com ambiente interno e apresentação do escritório.',
+        },
+    },
+    {
+        id: 'leticia-gomes-marques', title: 'Letícia Gomes Marques', kind: 'site',
+        preview: {
+            src: '/images/cases/riaheru-case-leticia-gomes-marques.jpg',
+            alt: 'Captura do site de Letícia Gomes Marques com apresentação da advocacia e retrato da profissional.',
+        },
+    },
+    {
+        id: 'custom-system',
+        title: 'Sistema sob medida',
+        kind: 'confidential',
+        subtitle: 'Projeto desenvolvido para empresa confidencial',
     },
 ];
