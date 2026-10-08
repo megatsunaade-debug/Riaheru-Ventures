@@ -1,46 +1,15 @@
+import type { PointerEvent as ReactPointerEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useReducedMotion } from 'framer-motion';
 import { ArrowRight, Building2, CheckCircle2, Code2, FileCheck2, LockKeyhole, Network, Scale, Shield, UsersRound } from 'lucide-react';
 
+import aboutLogoArtwork from '../../9ab79472-1244-4d1d-8e8b-5201f9ce0be4.jfif';
 import { m } from '@/lib/motion';
 import { Button } from '../components/ui/Button';
 import { SectionTitle } from '../components/ui/SectionTitle';
 import { useCanonical } from '../hooks/useCanonical';
 import { useModal } from '../hooks/useModal';
-
-const leadership = [
-    {
-        name: 'Carlos Henrique Marques Pereira',
-        role: 'Co-Founder & Technical COO',
-        description:
-            'Conduz arquitetura, produto e execução full-stack, conectando decisões técnicas a impacto operacional e comercial.',
-        image: '/carlos-henrique.webp',
-        color: '#0052CC',
-    },
-    {
-        name: 'Rian Lenger',
-        role: 'Co-Founder & Head de Dados',
-        description:
-            'Estrutura dados, APIs e bases operacionais para que sistemas críticos tenham rastreabilidade e consistência.',
-        image: '/rian-lenger.webp',
-        color: '#00A86B',
-    },
-    {
-        name: 'Ruan Lenger',
-        role: 'Co-Founder & Head de Integração',
-        description:
-            'Atua em integrações, automações e fluxos entre sistemas, reduzindo trabalho manual e ruído operacional.',
-        image: '/ruan-lenger.webp',
-        color: '#FF6B35',
-    },
-    {
-        name: 'Dra. Letícia Gomes Marques',
-        role: 'Co-Founder & Chief Legal Officer',
-        description:
-            'Apoia decisões de conformidade, LGPD, contratos e responsabilidade jurídica em produtos e operações digitais.',
-        image: '/leticia-gomes.webp',
-        color: '#7C3AED',
-    },
-];
+import './About.css';
 
 const proofPoints = [
     {
@@ -90,8 +59,45 @@ const expertise = [
     { icon: Scale, title: 'Compliance aplicado', description: 'LGPD, contratos, consentimento e governança de acesso.' },
 ];
 
+function moveMagneticControl(event: ReactPointerEvent<HTMLElement>) {
+    if (
+        event.pointerType !== 'mouse'
+        || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        || !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    ) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = Math.max(-4, Math.min(4, (event.clientX - bounds.left - bounds.width / 2) * 0.12));
+    const y = Math.max(-4, Math.min(4, (event.clientY - bounds.top - bounds.height / 2) * 0.12));
+    event.currentTarget.style.setProperty('--about-magnet-x', `${x}px`);
+    event.currentTarget.style.setProperty('--about-magnet-y', `${y}px`);
+}
+
+function resetMagneticControl(event: ReactPointerEvent<HTMLElement>) {
+    event.currentTarget.style.setProperty('--about-magnet-x', '0px');
+    event.currentTarget.style.setProperty('--about-magnet-y', '0px');
+}
+
+function resetCardPointer(event: ReactPointerEvent<HTMLElement>) {
+    event.currentTarget.style.setProperty('--about-spotlight-x', '50%');
+    event.currentTarget.style.setProperty('--about-spotlight-y', '50%');
+}
+
+function trackCardPointer(event: ReactPointerEvent<HTMLElement>) {
+    if (
+        event.pointerType !== 'mouse'
+        || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        || !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    ) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty('--about-spotlight-x', `${((event.clientX - bounds.left) / bounds.width) * 100}%`);
+    event.currentTarget.style.setProperty('--about-spotlight-y', `${((event.clientY - bounds.top) / bounds.height) * 100}%`);
+}
+
 export function About() {
     const { openContactModal } = useModal();
+    const prefersReducedMotion = useReducedMotion();
     useCanonical('https://riaheru.com/sobre');
 
     return (
@@ -104,22 +110,23 @@ export function About() {
                 />
             </Helmet>
 
-            <section className="relative overflow-hidden bg-[#070a12] pb-20 pt-32 text-white md:pb-28">
+            <section className="about-hero relative overflow-hidden bg-[#070a12] pb-20 pt-32 text-white md:pb-28">
                 <div
-                    className="pointer-events-none absolute inset-0 opacity-[0.05]"
+                    className="pointer-events-none absolute inset-0 opacity-[0.1]"
                     style={{
-                        backgroundImage: `linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)`,
+                        backgroundImage: `linear-gradient(rgba(231,235,240,0.45) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(231,235,240,0.45) 1px, transparent 1px)`,
                         backgroundSize: '44px 44px',
                     }}
                 />
 
                 <div className="container relative">
+                    <div className="about-hero__layout">
                     <m.div
-                        initial={{ opacity: 0, y: 22 }}
+                        initial={prefersReducedMotion ? false : { opacity: 0.94, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.55, ease: 'easeOut' }}
-                        className="max-w-5xl"
+                        transition={{ duration: prefersReducedMotion ? 0 : 0.4, ease: 'easeOut' }}
+                        className="about-hero__copy"
                     >
                         <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
                             Sobre a Riaheru
@@ -131,85 +138,71 @@ export function About() {
                             A Riaheru Ventures é uma empresa de engenharia de software e venture building para organizações que precisam transformar processos, produtos e dados em sistemas confiáveis.
                         </p>
 
-                        <div className="mt-9 flex flex-wrap gap-4">
-                            <Button onClick={() => openContactModal({ source: 'about_hero', page: '/sobre' })} size="lg">
-                                Iniciar projeto
-                                <ArrowRight size={19} />
-                            </Button>
-                            <a href="/cases" className="btn btn-outline on-dark-outline-button min-h-14 px-8 py-4 text-base">
+                <div className="mt-9 flex flex-wrap gap-4">
+                    <Button
+                        onClick={() => openContactModal({ source: 'about_hero', page: '/sobre' })}
+                        onPointerMove={moveMagneticControl}
+                        onPointerLeave={resetMagneticControl}
+                        onPointerCancel={resetMagneticControl}
+                        size="lg"
+                        className="about-magnetic-control"
+                    >
+                        Iniciar projeto
+                        <ArrowRight size={19} />
+                    </Button>
+                    <a
+                        href="/cases"
+                        onPointerMove={moveMagneticControl}
+                        onPointerLeave={resetMagneticControl}
+                        onPointerCancel={resetMagneticControl}
+                        className="about-magnetic-control btn btn-outline on-dark-outline-button min-h-14 px-8 py-4 text-base"
+                    >
                                 Ver cases
                             </a>
                         </div>
                     </m.div>
-                </div>
-            </section>
-
-            <section className="bg-white py-20 md:py-24">
-                <div className="container">
-                    <div className="grid gap-0 border-y border-[var(--border-subtle)] md:grid-cols-3">
-                        {proofPoints.map((item, index) => (
-                            <m.article
-                                key={item.title}
-                                initial={false}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: '-80px' }}
-                                transition={{ duration: 0.45, delay: index * 0.08, ease: 'easeOut' }}
-                                className="border-b border-[var(--border-subtle)] py-8 md:border-b-0 md:border-r md:px-8 md:last:border-r-0"
-                            >
-                                <item.icon size={24} className="text-[var(--accent-primary)]" strokeWidth={1.7} />
-                                <h2 className="mt-5 text-2xl font-semibold tracking-normal">
-                                    {item.title}
-                                </h2>
-                                <p className="mt-3 text-base leading-relaxed text-[var(--text-secondary)]">
-                                    {item.text}
-                                </p>
-                            </m.article>
-                        ))}
+                    <m.div
+                        initial={prefersReducedMotion ? false : { opacity: 0.94, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: prefersReducedMotion ? 0 : 0.45, delay: prefersReducedMotion ? 0 : 0.06, ease: 'easeOut' }}
+                        className="about-hero__artwork"
+                    >
+                        <img
+                            src={aboutLogoArtwork}
+                            alt="Logo bordada da Riaheru em branco e azul sobre fundo preto texturizado"
+                            className="about-hero__artwork-image"
+                            width={640}
+                            height={640}
+                            fetchPriority="high"
+                        />
+                    </m.div>
                     </div>
                 </div>
             </section>
 
-            <section className="bg-[var(--gray-50)] py-20 md:py-28">
+            <section className="bg-white py-16 md:py-20">
                 <div className="container">
-                    <SectionTitle
-                        tag="Liderança"
-                        title="Uma equipe técnica com leitura de produto, dados, operação e direito."
-                        description="A Riaheru combina engenharia, processos, dados e governança jurídica para construir sistemas com menor improviso e maior previsibilidade."
-                    />
-
-                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                        {leadership.map((person, index) => (
+                    <div className="grid gap-4 md:grid-cols-3">
+                        {proofPoints.map((item, index) => (
                             <m.article
-                                key={person.name}
-                                initial={false}
+                                key={item.title}
+                                initial={prefersReducedMotion ? false : { opacity: 0.92, y: 7 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-80px' }}
-                                transition={{ duration: 0.48, delay: index * 0.08, ease: 'easeOut' }}
-                                className="flex gap-5 rounded-lg border border-[var(--border-subtle)] bg-white p-5 shadow-[var(--shadow-sm)] md:p-6"
+                                transition={{ duration: prefersReducedMotion ? 0 : 0.38, delay: prefersReducedMotion ? 0 : index * 0.055, ease: 'easeOut' }}
+                                onPointerMove={trackCardPointer}
+                                onPointerLeave={resetCardPointer}
+                                onPointerCancel={resetCardPointer}
+                                className="about-info-card"
                             >
-                                <div className="shrink-0">
-                                    <div
-                                        className="h-[4.5rem] w-[4.5rem] overflow-hidden rounded-lg ring-2 ring-offset-2"
-                                        style={{ ['--tw-ring-color' as string]: person.color }}
-                                    >
-                                        <img
-                                            src={person.image}
-                                            alt={person.name}
-                                            className="h-full w-full object-cover object-top"
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-lg font-semibold tracking-normal text-[var(--text-dark)]">
-                                        {person.name}
-                                    </h3>
-                                    <p className="mt-1 text-sm font-semibold" style={{ color: person.color }}>
-                                        {person.role}
-                                    </p>
-                                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                                        {person.description}
+                                <span aria-hidden="true" className="about-info-card__spotlight" />
+                                <div className="about-info-card__content">
+                                    <item.icon size={24} className="about-info-card__icon text-[var(--accent-primary)]" strokeWidth={1.7} />
+                                    <h2 className="mt-5 text-2xl font-semibold tracking-normal">
+                                        {item.title}
+                                    </h2>
+                                    <p className="mt-3 text-base leading-relaxed text-[var(--text-secondary)]">
+                                        {item.text}
                                     </p>
                                 </div>
                             </m.article>
@@ -222,10 +215,10 @@ export function About() {
                 <div className="container">
                     <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
                         <m.div
-                            initial={false}
+                            initial={prefersReducedMotion ? false : { opacity: 0.94, y: 7 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-80px' }}
-                            transition={{ duration: 0.5, ease: 'easeOut' }}
+                            transition={{ duration: prefersReducedMotion ? 0 : 0.38, ease: 'easeOut' }}
                         >
                             <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
                                 Princípios
@@ -239,13 +232,13 @@ export function About() {
                             {principles.map((item, index) => (
                                 <m.article
                                     key={item.title}
-                                    initial={false}
+                                    initial={prefersReducedMotion ? false : { opacity: 0.92, y: 6 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: '-80px' }}
-                                    transition={{ duration: 0.46, delay: index * 0.07, ease: 'easeOut' }}
-                                    className="border-b border-white/10 py-7 sm:odd:pr-7 sm:even:border-l sm:even:pl-7"
+                                    transition={{ duration: prefersReducedMotion ? 0 : 0.36, delay: prefersReducedMotion ? 0 : index * 0.05, ease: 'easeOut' }}
+                                    className="about-dark-info-item border-b border-white/10 py-7 sm:odd:pr-7 sm:even:border-l sm:even:pl-7"
                                 >
-                                    <item.icon size={23} className="text-[var(--highlight)]" strokeWidth={1.7} />
+                                    <item.icon size={23} className="about-info-icon text-[var(--highlight)]" strokeWidth={1.7} />
                                     <h3 className="on-dark-heading mt-5 text-xl font-semibold tracking-normal">
                                         {item.title}
                                     </h3>
@@ -261,46 +254,66 @@ export function About() {
 
             <section className="bg-white py-20 md:py-28">
                 <div className="container">
-                    <SectionTitle
-                        tag="Expertise"
-                        title="Competências para tirar sistemas do improviso."
-                        description="Atuamos em produto, arquitetura, dados, integrações, automação, segurança e operação para entregar software que pode ser usado e mantido."
-                    />
+                    <m.div
+                        initial={prefersReducedMotion ? false : { opacity: 0.96, y: 6 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-80px' }}
+                        transition={{ duration: prefersReducedMotion ? 0 : 0.38, ease: 'easeOut' }}
+                    >
+                        <SectionTitle
+                            tag="Expertise"
+                            title="Competências para tirar sistemas do improviso."
+                            description="Atuamos em produto, arquitetura, dados, integrações, automação, segurança e operação para entregar software que pode ser usado e mantido."
+                        />
+                    </m.div>
 
-                    <div className="grid grid-cols-1 gap-0 border-y border-[var(--border-subtle)] sm:grid-cols-2 lg:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         {expertise.map((item, index) => (
                             <m.article
                                 key={item.title}
-                                initial={false}
+                                initial={prefersReducedMotion ? false : { opacity: 0.92, y: 7 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-80px' }}
-                                transition={{ duration: 0.45, delay: index * 0.07, ease: 'easeOut' }}
-                                className="border-b border-[var(--border-subtle)] py-8 sm:px-6 lg:border-b-0 lg:border-r lg:last:border-r-0"
+                                transition={{ duration: prefersReducedMotion ? 0 : 0.38, delay: prefersReducedMotion ? 0 : index * 0.045, ease: 'easeOut' }}
+                                onPointerMove={trackCardPointer}
+                                onPointerLeave={resetCardPointer}
+                                onPointerCancel={resetCardPointer}
+                                className="about-info-card"
                             >
-                                <item.icon size={24} className="text-[var(--accent-primary)]" strokeWidth={1.7} />
-                                <h3 className="mt-5 text-xl font-semibold tracking-normal">
-                                    {item.title}
-                                </h3>
-                                <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                                    {item.description}
-                                </p>
+                                <span aria-hidden="true" className="about-info-card__spotlight" />
+                                <div className="about-info-card__content">
+                                    <item.icon size={24} className="about-info-card__icon text-[var(--accent-primary)]" strokeWidth={1.7} />
+                                    <h3 className="mt-5 text-xl font-semibold tracking-normal">
+                                        {item.title}
+                                    </h3>
+                                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+                                        {item.description}
+                                    </p>
+                                </div>
                             </m.article>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section className="bg-[var(--off-white)] py-20">
-                <div className="container text-center">
-                    <span className="label label-accent justify-center">Primeira conversa</span>
-                    <h2 className="mx-auto mt-5 max-w-3xl text-4xl font-bold tracking-normal md:text-5xl">
+            <section className="about-first-conversation bg-[var(--off-white)] py-20">
+                <div className="about-first-conversation__container container text-center">
+                    <span className="about-first-conversation__eyebrow label label-accent justify-center">Primeira conversa</span>
+                    <h2 className="about-first-conversation__title mx-auto mt-5 w-full max-w-3xl text-center text-4xl font-bold tracking-normal md:text-5xl">
                         Vamos entender o contexto antes de vender uma solução.
                     </h2>
-                    <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-[var(--text-secondary)]">
+                    <p className="about-first-conversation__description mx-auto mt-5 w-full max-w-2xl text-center text-lg leading-relaxed text-[var(--text-secondary)]">
                         Conte o momento do produto, a dor operacional ou o sistema que precisa evoluir. A resposta será objetiva e orientada a próximos passos.
                     </p>
-                    <div className="mt-8">
-                        <Button onClick={() => openContactModal({ source: 'about_bottom', page: '/sobre' })} size="lg">
+                    <div className="mt-8 flex justify-center">
+                        <Button
+                            onClick={() => openContactModal({ source: 'about_bottom', page: '/sobre' })}
+                            onPointerMove={moveMagneticControl}
+                            onPointerLeave={resetMagneticControl}
+                            onPointerCancel={resetMagneticControl}
+                            size="lg"
+                            className="about-magnetic-control"
+                        >
                             Iniciar projeto
                             <ArrowRight size={18} />
                         </Button>

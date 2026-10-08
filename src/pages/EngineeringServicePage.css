@@ -1,0 +1,361 @@
+@property --engineering-badge-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.engineering-service-page {
+  width: 100%;
+  min-width: 0;
+}
+
+.engineering-service-hero__container,
+.engineering-service-hero__grid,
+.engineering-service-hero__grid > * {
+  min-width: 0;
+}
+
+.engineering-service-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+}
+
+.engineering-service-hero__grid > * {
+  min-width: 0;
+}
+
+.engineering-service-badge.on-dark-kicker {
+  position: relative;
+  isolation: isolate;
+  gap: 0.55rem;
+  overflow: hidden;
+  border-color: rgba(76, 154, 255, 0.42);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.045);
+  color: #e2e8f0;
+  box-shadow: inset 0 0 0 1px rgba(76, 154, 255, 0.035);
+  transition: border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.engineering-service-badge::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--engineering-badge-angle),
+    transparent 0deg 288deg,
+    rgba(76, 154, 255, 0.08) 310deg,
+    rgba(110, 180, 255, 0.95) 338deg,
+    rgba(76, 154, 255, 0.08) 354deg,
+    transparent 360deg
+  );
+  content: "";
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: engineering-badge-glow 9s linear infinite;
+}
+
+.engineering-service-badge > * {
+  position: relative;
+  z-index: 1;
+}
+
+.engineering-service-badge__dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: none;
+  border-radius: 50%;
+  background: #4c9aff;
+  box-shadow: 0 0 8px rgba(76, 154, 255, 0.62);
+  animation: engineering-badge-pulse 2.8s ease-in-out infinite;
+}
+
+.engineering-art-figure {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  justify-content: center;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4.5%, #000 95.5%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 4.5%, #000 95.5%, transparent 100%);
+}
+
+.engineering-art-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 4.5%, #000 95.5%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 4.5%, #000 95.5%, transparent 100%);
+}
+
+.engineering-service-magnetic {
+  translate: var(--engineering-magnet-x, 0px) var(--engineering-magnet-y, 0px);
+  transition: translate 160ms ease-out, filter 180ms ease, box-shadow 180ms ease;
+}
+
+.engineering-service-row {
+  margin-inline: -0.5rem;
+  padding-inline: 0.5rem;
+  border-radius: 0.375rem;
+  transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+
+.engineering-service-best-for .engineering-service-row {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(7, 10, 18, 0.1);
+  border-radius: 0.65rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(7, 10, 18, 0.025);
+}
+
+.engineering-service-deliverables .engineering-service-row {
+  margin: 0;
+  padding: 1rem 1rem 1rem 1.15rem;
+  border-left: 2px solid rgba(76, 154, 255, 0.42);
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+
+.engineering-service-outcome,
+.engineering-service-step,
+.engineering-service-case {
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease, color 180ms ease;
+}
+
+.engineering-service-outcome {
+  min-height: 100%;
+  align-items: flex-start;
+  border: 1px solid rgba(7, 10, 18, 0.09);
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 1rem;
+}
+
+.engineering-service-step {
+  border: 1px solid rgba(7, 10, 18, 0.09);
+  border-left-width: 3px;
+  border-radius: 0 0.375rem 0.375rem 0;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 0.85rem 1rem;
+}
+
+.engineering-service-step__number {
+  display: inline-grid;
+  min-width: 2rem;
+  min-height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(76, 154, 255, 0.24);
+  border-radius: 0.35rem;
+  background: rgba(76, 154, 255, 0.08);
+  color: #2468b4;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.engineering-service-case {
+  min-width: 0;
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.018);
+  padding: 2rem 1rem;
+}
+
+.engineering-service-case > span {
+  color: rgba(173, 204, 244, 0.85);
+  letter-spacing: 0.14em;
+}
+
+.engineering-service-case h3 {
+  color: #fff;
+  font-size: clamp(1.55rem, 2.1vw, 2rem);
+  font-weight: 700;
+}
+
+.engineering-service-case-visit {
+  border: 1px solid rgba(110, 180, 255, 0.48);
+  background: rgba(76, 154, 255, 0.12);
+  color: #e8f2ff;
+  text-decoration: none;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.engineering-service-cases-link {
+  width: fit-content;
+  border-bottom: 1px solid rgba(110, 180, 255, 0.42);
+  padding-bottom: 0.3rem;
+  font-weight: 600;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.engineering-service-contact-button:focus-visible,
+.engineering-service-cases-link:focus-visible,
+.engineering-service-case-visit:focus-visible {
+  outline: 2px solid #6eb4ff;
+  outline-offset: 4px;
+}
+
+/* These items animate only after their section enters view; without the observer they remain visible. */
+[data-scroll-reveal="visible"] .engineering-scroll-item {
+  animation: engineering-section-item-enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes engineering-section-item-enter {
+  from {
+    opacity: 0.55;
+    translate: 0 8px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .engineering-service-magnetic:hover {
+    filter: brightness(1.07);
+    box-shadow: 0 8px 26px rgba(76, 154, 255, 0.2);
+  }
+
+  .engineering-service-row:hover {
+    background-color: rgba(76, 154, 255, 0.055);
+    box-shadow: inset 3px 0 0 rgba(76, 154, 255, 0.55);
+    color: var(--text-dark);
+  }
+
+  .engineering-service-deliverables .engineering-service-row:hover {
+    border-left-color: #4c9aff;
+    background-color: rgba(76, 154, 255, 0.055);
+    box-shadow: inset 3px 0 0 rgba(76, 154, 255, 0.22);
+  }
+
+  .engineering-service-outcome:hover,
+  .engineering-service-step:hover {
+    transform: translateY(-2px);
+    background-color: rgba(76, 154, 255, 0.055);
+    box-shadow: 0 6px 18px rgba(7, 10, 18, 0.06);
+  }
+
+  .engineering-service-case:hover {
+    transform: translateY(-2px);
+    background-color: rgba(76, 154, 255, 0.06);
+    box-shadow: inset 0 0 0 1px rgba(76, 154, 255, 0.16);
+  }
+
+  .engineering-service-cases-link:hover {
+    border-color: #6eb4ff;
+    color: #fff;
+  }
+
+  .engineering-service-case-visit:hover {
+    border-color: #8bc5ff;
+    background: rgba(76, 154, 255, 0.24);
+    color: #fff;
+    box-shadow: 0 5px 16px rgba(76, 154, 255, 0.14);
+  }
+
+  .engineering-service-badge:hover {
+    border-color: rgba(110, 180, 255, 0.7);
+    background-color: rgba(76, 154, 255, 0.075);
+    box-shadow: inset 0 0 0 1px rgba(76, 154, 255, 0.1), 0 0 18px rgba(76, 154, 255, 0.12);
+  }
+}
+
+@keyframes engineering-badge-glow {
+  to {
+    --engineering-badge-angle: 1turn;
+  }
+}
+
+@keyframes engineering-badge-pulse {
+  0%,
+  100% {
+    opacity: 0.86;
+    box-shadow: 0 0 6px rgba(76, 154, 255, 0.42);
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(76, 154, 255, 0.8);
+  }
+}
+
+@media (min-width: 1024px) {
+  .engineering-service-hero__grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: clamp(2rem, 3vw, 2.5rem);
+  }
+
+  .engineering-art-figure {
+    height: min(calc(100svh - 9rem), 46rem);
+  }
+
+  .engineering-art-image {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .engineering-art-figure {
+    max-width: min(100%, 32.5rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .engineering-service-best-for .engineering-service-row {
+    padding: 0.9rem 1rem;
+  }
+
+  .engineering-service-case {
+    padding: 1.5rem 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engineering-service-badge::before,
+  .engineering-service-badge__dot {
+    animation: none;
+  }
+
+  .engineering-service-magnetic,
+  .engineering-service-row,
+  .engineering-service-outcome,
+  .engineering-service-step,
+  .engineering-service-case,
+  .engineering-service-case-visit {
+    transition-duration: 0.01ms;
+  }
+
+  [data-scroll-reveal="visible"] .engineering-scroll-item {
+    animation: none;
+    opacity: 1;
+    translate: none;
+  }
+
+  .engineering-service-magnetic {
+    translate: none !important;
+  }
+
+  .engineering-service-magnetic:hover {
+    filter: none;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .engineering-service-outcome:hover,
+  .engineering-service-step:hover,
+  .engineering-service-case:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

@@ -19,10 +19,10 @@ Site institucional da Riaheru Ventures construído com `React 19`, `TypeScript`,
   - `/servicos/arquitetura-ia-operacao`
 - CTA primário unificado em `Iniciar projeto`
 - Modal de contato suporta:
-  - envio real via `VITE_CONTACT_ENDPOINT`, se configurado
-  - fallback honesto para `mailto`, sem simular backend
+  - envio do briefing pelo endpoint server-side `/api/contact`
+  - destinatário `admin@riaheru.com` e email informado como `Reply-To`
   - contexto de origem, página e serviço de interesse quando o CTA fornece esses dados
-  - atalho direto para WhatsApp
+  - WhatsApp como caminho visual primário e briefing como alternativa
 - Consentimento de cookies com banner, rejeição de não essenciais e modal acessível de preferências
 - Newsletter substituída por CTA institucional até existir integração real
 
@@ -37,14 +37,14 @@ npx playwright test
 
 ## Variáveis de ambiente
 
-Opcionalmente, o modal de contato pode usar:
+Configure no ambiente de servidor da Vercel (não use prefixo `VITE_` nem exponha estes valores no navegador):
 
 ```bash
-VITE_CONTACT_ENDPOINT=https://sua-api.exemplo.com/contact
-VITE_CONTACT_EMAIL=contato@riaheru.com
+RESEND_API_KEY=chave-secreta-do-resend
+CONTACT_FROM_EMAIL="Riaheru <email-de-dominio-verificado@exemplo.com>"
 ```
 
-Sem `VITE_CONTACT_ENDPOINT`, o formulário abre o cliente de email do usuário com o briefing já preenchido.
+O domínio do remetente precisa estar verificado no Resend. Sem essas variáveis, o endpoint retorna erro e o formulário não informa sucesso; a pessoa pode usar o WhatsApp enquanto o envio não estiver configurado.
 
 ## Estrutura relevante
 

@@ -112,7 +112,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
         summary: 'Organizamos arquitetura, dados, integrações, IA aplicada, deploy e governança para sistemas que não podem depender de improviso.',
         description:
             'Quando a operação já é crítica, tratamos software como ativo: fronteiras de sistema, permissões, backup, observabilidade, automações e documentação útil.',
-        proof: 'O case industrial confidencial concentra esse tipo de entrega: permissões, documentos, filas, capacidade, indicadores e publicação protegida.',
+        proof: 'A atuação combina arquitetura, segurança, dados e documentação conforme as necessidades de cada operação.',
         metaTitle: 'Arquitetura, IA e Operação para Sistemas Críticos | Riaheru',
         metaDescription:
             'Arquitetura de software, IA aplicada, governança de dados, deploy, observabilidade, backup e operação segura para sistemas B2B críticos.',
@@ -138,7 +138,7 @@ export const SERVICE_OFFERINGS: ServiceOffering[] = [
             'Empresas que querem aplicar IA sem fragilizar governança',
             'Operações que precisam de segurança, backup e rastreabilidade',
         ],
-        relatedCaseIds: ['industrial-platform', 'marqlet'],
+        relatedCaseIds: ['custom-system', 'marqlet'],
         accent: 'emerald',
     },
 ];

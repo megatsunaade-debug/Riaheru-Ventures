@@ -1,0 +1,207 @@
+@property --venture-build-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.venture-build-badge.on-dark-kicker {
+  position: relative;
+  isolation: isolate;
+  gap: 0.55rem;
+  overflow: hidden;
+  border-color: rgba(76, 154, 255, 0.42);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.045);
+  color: #e2e8f0;
+  box-shadow: inset 0 0 0 1px rgba(76, 154, 255, 0.035);
+  transition: border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+
+.venture-build-badge::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--venture-build-angle),
+    transparent 0deg 288deg,
+    rgba(76, 154, 255, 0.08) 310deg,
+    rgba(110, 180, 255, 0.95) 338deg,
+    rgba(76, 154, 255, 0.08) 354deg,
+    transparent 360deg
+  );
+  content: "";
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: venture-build-border-glow 9s linear infinite;
+}
+
+.venture-build-badge__dot,
+.venture-build-badge__label {
+  position: relative;
+  z-index: 1;
+}
+
+.venture-build-badge__dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  flex: none;
+  border-radius: 50%;
+  background: #4c9aff;
+  box-shadow: 0 0 8px rgba(76, 154, 255, 0.62);
+  animation: venture-build-dot-pulse 2.8s ease-in-out infinite;
+}
+
+.venture-build-magnetic {
+  translate: var(--venture-magnet-x, 0px) var(--venture-magnet-y, 0px);
+  transition: translate 160ms ease-out, filter 180ms ease, box-shadow 180ms ease;
+}
+
+.venture-build-art-frame {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 4.5%, #000 95.5%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 4.5%, #000 95.5%, transparent 100%);
+}
+
+.venture-build-art-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+@media (min-width: 1024px) {
+  .venture-build-art-frame {
+    display: flex;
+    height: min(calc(100svh - 9rem), 46rem);
+    justify-content: center;
+  }
+
+  .venture-build-art-image {
+    width: auto;
+    height: 100%;
+  }
+}
+
+.venture-build-card {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.venture-build-card h3,
+.venture-build-card p,
+.venture-build-card svg {
+  transition: color 180ms ease;
+}
+
+.venture-build-audience-row {
+  margin-inline: -0.5rem;
+  padding-inline: 0.5rem;
+  border-radius: 0.375rem;
+  transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .venture-build-magnetic:hover {
+    filter: brightness(1.07);
+    box-shadow: 0 8px 26px rgba(76, 154, 255, 0.2);
+  }
+
+  .venture-build-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(76, 154, 255, 0.38);
+    box-shadow: 0 12px 28px rgba(7, 10, 18, 0.09), 0 0 0 1px rgba(76, 154, 255, 0.08);
+  }
+
+  .venture-build-card:hover h3,
+  .venture-build-card:hover svg {
+    color: var(--accent-primary);
+  }
+
+  .venture-build-card:hover p {
+    color: var(--text-dark);
+  }
+
+  .venture-build-audience-row:hover {
+    background-color: rgba(76, 154, 255, 0.055);
+    box-shadow: inset 3px 0 0 rgba(76, 154, 255, 0.55);
+    color: var(--text-dark);
+  }
+}
+
+.venture-build-badge:hover {
+  border-color: rgba(110, 180, 255, 0.7);
+  background-color: rgba(76, 154, 255, 0.075);
+  box-shadow: inset 0 0 0 1px rgba(76, 154, 255, 0.1), 0 0 18px rgba(76, 154, 255, 0.12);
+}
+
+@keyframes venture-build-border-glow {
+  to {
+    --venture-build-angle: 1turn;
+  }
+}
+
+@keyframes venture-build-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.86;
+    box-shadow: 0 0 6px rgba(76, 154, 255, 0.42);
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(76, 154, 255, 0.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .venture-build-magnetic,
+  .venture-build-card,
+  .venture-build-card h3,
+  .venture-build-card p,
+  .venture-build-card svg,
+  .venture-build-audience-row {
+    transition-duration: 0.01ms;
+  }
+
+  .venture-build-magnetic {
+    translate: none !important;
+  }
+
+  .venture-build-magnetic:hover {
+    filter: none;
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .venture-build-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .venture-build-badge::before,
+  .venture-build-badge__dot {
+    animation: none;
+  }
+}

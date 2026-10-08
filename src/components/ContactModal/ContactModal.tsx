@@ -8,7 +8,7 @@ import { useModal } from '../../hooks/useModal';
 
 type SubmitState =
     | { tone: 'idle'; message: '' }
-    | { tone: 'success' | 'error' | 'info'; message: string };
+    | { tone: 'success' | 'error'; message: string };
 
 export function ContactModal() {
     const { isContactOpen, closeContactModal, contactIntent } = useModal();
@@ -18,13 +18,11 @@ export function ContactModal() {
     const [consentError, setConsentError] = useState(false);
     const [submitState, setSubmitState] = useState<SubmitState>({ tone: 'idle', message: '' });
     const modalRef = useRef<HTMLDivElement>(null);
-    const firstFieldRef = useRef<HTMLInputElement>(null);
+    const initialFocusRef = useRef<HTMLButtonElement>(null);
     const lastActiveRef = useRef<HTMLElement | null>(null);
 
-    const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
-    const contactEmail = import.meta.env.VITE_CONTACT_EMAIL ?? CONTACT_INFO.EMAIL;
-    const hasDirectEndpoint = Boolean(contactEndpoint);
-    const whatsappUrl = `https://wa.me/${CONTACT_INFO.WHATSAPP}`;
+    const whatsappMessage = 'Olá! Vim pelo site da Riaheru e gostaria de saber como vocês podem me ajudar a desenvolver um projeto. Podemos conversar?';
+    const whatsappUrl = `https://wa.me/${CONTACT_INFO.WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}`;
 
     const openWhatsApp = () => {
         const externalWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
@@ -40,7 +38,7 @@ export function ContactModal() {
 
         lastActiveRef.current = document.activeElement as HTMLElement | null;
         const focusTimer = window.setTimeout(() => {
-            firstFieldRef.current?.focus();
+            initialFocusRef.current?.focus();
         }, 0);
 
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -97,35 +95,6 @@ export function ContactModal() {
         setSubmitState({ tone: 'idle', message: '' });
     }, [isContactOpen]);
 
-    const buildMailto = (
-        name: string,
-        email: string,
-        empresa: string,
-        telefone: string,
-        message: string,
-    ) => {
-        const subject = encodeURIComponent(`Novo projeto - ${name}`);
-        const contextLines = [
-            contactIntent?.serviceLabel ? `Serviço de interesse: ${contactIntent.serviceLabel}` : '',
-            contactIntent?.source ? `Origem do CTA: ${contactIntent.source}` : '',
-            `Página: ${contactIntent?.page ?? location.pathname}`,
-        ].filter(Boolean);
-        const body = encodeURIComponent(
-            [
-                `Nome: ${name}`,
-                `Email: ${email}`,
-                empresa ? `Empresa: ${empresa}` : '',
-                telefone ? `Telefone: ${telefone}` : '',
-                ...contextLines,
-                '',
-                'Contexto do projeto:',
-                message,
-            ].filter(Boolean).join('\n')
-        );
-
-        return `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-    };
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -138,7 +107,8 @@ export function ContactModal() {
         setSubmitState({ tone: 'idle', message: '' });
         setIsLoading(true);
 
-        const formData = new FormData(e.currentTarget);
+        const form = e.currentTarget;
+        const formData = new FormData(form);
         const name = String(formData.get('nome') ?? '').trim();
         const email = String(formData.get('email') ?? '').trim();
         const empresa = String(formData.get('empresa') ?? '').trim();
@@ -146,46 +116,38 @@ export function ContactModal() {
         const message = String(formData.get('mensagem') ?? '').trim();
 
         try {
-            if (contactEndpoint) {
-                const response = await fetch(contactEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    empresa,
+                    telefone,
+                    message,
+                    privacyConsent: true,
+                    context: {
+                        ...contactIntent,
+                        page: contactIntent?.page ?? location.pathname,
                     },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        empresa,
-                        telefone,
-                        message,
-                        privacyConsent: true,
-                        context: {
-                            ...contactIntent,
-                            page: contactIntent?.page ?? location.pathname,
-                        },
-                    }),
-                });
+                }),
+            });
 
-                if (!response.ok) {
-                    throw new Error('Falha ao enviar o contato.');
-                }
-
-                e.currentTarget.reset();
-                setPrivacyConsent(false);
-                setSubmitState({
-                    tone: 'success',
-                    message: 'Briefing enviado. Nossa equipe retorna em até 24h úteis.',
-                });
-            } else {
-                window.location.href = buildMailto(name, email, empresa, telefone, message);
-                setSubmitState({
-                    tone: 'info',
-                    message: `Abrimos seu cliente de email com o briefing preenchido para ${contactEmail}. Se preferir, continue pelo WhatsApp.`,
-                });
+            if (!response.ok) {
+                throw new Error('Falha ao enviar o briefing.');
             }
+
+            form.reset();
+            setPrivacyConsent(false);
+            setSubmitState({
+                tone: 'success',
+                message: 'Briefing enviado para nossa equipe. Retornaremos em até 24h úteis.',
+            });
         } catch (error) {
-            console.error(error);
+            console.error('Falha no envio do briefing.', error);
             setSubmitState({
                 tone: 'error',
                 message: 'Não conseguimos concluir agora. Tente novamente em instantes ou siga pelo WhatsApp.',
@@ -245,11 +207,26 @@ export function ContactModal() {
                                         </div>
                                     )}
 
-                                    {!hasDirectEndpoint && (
-                                        <div className="mb-6 rounded-2xl border border-[var(--accent-primary)]/12 bg-[var(--accent-primary)]/6 px-4 py-4 text-sm leading-relaxed text-[var(--text-dark)]">
-                                            Ao enviar, abrimos seu cliente de email com o briefing preenchido. É um hand-off explícito, sem simular envio por um backend que ainda não existe.
+                                    <button
+                                        type="button"
+                                        onClick={openWhatsApp}
+                                        ref={initialFocusRef}
+                                        className="mb-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-6 py-4 text-base font-semibold text-white shadow-md shadow-emerald-700/20 transition-colors hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+                                    >
+                                        <MessageCircle size={20} />
+                                        Falar direto pelo WhatsApp
+                                    </button>
+
+                                    <div className="relative mb-6">
+                                        <div className="absolute inset-0 flex items-center">
+                                            <div className="w-full border-t border-gray-200"></div>
                                         </div>
-                                    )}
+                                        <div className="relative flex justify-center">
+                                            <span className="bg-white px-3 text-sm text-gray-500">
+                                                Ou envie um briefing
+                                            </span>
+                                        </div>
+                                    </div>
 
                                     {submitState.tone !== 'idle' && (
                                         <div
@@ -257,9 +234,7 @@ export function ContactModal() {
                                             role={submitState.tone === 'error' ? 'alert' : 'status'}
                                             className={`mb-6 rounded-2xl px-4 py-4 text-sm leading-relaxed ${submitState.tone === 'error'
                                                 ? 'border border-red-200 bg-red-50 text-red-700'
-                                                : submitState.tone === 'success'
-                                                    ? 'border border-emerald-200 bg-emerald-50 text-emerald-700'
-                                                    : 'border border-[var(--accent-primary)]/12 bg-[var(--accent-primary)]/6 text-[var(--text-dark)]'
+                                                : 'border border-emerald-200 bg-emerald-50 text-emerald-700'
                                                 }`}
                                         >
                                             {submitState.message}
@@ -278,7 +253,6 @@ export function ContactModal() {
                                                     type="text"
                                                     required
                                                     autoComplete="name"
-                                                    ref={firstFieldRef}
                                                     className="w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 outline-none transition-all focus:border-[var(--accent-primary)] focus:bg-white focus:ring-2 focus:ring-[var(--accent-primary)]/20"
                                                     placeholder="Seu nome completo"
                                                 />
@@ -400,36 +374,14 @@ export function ContactModal() {
                                             type="submit"
                                             disabled={isLoading}
                                             aria-busy={isLoading}
-                                            className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--accent-primary)] px-6 py-4 text-base font-semibold text-white shadow-lg shadow-[var(--accent-primary)]/20 transition-all duration-200 hover:bg-[var(--accent-secondary)] disabled:opacity-70"
+                                            className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl border border-gray-300 bg-white px-6 py-4 text-base font-semibold text-gray-700 transition-colors duration-200 hover:border-gray-400 hover:bg-gray-50 disabled:cursor-wait disabled:opacity-70"
                                         >
                                             {isLoading
-                                                ? 'Processando...'
-                                                : hasDirectEndpoint
-                                                    ? 'Enviar briefing'
-                                                    : 'Abrir email com briefing'}
-                                            {!isLoading && <Send size={18} />}
+                                                ? 'Enviando briefing...'
+                                                : 'Enviar briefing'}
+                                            {!isLoading && <Send size={18} className="text-gray-500" />}
                                         </button>
                                     </form>
-
-                                    <div className="relative my-6">
-                                        <div className="absolute inset-0 flex items-center">
-                                            <div className="w-full border-t border-gray-200"></div>
-                                        </div>
-                                        <div className="relative flex justify-center">
-                                            <span className="bg-white px-3 text-sm text-gray-500">
-                                                Ou prefere WhatsApp?
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        type="button"
-                                        onClick={openWhatsApp}
-                                        className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-gray-200 bg-white px-6 py-3 font-medium text-gray-600 transition-all hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700"
-                                    >
-                                        <MessageCircle size={20} />
-                                        Chamar no WhatsApp
-                                    </button>
                                 </div>
                             </m.div>
                         </div>

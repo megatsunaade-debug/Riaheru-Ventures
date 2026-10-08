@@ -1,165 +1,182 @@
-import { ArrowRight, ArrowUpRight, LockKeyhole } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowRight, ExternalLink, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import { CasePreview } from '@/components/Cases/CasePreview';
 import { CASE_STUDIES, type CaseStudy } from '@/data/cases';
 import { m } from '@/lib/motion';
-
-function CasePreview({ caseStudy, featured = false }: { caseStudy: CaseStudy; featured?: boolean }) {
-    if (!caseStudy.image) {
-        return (
-            <div className="h-full min-h-[280px] rounded-lg border border-white/10 bg-[#080b12] p-6 text-white shadow-[var(--shadow-lg)]">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/8 text-[var(--accent-light)]">
-                    <LockKeyhole size={22} strokeWidth={1.7} />
-                </div>
-                <span className="mt-7 block text-xs font-semibold uppercase tracking-normal text-white/48">
-                    Case confidencial
-                </span>
-                <h3 className="on-dark-heading mt-3 text-3xl font-semibold tracking-normal">
-                    {caseStudy.title}
-                </h3>
-                <p className="on-dark-copy mt-4 text-sm leading-relaxed">
-                    {caseStudy.outcome}
-                </p>
-            </div>
-        );
-    }
-
-    const image = (
-        <picture>
-            {caseStudy.imageAvif && <source srcSet={caseStudy.imageAvif} type="image/avif" />}
-            <img
-                src={caseStudy.image}
-                alt={caseStudy.imageAlt}
-                loading={featured ? 'eager' : 'lazy'}
-                width={1280}
-                height={featured ? 720 : 800}
-                className={`${featured ? 'aspect-[16/9]' : 'aspect-[16/10]'} w-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.025]`}
-            />
-        </picture>
-    );
-
-    return (
-        <div className="group overflow-hidden rounded-lg border border-[var(--border-subtle)] bg-white p-2 shadow-[var(--shadow-lg)]">
-            {caseStudy.link ? (
-                <a href={caseStudy.link} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-md bg-[var(--gray-100)]">
-                    {image}
-                </a>
-            ) : (
-                <div className="overflow-hidden rounded-md bg-[var(--gray-100)]">{image}</div>
-            )}
-        </div>
-    );
-}
+import './Showcase.css';
 
 export function Showcase() {
-    const [featuredCase, ...supportCases] = CASE_STUDIES;
+    const [activeCase, setActiveCase] = useState<CaseStudy | null>(null);
+    const dialogRef = useRef<HTMLDialogElement>(null);
+
+    useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!activeCase || !dialog) return;
+
+        const previousOverflow = document.body.style.overflow;
+        if (!dialog.open) dialog.showModal();
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [activeCase]);
+
+    const closePreview = () => dialogRef.current?.close();
 
     return (
-        <section id="trabalhos" className="bg-[var(--gray-50)] py-20 md:py-28">
+        <section id="trabalhos" className="showcase-section py-20 md:py-28">
             <div className="container">
                 <m.div
                     initial={false}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className="mb-14 flex flex-col gap-6 md:mb-18 lg:flex-row lg:items-end lg:justify-between"
+                    className="showcase-heading mb-10 flex flex-col gap-6 md:mb-14 lg:flex-row lg:items-end lg:justify-between"
                 >
                     <div className="max-w-3xl">
                         <span className="label label-accent block">Cases e ativos digitais</span>
                         <h2 className="mt-5 text-4xl font-bold tracking-normal md:text-6xl">
                             Prova de construção, não promessa de apresentação.
                         </h2>
-                        <p className="mt-6 text-lg leading-relaxed text-[var(--text-secondary)] md:text-xl">
-                            A mesma assinatura aparece em SaaS, aquisição digital e operação crítica: clareza de produto, base técnica e continuidade.
+                        <p className="mt-6 text-lg leading-relaxed md:text-xl">
+                            Sites e sistemas sob medida, com espaços preparados para as prévias de cada projeto.
                         </p>
                     </div>
-                    <Link to="/cases" className="link-arrow">
+                    <Link to="/cases" className="showcase-all-link">
                         Ver todos os cases
-                        <ArrowRight size={18} />
+                        <ArrowRight size={18} aria-hidden="true" />
                     </Link>
                 </m.div>
 
-                {featuredCase && (
-                    <m.article
-                        initial={false}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: '-90px' }}
-                        transition={{ duration: 0.58, ease: 'easeOut' }}
-                        className="grid gap-9 lg:grid-cols-12 lg:items-center lg:gap-14"
-                    >
-                        <div className="lg:col-span-7">
-                            <CasePreview caseStudy={featuredCase} featured />
-                        </div>
-                        <div className="lg:col-span-5">
-                            {featuredCase.logo ? (
-                                <div className="inline-flex max-w-full items-center rounded-lg border border-[var(--border-subtle)] bg-white px-4 py-3">
-                                    <img
-                                        src={featuredCase.logo}
-                                        alt={`${featuredCase.title} logo`}
-                                        loading="lazy"
-                                        width={210}
-                                        height={32}
-                                        className="h-8 w-auto max-w-[210px] object-contain"
-                                    />
-                                </div>
-                            ) : (
-                                <span className="label label-accent block">{featuredCase.eyebrow}</span>
-                            )}
-                            <h3 className="mt-6 text-4xl font-bold tracking-normal text-[var(--text-dark)] md:text-5xl">
-                                {featuredCase.title}
-                            </h3>
-                            <p className="mt-5 text-lg leading-relaxed text-[var(--text-secondary)]">
-                                {featuredCase.description}
-                            </p>
-                            <div className="mt-8 border-y border-[var(--border-subtle)] py-5">
-                                <span className="text-xs font-bold uppercase tracking-normal text-[var(--gray-400)]">
-                                    Resultado
-                                </span>
-                                <p className="mt-2 text-sm leading-relaxed text-[var(--text-dark)]">
-                                    {featuredCase.outcome}
-                                </p>
-                            </div>
-                            {featuredCase.link && (
-                                <a
-                                    href={featuredCase.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="link-arrow mt-8"
-                                >
-                                    Abrir projeto
-                                    <ArrowUpRight size={18} />
-                                </a>
-                            )}
-                        </div>
-                    </m.article>
-                )}
-
-                <div className="mt-16 grid gap-8 md:grid-cols-2">
-                    {supportCases.map((caseStudy, index) => (
+                <div className="showcase-grid grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                    {CASE_STUDIES.map((caseStudy, index) => (
                         <m.article
                             key={caseStudy.id}
+                            data-case-id={caseStudy.id}
                             initial={false}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-80px' }}
-                            transition={{ duration: 0.5, delay: index * 0.08, ease: 'easeOut' }}
-                            className="grid gap-6"
+                            transition={{ duration: 0.42, delay: (index % 2) * 0.06, ease: 'easeOut' }}
+                            className="showcase-card"
+                            style={{ animationDelay: `${(index % 2) * 55}ms` }}
+                            tabIndex={0}
+                            aria-haspopup="dialog"
+                            aria-label={`Abrir detalhes do projeto ${caseStudy.title}`}
+                            onClick={(event) => {
+                                if (event.target instanceof Element && event.target.closest('a, button')) return;
+                                setActiveCase(caseStudy);
+                            }}
+                            onKeyDown={(event) => {
+                                if (event.target !== event.currentTarget) return;
+                                if (event.key === 'Enter' || event.key === ' ') {
+                                    event.preventDefault();
+                                    setActiveCase(caseStudy);
+                                }
+                            }}
                         >
-                            <CasePreview caseStudy={caseStudy} />
-                            <div>
-                                <span className="label label-accent block">
-                                    {caseStudy.confidential ? 'Confidencial' : caseStudy.eyebrow}
-                                </span>
-                                <h3 className="mt-4 text-2xl font-semibold tracking-normal text-[var(--text-dark)]">
-                                    {caseStudy.title}
-                                </h3>
-                                <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                                    {caseStudy.outcome}
-                                </p>
+                            <button
+                                type="button"
+                                className="showcase-preview-trigger"
+                                onClick={() => setActiveCase(caseStudy)}
+                                aria-label={`Ampliar imagem: ${caseStudy.title}`}
+                            >
+                                <CasePreview caseStudy={caseStudy} className="showcase-preview-frame aspect-[1.48/1] w-full" fit="contain" />
+                            </button>
+                            <div className="showcase-card-content">
+                                <div className="showcase-case-heading">
+                                    <div>
+                                        <span className="showcase-category">
+                                            {caseStudy.kind === 'site' ? 'Site' : 'Projeto confidencial'}
+                                        </span>
+                                        <h3>{caseStudy.title}</h3>
+                                    </div>
+                                    {caseStudy.kind === 'confidential' && (
+                                        <span className="showcase-illustrative">Imagem ilustrativa</span>
+                                    )}
+                                </div>
+                                {caseStudy.kind === 'confidential' ? (
+                                    <p className="showcase-case-description">{caseStudy.subtitle}</p>
+                                ) : caseStudy.summary ? (
+                                    <p className="showcase-case-description">{caseStudy.summary}</p>
+                                ) : null}
+                                <div className="showcase-card-actions">
+                                    {caseStudy.kind === 'site' && caseStudy.url && (
+                                        <a
+                                            href={caseStudy.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={`Visitar site ${caseStudy.title} (abre em nova aba)`}
+                                            className="showcase-visit-link"
+                                        >
+                                            Visitar site
+                                            <ExternalLink size={16} aria-hidden="true" />
+                                        </a>
+                                    )}
+                                    <button
+                                        type="button"
+                                        className="showcase-enlarge-link"
+                                        onClick={() => setActiveCase(caseStudy)}
+                                        aria-label={`Ampliar imagem: ${caseStudy.title}`}
+                                    >
+                                        Ampliar prévia
+                                    </button>
+                                </div>
                             </div>
                         </m.article>
                     ))}
                 </div>
             </div>
+
+            <dialog
+                ref={dialogRef}
+                className="showcase-dialog"
+                aria-labelledby="showcase-dialog-title"
+                onClose={() => setActiveCase(null)}
+                onClick={(event) => {
+                    if (event.target === event.currentTarget) closePreview();
+                }}
+            >
+                {activeCase?.preview && (
+                    <div className="showcase-dialog-layout">
+                        <div className="showcase-dialog-preview">
+                            <img src={activeCase.preview.src} alt={activeCase.preview.alt} />
+                            {activeCase.kind === 'confidential' && (
+                                <span className="showcase-dialog-illustrative">Imagem ilustrativa</span>
+                            )}
+                        </div>
+                        <div className="showcase-dialog-details">
+                            <header className="showcase-dialog-heading">
+                                <div>
+                                    <span className="showcase-dialog-category">
+                                        {activeCase.kind === 'site' ? 'Site' : 'Projeto confidencial'}
+                                    </span>
+                                    <h2 id="showcase-dialog-title">{activeCase.title}</h2>
+                                </div>
+                                <button type="button" onClick={closePreview} aria-label="Fechar prévia">
+                                    <X size={22} aria-hidden="true" />
+                                </button>
+                            </header>
+                            <div className="showcase-dialog-copy">
+                                <section aria-labelledby="showcase-about-heading">
+                                    <h3 id="showcase-about-heading">Sobre o projeto</h3>
+                                    {activeCase.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                                </section>
+                            </div>
+                            {activeCase.kind === 'site' && activeCase.url && (
+                                <footer className="showcase-dialog-actions">
+                                    <a href={activeCase.url} target="_blank" rel="noopener noreferrer" className="showcase-visit-link">
+                                        Visitar site
+                                        <ExternalLink size={16} aria-hidden="true" />
+                                    </a>
+                                </footer>
+                            )}
+                        </div>
+                    </div>
+                )}
+            </dialog>
         </section>
     );
 }

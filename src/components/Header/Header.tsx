@@ -7,7 +7,7 @@ import { Button } from '../ui/Button';
 
 const navLinks = [
     { name: 'Serviços', href: '/#servicos' },
-    { name: 'Cases', href: '/cases' },
+    { name: 'Cases', href: '/#trabalhos' },
     { name: 'Método', href: '/#metodo' },
     { name: 'Sobre', href: '/sobre' },
 ];

@@ -1,5 +1,6 @@
+import { lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ArrowRight, CheckCircle2, ExternalLink } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { CASE_STUDIES } from '@/data/cases';
@@ -8,6 +9,10 @@ import { m } from '@/lib/motion';
 import { Button } from '../components/ui/Button';
 import { useCanonical } from '../hooks/useCanonical';
 import { useModal } from '../hooks/useModal';
+
+const LazyVentureBuildServicePage = lazy(() => import('./VentureBuildServicePage').then((module) => ({ default: module.VentureBuildServicePage })));
+const LazyEngineeringServicePage = lazy(() => import('./EngineeringServicePage').then((module) => ({ default: module.EngineeringServicePage })));
+const LazyArchitectureAIServicePage = lazy(() => import('./ArchitectureAIServicePage').then((module) => ({ default: module.ArchitectureAIServicePage })));
 
 const accentByService: Record<ServiceOffering['accent'], string> = {
     blue: '#4c9aff',
@@ -34,6 +39,18 @@ export function ServicePage({ service }: ServicePageProps) {
             page: service.route,
         });
     };
+
+    if (service.id === 'venture-building') {
+        return <LazyVentureBuildServicePage service={service} onContact={openServiceContact} />;
+    }
+
+    if (service.id === 'engenharia-dedicada') {
+        return <LazyEngineeringServicePage service={service} onContact={openServiceContact} />;
+    }
+
+    if (service.id === 'arquitetura-ia-operacao') {
+        return <LazyArchitectureAIServicePage service={service} onContact={openServiceContact} />;
+    }
 
     return (
         <div className="bg-[var(--off-white)]">
@@ -191,25 +208,16 @@ export function ServicePage({ service }: ServicePageProps) {
                     <div className="grid gap-0 border-y border-white/10 md:grid-cols-2">
                         {relatedCases.map((caseStudy) => (
                             <article key={caseStudy.id} className="border-b border-white/10 py-8 md:border-b-0 md:border-r md:px-8 md:last:border-r-0">
-                                <span className="text-xs font-semibold uppercase tracking-normal text-white/44">
-                                    {caseStudy.confidential ? 'Confidencial' : caseStudy.eyebrow}
-                                </span>
+                                {caseStudy.kind === 'site' && (
+                                    <span className="text-xs font-semibold uppercase tracking-normal text-white/44">Site</span>
+                                )}
                                 <h3 className="on-dark-heading mt-4 text-2xl font-semibold tracking-normal">
                                     {caseStudy.title}
                                 </h3>
-                                <p className="on-dark-copy mt-4 text-sm leading-relaxed">
-                                    {caseStudy.outcome}
-                                </p>
-                                {caseStudy.link && (
-                                    <a
-                                        href={caseStudy.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="link-arrow mt-6 text-[var(--accent-light)]"
-                                    >
-                                        Abrir projeto
-                                        <ExternalLink size={16} />
-                                    </a>
+                                {caseStudy.kind === 'confidential' && (
+                                    <p className="on-dark-copy mt-4 text-sm leading-relaxed">
+                                        {caseStudy.subtitle}
+                                    </p>
                                 )}
                             </article>
                         ))}

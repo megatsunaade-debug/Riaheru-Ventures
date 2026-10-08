@@ -34,13 +34,26 @@ test.describe('Contact Modal', () => {
         await expect(consentError).toContainText('Política de Privacidade');
     });
 
-    test('modo sem backend é comunicado com clareza', async ({ page }) => {
+    test('falha do endpoint é comunicada sem abrir o email do visitante', async ({ page }) => {
+        await page.route('**/api/contact', (route) => route.fulfill({
+            status: 503,
+            contentType: 'application/json',
+            body: JSON.stringify({ error: 'O envio do briefing não está configurado no servidor.' }),
+        }));
+
         await openContactModal(page);
 
         const dialog = page.getByRole('dialog');
         await expect(dialog).toBeVisible();
-        await expect(dialog.getByText('Ao enviar, abrimos seu cliente de email com o briefing preenchido.')).toBeVisible();
-        await expect(dialog.locator('form').getByRole('button', { name: /Abrir email com briefing/i })).toBeVisible();
+        await expect(dialog.getByRole('button', { name: /Falar direto pelo WhatsApp/i })).toBeVisible();
+        await page.fill('[name="nome"]', 'Teste Playwright');
+        await page.fill('[name="email"]', 'teste@playwright.com');
+        await page.fill('[name="mensagem"]', 'Esta é uma mensagem de teste automatizado.');
+        await page.locator('[data-testid="privacy-consent"]').check({ force: true });
+        await dialog.locator('form').getByRole('button', { name: 'Enviar briefing' }).click();
+
+        await expect(dialog.getByRole('alert')).toContainText('Não conseguimos concluir agora');
+        await expect(page).toHaveURL('/');
     });
 
     test('campos opcionais são exibidos', async ({ page }) => {
