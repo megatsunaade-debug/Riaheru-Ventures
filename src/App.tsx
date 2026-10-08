@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 import { Header } from '@/components';
+import { ScrollRevealObserver } from '@/components/ScrollRevealObserver';
 import { ModalProvider } from '@/context/ModalContext';
 import { INFO_PAGES } from '@/data/infoPages';
 import { SERVICE_OFFERINGS } from '@/data/serviceOfferings';
@@ -119,6 +120,7 @@ function App() {
     return (
         <Router>
             <ScrollToTop />
+            <ScrollRevealObserver />
             <Helmet>
                 <title>Riaheru Ventures | Engenharia B2B e Venture Building</title>
                 <meta

@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, Workflow } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { SERVICE_OFFERINGS } from '@/data/serviceOfferings';
@@ -15,7 +15,7 @@ export function Hero() {
     const { openContactModal } = useModal();
 
     return (
-        <section className="relative isolate flex min-h-[min(100svh,900px)] overflow-hidden bg-[#070a12] text-white">
+        <section className="relative isolate flex min-h-[100svh] overflow-hidden bg-[#070a12] text-white">
             <div
                 className="pointer-events-none absolute inset-0 opacity-[0.075]"
                 style={{
@@ -37,7 +37,7 @@ export function Hero() {
                 </div>
             </div>
 
-            <div className="container relative z-10 grid w-full grid-cols-1 gap-10 pb-8 pt-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start lg:gap-6 lg:pb-4">
+            <div className="container relative z-10 grid w-full grid-cols-1 gap-10 pb-8 pt-24 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:items-start lg:gap-6 lg:pb-0">
                 <m.div
                     initial={{ opacity: 0, y: 22 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -100,15 +100,7 @@ export function Hero() {
                     aria-label="Produtos e sistemas construídos pela Riaheru"
                 >
                     <div className="relative">
-                        <div className="flex items-center justify-between pb-3 text-xs text-white/50 lg:pb-1">
-                            <span className="inline-flex items-center gap-2">
-                                <Workflow size={15} className="text-[var(--accent-light)]" />
-                                Product lab
-                            </span>
-                            <span>Build / Operate / Scale</span>
-                        </div>
-
-                        <div className="relative isolate mt-3 flex justify-center lg:mt-1 lg:justify-end xl:translate-x-4 2xl:translate-x-8 min-[1760px]:translate-x-20!">
+                        <div className="relative isolate flex justify-center lg:justify-start lg:translate-x-6">
                             <div
                                 aria-hidden="true"
                                 className="pointer-events-none absolute inset-x-[-8%] inset-y-[8%] z-0 blur-[48px]"
@@ -121,7 +113,7 @@ export function Hero() {
                                 decoding="async"
                                 width={1122}
                                 height={1402}
-                                className="relative z-10 block h-auto w-auto max-h-[min(92svh,920px)] max-w-full lg:max-h-[clamp(36rem,calc(100svh-200px),920px)]"
+                                className="relative z-10 block h-auto w-auto max-h-[min(92svh,920px)] max-w-full lg:max-h-[clamp(36rem,calc(100svh-180px),920px)]"
                                 style={{
                                     maskImage: 'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)',
                                     WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)',

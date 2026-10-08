@@ -9,7 +9,7 @@ type CasePreviewProps = {
 export function CasePreview({ caseStudy, className = '', fit = 'cover' }: CasePreviewProps) {
     return (
         <div className={`relative min-w-0 overflow-hidden rounded-lg border border-slate-200/80 ${fit === 'contain' ? 'bg-[#0b1020]' : 'bg-slate-200'} ${className}`}>
-            {caseStudy.kind === 'site' && caseStudy.preview ? (
+            {caseStudy.preview ? (
                 <picture className="absolute inset-0 block h-full w-full">
                     {caseStudy.preview.avif && <source srcSet={caseStudy.preview.avif} type="image/avif" />}
                     <img
@@ -17,8 +17,8 @@ export function CasePreview({ caseStudy, className = '', fit = 'cover' }: CasePr
                         alt={caseStudy.preview.alt}
                         loading="lazy"
                         decoding="async"
-                        width={1348}
-                        height={926}
+                        width={caseStudy.kind === 'confidential' ? 1600 : 1348}
+                        height={caseStudy.kind === 'confidential' ? 1140 : 926}
                         className={fit === 'contain' ? 'h-full w-full object-contain object-top' : 'h-full w-full object-cover object-top'}
                     />
                 </picture>
@@ -49,6 +49,11 @@ export function CasePreview({ caseStudy, className = '', fit = 'cover' }: CasePr
                         )}
                     </div>
                 </div>
+            )}
+            {caseStudy.kind === 'confidential' && (
+                <span className="absolute bottom-3 left-3 rounded-full bg-slate-950/75 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    Imagem ilustrativa
+                </span>
             )}
         </div>
     );
