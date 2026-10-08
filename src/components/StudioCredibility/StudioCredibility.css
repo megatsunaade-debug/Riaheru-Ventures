@@ -1,0 +1,138 @@
+.studio-credibility-copy h2 {
+  color: #fff;
+}
+
+.studio-credibility-copy > p {
+  color: rgba(248, 250, 252, 0.88);
+}
+
+.studio-credibility-copy .studio-credibility-secondary {
+  color: #fff;
+}
+
+.studio-credibility-section .label-accent {
+  color: var(--accent-light);
+}
+
+.studio-credibility-section .link-arrow {
+  color: var(--accent-light);
+}
+
+.studio-credibility-section .link-arrow:hover {
+  color: #fff;
+}
+
+.studio-competency-card {
+  --studio-spotlight-x: 50%;
+  --studio-spotlight-y: 50%;
+  --studio-tilt-x: 0deg;
+  --studio-tilt-y: 0deg;
+  position: relative;
+  isolation: isolate;
+  transition:
+    translate 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.studio-competency-spotlight {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    260px circle at var(--studio-spotlight-x) var(--studio-spotlight-y),
+    rgba(37, 99, 235, 0.09),
+    transparent 72%
+  );
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.studio-competency-content {
+  position: relative;
+  z-index: 1;
+  transform: perspective(900px)
+    rotateX(var(--studio-tilt-x))
+    rotateY(var(--studio-tilt-y));
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+.studio-competency-icon {
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.studio-credibility-magnetic {
+  --studio-magnet-x: 0px;
+  --studio-magnet-y: 0px;
+  transform: translate3d(var(--studio-magnet-x), var(--studio-magnet-y), 0);
+  transition: transform 180ms ease, color 180ms ease, gap 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .studio-competency-card:hover {
+    translate: 0 -4px;
+    border-color: rgba(0, 82, 204, 0.42);
+    background-color: #fff;
+    box-shadow: 0 14px 32px rgba(15, 42, 78, 0.09);
+  }
+
+  .studio-competency-card:hover .studio-competency-spotlight {
+    opacity: 1;
+  }
+
+  .studio-competency-card:hover .studio-competency-content {
+    transform: perspective(900px)
+      rotateX(var(--studio-tilt-x))
+      rotateY(var(--studio-tilt-y));
+  }
+
+  .studio-competency-card:hover .studio-competency-icon {
+    border-color: rgba(0, 82, 204, 0.28);
+    background-color: #eff6ff;
+    animation: studio-competency-icon-enter 220ms ease-out 1;
+  }
+}
+
+@keyframes studio-competency-icon-enter {
+  0%, 100% { transform: translateY(0); }
+  55% { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-competency-card,
+  .studio-competency-content,
+  .studio-competency-icon,
+  .studio-credibility-magnetic,
+  .studio-competency-spotlight {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+
+  .studio-competency-card:hover {
+    translate: none;
+  }
+
+  .studio-competency-content,
+  .studio-competency-card:hover .studio-competency-content {
+    transform: none !important;
+  }
+
+  .studio-credibility-magnetic {
+    transform: none !important;
+  }
+}
+
+#root .studio-credibility-section .studio-competency-card,
+#root .studio-credibility-section .studio-competency-card:hover,
+#root .studio-credibility-section .studio-competency-card:focus,
+#root .studio-credibility-section .studio-competency-card:focus-within,
+#root .studio-credibility-section .studio-competency-card:focus-visible {
+  background: #e7ebf0 !important;
+  border: 1px solid #9aa5b2 !important;
+}

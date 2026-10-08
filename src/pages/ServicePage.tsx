@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,10 @@ import { m } from '@/lib/motion';
 import { Button } from '../components/ui/Button';
 import { useCanonical } from '../hooks/useCanonical';
 import { useModal } from '../hooks/useModal';
+
+const LazyVentureBuildServicePage = lazy(() => import('./VentureBuildServicePage').then((module) => ({ default: module.VentureBuildServicePage })));
+const LazyEngineeringServicePage = lazy(() => import('./EngineeringServicePage').then((module) => ({ default: module.EngineeringServicePage })));
+const LazyArchitectureAIServicePage = lazy(() => import('./ArchitectureAIServicePage').then((module) => ({ default: module.ArchitectureAIServicePage })));
 
 const accentByService: Record<ServiceOffering['accent'], string> = {
     blue: '#4c9aff',
@@ -34,6 +39,18 @@ export function ServicePage({ service }: ServicePageProps) {
             page: service.route,
         });
     };
+
+    if (service.id === 'venture-building') {
+        return <LazyVentureBuildServicePage service={service} onContact={openServiceContact} />;
+    }
+
+    if (service.id === 'engenharia-dedicada') {
+        return <LazyEngineeringServicePage service={service} onContact={openServiceContact} />;
+    }
+
+    if (service.id === 'arquitetura-ia-operacao') {
+        return <LazyArchitectureAIServicePage service={service} onContact={openServiceContact} />;
+    }
 
     return (
         <div className="bg-[var(--off-white)]">

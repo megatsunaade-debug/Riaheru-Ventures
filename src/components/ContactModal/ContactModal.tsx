@@ -21,7 +21,8 @@ export function ContactModal() {
     const initialFocusRef = useRef<HTMLButtonElement>(null);
     const lastActiveRef = useRef<HTMLElement | null>(null);
 
-    const whatsappUrl = `https://wa.me/${CONTACT_INFO.WHATSAPP}`;
+    const whatsappMessage = 'Olá! Vim pelo site da Riaheru e gostaria de saber como vocês podem me ajudar a desenvolver um projeto. Podemos conversar?';
+    const whatsappUrl = `https://wa.me/${CONTACT_INFO.WHATSAPP}?text=${encodeURIComponent(whatsappMessage)}`;
 
     const openWhatsApp = () => {
         const externalWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');

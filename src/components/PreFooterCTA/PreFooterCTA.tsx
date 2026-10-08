@@ -12,12 +12,12 @@ export function PreFooterCTA() {
     const location = useLocation();
 
     return (
-        <section className="relative overflow-hidden bg-[#070a12] py-20 text-white md:py-28">
+        <section className="relative overflow-hidden bg-[#070a12] py-16 text-white md:py-20">
             <div
-                className="pointer-events-none absolute inset-0 opacity-[0.06]"
+                className="pointer-events-none absolute inset-0"
                 style={{
-                    backgroundImage: `linear-gradient(rgba(255,255,255,0.48) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.48) 1px, transparent 1px)`,
+                    backgroundImage: `linear-gradient(rgba(231,235,240,0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(231,235,240,0.1) 1px, transparent 1px)`,
                     backgroundSize: '40px 40px',
                 }}
             />
@@ -28,18 +28,18 @@ export function PreFooterCTA() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.6, ease: 'easeOut' }}
-                    className="mx-auto max-w-4xl text-center"
+                    className="mx-auto max-w-6xl text-center"
                 >
                     <span className="on-dark-kicker inline-flex rounded-lg border px-4 py-2 text-xs font-semibold uppercase tracking-normal">
                         Próximo passo
                     </span>
 
-                    <h2 className="on-dark-heading mt-6 text-4xl font-bold leading-tight tracking-normal md:text-6xl">
-                        Traga a tese, o sistema ou a operação. A gente organiza o caminho técnico.
+                    <h2 className="on-dark-heading mx-auto mt-6 max-w-6xl text-4xl font-bold leading-tight tracking-normal md:text-6xl">
+                        Traga o desafio. Vamos definir o <span className="text-[var(--accent-light)]">caminho técnico</span>.
                     </h2>
 
-                    <p className="on-dark-copy mx-auto mt-6 max-w-2xl text-lg leading-relaxed md:text-xl">
-                        Em uma primeira conversa, entendemos estágio, risco e urgência para indicar se faz sentido venture build, squad dedicado ou arquitetura aplicada.
+                    <p className="on-dark-copy mx-auto mt-6 max-w-4xl text-lg leading-relaxed md:text-xl">
+                        Em uma conversa objetiva, entendemos o estágio, o risco e a urgência para indicar se faz sentido Venture Build, squad dedicado ou arquitetura aplicada.
                     </p>
 
                     <div className="mt-9">

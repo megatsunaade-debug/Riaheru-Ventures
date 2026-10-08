@@ -1,0 +1,8 @@
+#root .case-grid-card,
+#root .case-grid-card:hover,
+#root .case-grid-card:focus,
+#root .case-grid-card:focus-within,
+#root .case-grid-card:focus-visible {
+  background: #e7ebf0 !important;
+  border: 1px solid #9aa5b2 !important;
+}

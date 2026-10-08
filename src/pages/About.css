@@ -1,0 +1,182 @@
+.about-hero__layout,
+.about-hero__layout > * {
+  min-width: 0;
+}
+
+.about-hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 2rem;
+}
+
+.about-hero__copy {
+  width: 100%;
+  max-width: 58rem;
+}
+
+.about-hero__artwork {
+  display: grid;
+  width: min(100%, 22rem);
+  aspect-ratio: 1;
+  place-items: center;
+  margin-inline: auto;
+}
+
+.about-hero__artwork-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-repeat: no-repeat, no-repeat;
+  mask-repeat: no-repeat, no-repeat;
+  -webkit-mask-size: 100% 100%, 100% 100%;
+  mask-size: 100% 100%, 100% 100%;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+@media (min-width: 1024px) {
+  .about-hero__layout {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    gap: clamp(2rem, 4vw, 4.5rem);
+  }
+
+  .about-hero__artwork {
+    width: min(100%, 34rem);
+  }
+}
+
+.about-first-conversation__container {
+  width: 100%;
+  margin-inline: auto;
+  text-align: center !important;
+}
+
+.about-first-conversation__eyebrow {
+  display: flex;
+  width: max-content;
+  margin-inline: auto;
+}
+
+.about-first-conversation__title {
+  display: block;
+  width: min(100%, 48rem);
+  max-width: 48rem;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+
+.about-first-conversation__description {
+  display: block;
+  width: min(100%, 42rem);
+  max-width: 42rem;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+
+.about-first-conversation__container > div:last-child {
+  display: flex;
+  justify-content: center;
+}
+
+.about-info-card {
+  --about-spotlight-x: 50%;
+  --about-spotlight-y: 50%;
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #9aa5b2;
+  background: #e7ebf0;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.045);
+  transition: translate 210ms ease, border-color 210ms ease, box-shadow 210ms ease;
+}
+
+.about-info-card__spotlight {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    260px circle at var(--about-spotlight-x) var(--about-spotlight-y),
+    rgba(0, 82, 204, 0.07),
+    transparent 72%
+  );
+  opacity: 0;
+  transition: opacity 210ms ease;
+}
+
+.about-info-card__content {
+  position: relative;
+  z-index: 1;
+}
+
+.about-info-card__icon,
+.about-info-icon {
+  transform-origin: center;
+}
+
+.about-magnetic-control {
+  --about-magnet-x: 0px;
+  --about-magnet-y: 0px;
+  translate: var(--about-magnet-x) var(--about-magnet-y);
+  transition: translate 180ms ease, color 180ms ease, gap 180ms ease, background-color 180ms ease;
+}
+
+.about-dark-info-item {
+  transition: translate 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .about-info-card:hover {
+    translate: 0 -3px;
+    border-color: #9aa5b2;
+    box-shadow: 0 14px 30px rgba(15, 42, 78, 0.09);
+  }
+
+  .about-info-card:hover .about-info-card__spotlight {
+    opacity: 1;
+  }
+
+  .about-info-card:hover .about-info-card__icon,
+  .about-dark-info-item:hover .about-info-icon {
+    animation: about-info-icon-nudge 230ms ease-out 1;
+  }
+
+  .about-dark-info-item:hover {
+    translate: 0 -2px;
+    background-color: rgba(231, 235, 240, 0.045);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+@keyframes about-info-icon-nudge {
+  0%, 100% { transform: translateY(0); }
+  55% { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-info-card,
+  .about-info-card__spotlight,
+  .about-info-card__icon,
+  .about-info-icon,
+  .about-magnetic-control,
+  .about-dark-info-item {
+    transition-duration: 0.01ms !important;
+    animation: none !important;
+  }
+
+  .about-info-card:hover,
+  .about-dark-info-item:hover {
+    translate: none;
+  }
+}

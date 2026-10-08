@@ -3,6 +3,7 @@ import { ExternalLink } from 'lucide-react';
 import { CASE_STUDIES } from '@/data/cases';
 import { m } from '@/lib/motion';
 import { CasePreview } from './CasePreview';
+import './CaseGrid.css';
 
 export function CaseGrid() {
     return (
@@ -15,7 +16,7 @@ export function CaseGrid() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.5, delay: (index % 3) * 0.08, ease: 'easeOut' }}
-                    className="flex min-w-0 flex-col rounded-lg border border-[var(--border-subtle)] bg-white p-3 shadow-[var(--shadow-sm)]"
+                    className="case-grid-card flex min-w-0 flex-col rounded-lg border border-[var(--border-subtle)] bg-[#E7EBF0] p-3 shadow-[var(--shadow-sm)]"
                 >
                     <CasePreview
                         caseStudy={caseStudy}

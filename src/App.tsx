@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 
 import { Header } from '@/components';
 import { ScrollRevealObserver } from '@/components/ScrollRevealObserver';
+import { FloatingWhatsAppButton } from '@/components/FloatingWhatsAppButton';
 import { ModalProvider } from '@/context/ModalContext';
 import { INFO_PAGES } from '@/data/infoPages';
 import { SERVICE_OFFERINGS } from '@/data/serviceOfferings';
@@ -132,6 +133,7 @@ function App() {
                 <ModalProvider>
                     <div className="min-h-screen antialiased">
                         <Header />
+                        <FloatingWhatsAppButton />
                         <main id="main-content" className="relative z-10">
                             <Routes>
                                 <Route path="/" element={<Home />} />

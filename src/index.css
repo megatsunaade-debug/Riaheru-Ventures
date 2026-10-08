@@ -273,6 +273,21 @@ select {
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
 }
 
+.whatsapp-float {
+  position: fixed;
+  z-index: 30;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  translate: var(--whatsapp-magnet-x, 0px) var(--whatsapp-magnet-y, 0px);
+  transition:
+    translate 160ms ease-out,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
 @keyframes scroll-content-enter {
   from {
     opacity: 0.94;
@@ -424,4 +439,66 @@ select:focus-visible,
     opacity: 1 !important;
     transform: none !important;
   }
+
+  .whatsapp-float,
+  .whatsapp-float:hover {
+    translate: none !important;
+    transform: none !important;
+  }
+}
+
+/* Global text-weight pass: retain each element's font family, size, and color. */
+#root :where(*:not(svg):not(path):not(rect):not(circle):not(line):not(polyline):not(polygon):not(ellipse):not(g):not(use):not(img):not(video):not(canvas)) {
+  font-weight: 600 !important;
+}
+
+#root :where(h1, h2, h3, h4, h5, h6),
+#root :where(h1, h2, h3, h4, h5, h6) :where(*:not(svg):not(path):not(rect):not(circle):not(line):not(polyline):not(polygon):not(ellipse):not(g):not(use):not(img):not(video):not(canvas)),
+#root :where(strong, b, dt, th) {
+  font-weight: 700 !important;
+}
+
+#root ::placeholder {
+  font-weight: 600 !important;
+}
+
+/* Lift low-opacity text on dark surfaces while retaining its pale brand hue. */
+#root .on-dark-copy {
+  color: rgba(241, 245, 249, 0.92) !important;
+}
+
+#root .on-dark-meta,
+#root .site-footer-copy {
+  color: rgba(226, 232, 240, 0.88) !important;
+}
+
+#root .site-footer-label {
+  color: rgba(203, 213, 225, 0.9) !important;
+}
+
+#root .header-link-dark {
+  color: rgba(248, 250, 252, 0.86) !important;
+}
+
+#root .header-link-dark:hover,
+#root .header-link-dark-active {
+  color: #ffffff !important;
+}
+
+#root p[class~="text-white/50"],
+#root p[class~="text-white/60"] {
+  color: rgba(241, 245, 249, 0.86) !important;
+}
+
+#root span[class~="text-white/34"] {
+  color: rgba(226, 232, 240, 0.72) !important;
+}
+
+#root span[class~="text-white/42"],
+#root span[class~="text-white/44"] {
+  color: rgba(226, 232, 240, 0.8) !important;
+}
+
+#root span[class~="text-gray-400"] {
+  color: #64748b !important;
 }
