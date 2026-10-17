@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AnimatePresence, m } from '@/lib/motion';
+import { trackWhatsAppConversion } from '@/lib/googleAds';
 import { CONTACT_INFO } from '../../constants';
+import { useCookieConsent } from '../../hooks/useCookieConsent';
 import { useModal } from '../../hooks/useModal';
 
 type SubmitState =
@@ -12,6 +14,7 @@ type SubmitState =
 
 export function ContactModal() {
     const { isContactOpen, closeContactModal, contactIntent } = useModal();
+    const { hasConsented, preferences } = useCookieConsent();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(false);
     const [privacyConsent, setPrivacyConsent] = useState(false);
@@ -29,6 +32,7 @@ export function ContactModal() {
         if (externalWindow) {
             externalWindow.opener = null;
         }
+        trackWhatsAppConversion(hasConsented && preferences.marketing);
     };
 
     useEffect(() => {

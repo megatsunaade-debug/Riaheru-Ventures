@@ -1,12 +1,13 @@
 import { CONTACT_INFO } from '@/constants';
 import { useCookieConsent } from '@/hooks/useCookieConsent';
 import { useModal } from '@/hooks/useModal';
+import { trackWhatsAppConversion } from '@/lib/googleAds';
 
 const MESSAGE = 'Olá! Vim pelo site da Riaheru e gostaria de saber como vocês podem me ajudar a desenvolver um projeto. Podemos conversar?';
 
 export function FloatingWhatsAppButton() {
     const { isContactOpen } = useModal();
-    const { showBanner, showSettings } = useCookieConsent();
+    const { hasConsented, preferences, showBanner, showSettings } = useCookieConsent();
 
     if (isContactOpen || showBanner || showSettings) return null;
 
@@ -18,6 +19,10 @@ export function FloatingWhatsAppButton() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Conversar com a Riaheru pelo WhatsApp (abre em nova aba)"
+            onClick={() => trackWhatsAppConversion(hasConsented && preferences.marketing)}
+            onAuxClick={(event) => {
+                if (event.button === 1) trackWhatsAppConversion(hasConsented && preferences.marketing);
+            }}
             onPointerMove={(event) => {
                 if (
                     event.pointerType !== 'mouse'
