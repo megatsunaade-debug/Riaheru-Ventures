@@ -33,6 +33,7 @@ function configureGoogleAdsTag() {
     const existingGtag = Boolean(window.gtag);
     window.dataLayer ??= [];
     window.gtag ??= function gtag() {
+        // eslint-disable-next-line prefer-rest-params -- Keep Google's documented Arguments-based dataLayer queue.
         window.dataLayer?.push(arguments);
     };
 
