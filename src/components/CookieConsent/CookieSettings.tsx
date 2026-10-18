@@ -65,7 +65,7 @@ export function CookieSettings({ onClose }: CookieSettingsProps) {
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="cookie-settings-title"
-                className="relative w-full max-w-lg rounded-[28px] border border-[var(--border-subtle)] bg-white p-6 shadow-[var(--shadow-lg)]"
+                className="relative max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-[28px] border border-[var(--border-subtle)] bg-white p-6 shadow-[var(--shadow-lg)]"
             >
                 <div className="mb-5 flex items-start justify-between gap-4">
                     <div>
@@ -101,7 +101,7 @@ export function CookieSettings({ onClose }: CookieSettingsProps) {
                         {
                             id: 'marketing' as const,
                             title: 'Cookies de Marketing',
-                            description: 'Reservados para medições e ações de conversão futuras, sempre com consentimento explícito.',
+                            description: 'Medem cliques no WhatsApp para avaliar conversões do Google Ads, sempre com seu consentimento.',
                         },
                     ].map((item) => (
                         <div key={item.id} className="rounded-3xl border border-[var(--border-subtle)] bg-[var(--gray-50)] p-4">

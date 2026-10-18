@@ -1,4 +1,4 @@
-import { useCallback, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 
 import {
     CookieConsentContext,
@@ -7,6 +7,7 @@ import {
     STORAGE_KEY,
     type CookiePreferences,
 } from '@/context/cookie-consent-context';
+import { syncGoogleAdsConsent } from '@/lib/googleAds';
 
 export function CookieConsentProvider({ children }: { children: ReactNode }) {
     const initialState = readStoredCookieConsent();
@@ -14,6 +15,10 @@ export function CookieConsentProvider({ children }: { children: ReactNode }) {
     const [hasConsented, setHasConsented] = useState(initialState.hasConsented);
     const [showBanner, setShowBanner] = useState(initialState.showBanner);
     const [showSettings, setShowSettings] = useState(false);
+
+    useEffect(() => {
+        syncGoogleAdsConsent(hasConsented && preferences.marketing);
+    }, [hasConsented, preferences.marketing]);
 
     const saveToStorage = useCallback((prefs: CookiePreferences) => {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
